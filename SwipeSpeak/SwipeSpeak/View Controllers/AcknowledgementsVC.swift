@@ -7,7 +7,14 @@
 //
 
 import UIKit
-import MarkdownView
+// import MarkdownView // TODO: Re-enable with SPM
+
+// MARK: - Temporary MarkdownView Stub
+class MarkdownView: UIView {
+    func load(markdown: String) {
+        // TODO: Implement with proper MarkdownView SPM dependency
+    }
+}
 
 class AcknowledgementsVC: UIViewController {
 
