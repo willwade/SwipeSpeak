@@ -9,22 +9,7 @@
 
 import Foundation
 import AVFoundation
-// import Zephyr // TODO: Re-enable with SPM
-
-// MARK: - Temporary Zephyr Stub
-struct Zephyr {
-    static func sync(keys: [String]) {
-        // TODO: Implement with proper Zephyr SPM dependency
-    }
-
-    static func addKeysToBeMonitored(keys: [String]) {
-        // TODO: Implement with proper Zephyr SPM dependency
-    }
-
-    static func removeKeysFromBeingMonitored(keys: [String]) {
-        // TODO: Implement with proper Zephyr SPM dependency
-    }
-}
+import Zephyr
 
 enum KeyboardLayout: Int {
     case keys4 = 4

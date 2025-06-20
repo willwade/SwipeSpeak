@@ -8,33 +8,7 @@
 //
 
 import UIKit
-// import DZNEmptyDataSet // TODO: Re-enable with SPM
-
-// MARK: - Temporary DZNEmptyDataSet Stub
-protocol DZNEmptyDataSetSource {
-    func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString!
-    func description(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString!
-}
-
-protocol DZNEmptyDataSetDelegate {
-    func emptyDataSet(_ scrollView: UIScrollView!, didTap button: UIButton!)
-}
-
-extension UIScrollView {
-    var emptyDataSetSource: DZNEmptyDataSetSource? {
-        get { return nil }
-        set { /* TODO: Implement with proper DZNEmptyDataSet SPM dependency */ }
-    }
-
-    var emptyDataSetDelegate: DZNEmptyDataSetDelegate? {
-        get { return nil }
-        set { /* TODO: Implement with proper DZNEmptyDataSet SPM dependency */ }
-    }
-
-    func reloadEmptyDataSet() {
-        // TODO: Implement with proper DZNEmptyDataSet SPM dependency
-    }
-}
+import DZNEmptyDataSet
 
 class UserAddedWordListVC: UITableViewController {
     

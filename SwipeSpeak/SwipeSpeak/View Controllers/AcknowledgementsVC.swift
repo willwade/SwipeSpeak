@@ -7,15 +7,7 @@
 //
 
 import UIKit
-// import MarkdownView // TODO: Re-enable with SPM
-
-// MARK: - Temporary MarkdownView Stub
-class MarkdownView: UIView {
-    func load(markdown: String, enableImage: Bool = true) {
-        // TODO: Implement with proper MarkdownView SPM dependency
-        print("MarkdownView stub: loading markdown content (enableImage: \(enableImage))")
-    }
-}
+import MarkdownView
 
 class AcknowledgementsVC: UIViewController {
 
