@@ -293,26 +293,66 @@ struct VoiceRow: View {
 }
 
 struct AboutView: View {
+    @State private var showingContactOptions = false
+
     var body: some View {
-        ScrollView {
-            VStack(alignment: .leading, spacing: 16) {
-                Text("SwipeSpeak")
-                    .font(.largeTitle)
-                    .fontWeight(.bold)
-                
-                Text("An innovative communication app designed to help users express themselves through intuitive swipe gestures and word prediction.")
-                    .font(.body)
-                
-                Text("Developed by Team Gleason")
-                    .font(.subheadline)
-                    .foregroundColor(.secondary)
-                
-                // Add more about content here
+        List {
+            Section {
+                Button("Contact Support") {
+                    showingContactOptions = true
+                }
+                .foregroundColor(.blue)
             }
-            .padding()
+
+            Section {
+                VStack(alignment: .leading, spacing: 16) {
+                    Text("SwipeSpeak")
+                        .font(.largeTitle)
+                        .fontWeight(.bold)
+
+                    Text("An innovative communication app designed to help users express themselves through intuitive swipe gestures and word prediction.")
+                        .font(.body)
+
+                    Text("Developed by Team Gleason")
+                        .font(.subheadline)
+                        .foregroundColor(.secondary)
+
+                    Text("Version \(appVersion) (\(appBuild))")
+                        .font(.caption)
+                        .foregroundColor(.secondary)
+                }
+                .padding(.vertical, 8)
+            }
         }
         .navigationTitle("About")
         .navigationBarTitleDisplayMode(.inline)
+        .confirmationDialog("Choose an email app:", isPresented: $showingContactOptions) {
+            ContactOptionsView()
+        }
+    }
+}
+
+struct ContactOptionsView: View {
+    let email = "swipespeak@teamgleason.org"
+    let subject = "SwipeSpeak Feedback"
+
+    var body: some View {
+        let urls = [
+            ("Mail", "mailto:\(email)?subject=\(subject.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "Feedback")"),
+            ("Gmail", "googlegmail:///co?to=\(email)&subject=\(subject.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "Feedback")"),
+            ("Inbox", "inbox-gmail://co?to=\(email)&subject=\(subject.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "Feedback")"),
+            ("Outlook", "ms-outlook://compose?to=\(email)&subject=\(subject.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "Feedback")")
+        ]
+
+        ForEach(urls, id: \.0) { name, urlString in
+            if let url = URL(string: urlString), UIApplication.shared.canOpenURL(url) {
+                Button(name) {
+                    UIApplication.shared.open(url)
+                }
+            }
+        }
+
+        Button("Cancel", role: .cancel) { }
     }
 }
 
