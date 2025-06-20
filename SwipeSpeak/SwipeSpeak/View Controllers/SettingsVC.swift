@@ -27,23 +27,23 @@ class SettingsVC: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        keyboardLayoutLabel.text = UserPreferences.shared.keyboardLayout.localizedString()
+        keyboardLayoutLabel?.text = UserPreferences.shared.keyboardLayout.localizedString()
 
         // Update prediction engine label
         if let engineTypeString = UserPreferences.shared.predictionEngineType,
            let engineType = PredictionEngineType(rawValue: engineTypeString) {
-            predictionEngineLabel.text = engineType.displayName
+            predictionEngineLabel?.text = engineType.displayName
         } else {
-            predictionEngineLabel.text = PredictionEngineType.custom.displayName
+            predictionEngineLabel?.text = PredictionEngineType.custom.displayName
         }
 
-        announceLettersCountSwitch.isOn = UserPreferences.shared.announceLettersCount
-        vibrateSwitch.isOn = UserPreferences.shared.vibrate
+        announceLettersCountSwitch?.isOn = UserPreferences.shared.announceLettersCount
+        vibrateSwitch?.isOn = UserPreferences.shared.vibrate
 
-        longerPauseBetweenLettersSwitch.isOn = UserPreferences.shared.longerPauseBetweenLetters
+        longerPauseBetweenLettersSwitch?.isOn = UserPreferences.shared.longerPauseBetweenLetters
 
-        enableAudioFeedbackSwitch.isOn = UserPreferences.shared.audioFeedback
-        enableCouldSyncSwitch.isOn = UserPreferences.shared.enableCloudSync
+        enableAudioFeedbackSwitch?.isOn = UserPreferences.shared.audioFeedback
+        enableCouldSyncSwitch?.isOn = UserPreferences.shared.enableCloudSync
     }
     
     @IBAction func dismissViewController() {
@@ -83,26 +83,28 @@ class SettingsVC: UITableViewController {
 
         for engineType in PredictionEngineType.allCases {
             let action = UIAlertAction(title: engineType.displayName, style: .default) { _ in
-                if manager.switchToEngine(engineType) {
-                    self.predictionEngineLabel.text = engineType.displayName
+                Task { @MainActor in
+                    if manager.switchToEngine(engineType) {
+                        self.predictionEngineLabel?.text = engineType.displayName
 
-                    // Show brief description
-                    let successAlert = UIAlertController(
-                        title: NSLocalizedString("Engine Changed", comment: ""),
-                        message: engineType.displayName,
-                        preferredStyle: .alert
-                    )
-                    successAlert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .default))
-                    self.present(successAlert, animated: true)
-                } else {
-                    // Engine not available
-                    let errorAlert = UIAlertController(
-                        title: NSLocalizedString("Engine Unavailable", comment: ""),
-                        message: NSLocalizedString("This prediction engine is not available on your device", comment: ""),
-                        preferredStyle: .alert
-                    )
-                    errorAlert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .default))
-                    self.present(errorAlert, animated: true)
+                        // Show brief description
+                        let successAlert = UIAlertController(
+                            title: NSLocalizedString("Engine Changed", comment: ""),
+                            message: engineType.displayName,
+                            preferredStyle: .alert
+                        )
+                        successAlert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .default))
+                        self.present(successAlert, animated: true)
+                    } else {
+                        // Engine not available
+                        let errorAlert = UIAlertController(
+                            title: NSLocalizedString("Engine Unavailable", comment: ""),
+                            message: NSLocalizedString("This prediction engine is not available on your device", comment: ""),
+                            preferredStyle: .alert
+                        )
+                        errorAlert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .default))
+                        self.present(errorAlert, animated: true)
+                    }
                 }
             }
 
@@ -119,8 +121,8 @@ class SettingsVC: UITableViewController {
 
         // For iPad
         if let popover = alertController.popoverPresentationController {
-            popover.sourceView = predictionEngineLabel
-            popover.sourceRect = predictionEngineLabel.bounds
+            popover.sourceView = predictionEngineLabel ?? view
+            popover.sourceRect = predictionEngineLabel?.bounds ?? view.bounds
         }
 
         present(alertController, animated: true)

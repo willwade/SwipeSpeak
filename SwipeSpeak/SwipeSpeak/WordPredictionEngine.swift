@@ -79,12 +79,29 @@ class PredictionEngineManager {
         engines[type] = engine
     }
 
-    func switchToEngine(_ type: PredictionEngineType) -> Bool {
-        if engines[type] != nil {
-            currentEngineType = type
-            return true
+    @MainActor func switchToEngine(_ type: PredictionEngineType) -> Bool {
+        guard engines[type] != nil else {
+            return false
         }
-        return false
+        currentEngineType = type
+        UserPreferences.shared.predictionEngineType = type.rawValue
+        return true
+    }
+
+    func setKeyLetterGrouping(_ grouping: [String], twoStrokes: Bool) {
+        currentEngine?.setKeyLetterGrouping(grouping, twoStrokes: twoStrokes)
+    }
+
+    func insert(_ word: String, _ frequency: Int) throws {
+        try currentEngine?.insert(word, frequency)
+    }
+
+    func contains(_ word: String) -> Bool {
+        return currentEngine?.contains(word) ?? false
+    }
+
+    func suggestions(for keyString: [Int]) -> [(String, Int)] {
+        return currentEngine?.suggestions(for: keyString) ?? []
     }
 }
 

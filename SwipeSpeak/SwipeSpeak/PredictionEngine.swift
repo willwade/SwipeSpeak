@@ -12,27 +12,28 @@ import Foundation
 enum PredictionEngineType: String, CaseIterable {
     case custom = "custom"
     case native = "native"
-    case hybrid = "hybrid"
-    
+    // TODO: Add hybrid engine in future update
+    // case hybrid = "hybrid"
+
     var displayName: String {
         switch self {
         case .custom:
             return "Custom Trie Engine"
         case .native:
             return "iOS Native Engine"
-        case .hybrid:
-            return "Hybrid Engine"
+        // case .hybrid:
+        //     return "Hybrid Engine"
         }
     }
-    
+
     var description: String {
         switch self {
         case .custom:
             return "Fast offline prediction using custom dictionary"
         case .native:
             return "iOS system prediction with spell checking"
-        case .hybrid:
-            return "Combines both engines for best results"
+        // case .hybrid:
+        //     return "Combines both engines for best results"
         }
     }
 }
@@ -41,33 +42,33 @@ enum PredictionEngineType: String, CaseIterable {
 protocol PredictionEngine {
     /// The type of this prediction engine
     var engineType: PredictionEngineType { get }
-    
+
     /// Whether this engine is currently available for use
     var isAvailable: Bool { get }
-    
+
     /// Get word suggestions for a given key sequence
     /// - Parameter keySequence: Array of integers representing key presses
     /// - Returns: Array of tuples containing (word, frequency/score)
     func suggestions(for keySequence: [Int]) -> [(String, Int)]
-    
+
     /// Insert a new word into the engine's dictionary
     /// - Parameters:
     ///   - word: The word to insert
     ///   - frequency: The frequency/score for the word
     /// - Throws: WordPredictionError if the word cannot be inserted
     func insert(_ word: String, frequency: Int) throws
-    
+
     /// Check if a word exists in the engine's dictionary
     /// - Parameter word: The word to check
     /// - Returns: True if the word exists, false otherwise
     func contains(_ word: String) -> Bool
-    
+
     /// Set the key letter grouping for the engine
     /// - Parameters:
     ///   - grouping: Array of strings representing letter groups for each key
     ///   - twoStrokes: Whether this is a two-stroke keyboard layout
     func setKeyLetterGrouping(_ grouping: [String], twoStrokes: Bool)
-    
+
     /// Get performance metrics for this engine (optional)
     var performanceMetrics: PredictionEngineMetrics? { get }
 }
@@ -127,6 +128,23 @@ class PredictionEngineManager {
     ///   - type: The type of the engine
     func registerEngine(_ engine: PredictionEngine, for type: PredictionEngineType) {
         engines[type] = engine
+    }
+
+    /// Convenience methods for backward compatibility with WordPredictionEngine interface
+    func setKeyLetterGrouping(_ grouping: [String], twoStrokes: Bool) {
+        currentEngine?.setKeyLetterGrouping(grouping, twoStrokes: twoStrokes)
+    }
+
+    func insert(_ word: String, _ frequency: Int) throws {
+        try currentEngine?.insert(word, frequency)
+    }
+
+    func contains(_ word: String) -> Bool {
+        return currentEngine?.contains(word) ?? false
+    }
+
+    func suggestions(for keyString: [Int]) -> [(String, Int)] {
+        return currentEngine?.suggestions(for: keyString) ?? []
     }
     
     private func setupEngines() {
