@@ -14,7 +14,14 @@ class MainTVC: UITableViewController {
     
     // MARK: Constants
     
-    private static let wordAndFrequencyList = getWordAndFrequencyListFromCSV(Bundle.main.path(forResource: "word_frequency_english_ucrel", ofType: "csv")!)!
+    private static let wordAndFrequencyList: [(String, Int)] = {
+        guard let path = Bundle.main.path(forResource: "word_frequency_english_ucrel", ofType: "csv"),
+              let list = getWordAndFrequencyListFromCSV(path) else {
+            print("Warning: Could not load word frequency list, using empty list")
+            return []
+        }
+        return list
+    }()
     private static let buildWordButtonText = NSLocalizedString("Build Word", comment: "")
     
     // MARK: - Properties
@@ -195,16 +202,19 @@ class MainTVC: UITableViewController {
         
         setupKeyboard()
         
-        let swipeParentView = self.view! //keyboardView.superview!
-        
+        guard let swipeParentView = self.view else {
+            print("Error: self.view is nil in setupUI")
+            return
+        }
+
         swipeView = SwipeView(frame: swipeParentView.frame,
                               keyboardContainerView: self.view,
                               keyboardLabels:  keyboardLabels,
                               isTwoStrokes: usesTwoStrokesKeyboard,
                               useTwoStrokesLogic: UserPreferences.shared.keyboardLayout == .strokes2,
                               delegate: self)
-    
-        swipeParentView.superview!.addSubview(swipeView)
+
+        swipeParentView.superview?.addSubview(swipeView)
  
         setSentenceText("")
         
@@ -348,9 +358,10 @@ class MainTVC: UITableViewController {
         let keyboardViews = [keysView4Keys, keysView6Keys, keysView8Keys, keysView2Strokes, keyboardMSMaster]
         
         for keyboardView in keyboardViews {
-            for subview in keyboardView!.subviews {
+            guard let keyboardView = keyboardView else { continue }
+            for subview in keyboardView.subviews {
                 guard let label = subview as? UILabel else { continue }
-                
+
                 label.font = label.font.withSize(label.font.pointSize * multiplier)
             }
         }
@@ -563,7 +574,8 @@ class MainTVC: UITableViewController {
             }
         }
         
-        setSentenceText(sentenceLabel.text! + word + " ")
+        let currentSentence = sentenceLabel.text ?? ""
+        setSentenceText(currentSentence + word + " ")
         
         resetAfterWordAdded()
         resetBuildWordMode()
@@ -674,7 +686,8 @@ class MainTVC: UITableViewController {
             
             // Cannot find any prediction.
             if (prediction.count == 0) {
-                setWordText(trimmedStringForwordLabel(self.wordLabel.text! + "?"))
+                let currentText = self.wordLabel.text ?? ""
+                setWordText(trimmedStringForwordLabel(currentText + "?"))
                 return
             }
             
@@ -682,7 +695,8 @@ class MainTVC: UITableViewController {
             if firstPrediction.count >= enteredKeyList.count {
                 setWordText(trimmedStringForwordLabel(firstPrediction))
             } else {
-                setWordText(trimmedStringForwordLabel(self.wordLabel.text! + "?"))
+                let currentText = self.wordLabel.text ?? ""
+                setWordText(trimmedStringForwordLabel(currentText + "?"))
             }
         }
         
@@ -887,7 +901,7 @@ class MainTVC: UITableViewController {
     
     private static func directionArrows(for keys: [Int]) -> String {
         guard !keys.isEmpty else { return "" }
-        let arrows = keys.map { Constants.arrows4KeysMap[$0]! }
+        let arrows = keys.compactMap { Constants.arrows4KeysMap[$0] }
         return arrows.joined(separator: "")
     }
     

@@ -48,43 +48,47 @@ class WordPredictionEngine {
     
     private func findNodeToAddWord(_ word: String, node: TrieNode) throws -> TrieNode {
         var node = node
-        
+        let wordArray = Array(word)
+
         // Traverse existing nodes as far as possible.
         var i = 0
-        let length = word.count
+        let length = wordArray.count
         while (i < length) {
-            let char = word[i]
-            
-            guard keyLetterGrouping.keys.contains(char) else {
-                throw WordPredictionError.unsupportedWord(invalidChar: char)
-            }
-            
-            let key = keyLetterGrouping[char]!
-            
-            let c = node.children[key]
-            if (c != nil) {
-                node = c!
-            } else {
-                break
-            }
-            i+=1
-        }
-        
-        while (i < length) {
-            let char = word[i]
+            let char = wordArray[i]
 
             guard keyLetterGrouping.keys.contains(char) else {
                 throw WordPredictionError.unsupportedWord(invalidChar: char)
             }
-            
-            let key = keyLetterGrouping[word[i]]!
-            
+
+            guard let key = keyLetterGrouping[char] else {
+                throw WordPredictionError.unsupportedWord(invalidChar: char)
+            }
+
+            if let childNode = node.children[key] {
+                node = childNode
+            } else {
+                break
+            }
+            i += 1
+        }
+
+        while (i < length) {
+            let char = wordArray[i]
+
+            guard keyLetterGrouping.keys.contains(char) else {
+                throw WordPredictionError.unsupportedWord(invalidChar: char)
+            }
+
+            guard let key = keyLetterGrouping[char] else {
+                throw WordPredictionError.unsupportedWord(invalidChar: char)
+            }
+
             let newNode = TrieNode()
             node.children[key] = newNode
             node = newNode
-            i+=1
+            i += 1
         }
-        
+
         return node
     }
     

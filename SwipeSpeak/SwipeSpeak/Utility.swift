@@ -76,11 +76,18 @@ struct Constants {
 }
 
 func getWordAndFrequencyListFromCSV(_ filepath: String) -> [(String, Int)]? {
-    let contents = try? String(contentsOfFile: filepath)
-    let lines = contents?.components(separatedBy: CharacterSet.newlines).filter{!$0.isEmpty}
+    guard let contents = try? String(contentsOfFile: filepath) else {
+        print("Error: Could not read file at path: \(filepath)")
+        return nil
+    }
+
+    let lines = contents.components(separatedBy: CharacterSet.newlines).filter { !$0.isEmpty }
     var wordAndFrequencyList = [(String, Int)]()
-    for line in lines! {
+
+    for line in lines {
         let pair = line.components(separatedBy: ",")
+        guard pair.count >= 2 else { continue }
+
         if let frequency = Int(pair[1]) {
             wordAndFrequencyList.append((pair[0].lowercased(), frequency))
         } else {
@@ -91,8 +98,7 @@ func getWordAndFrequencyListFromCSV(_ filepath: String) -> [(String, Int)]? {
 }
 
 func isWordValid(_ word: String) -> Bool {
-    let predicate = NSPredicate(format:"SELF MATCHES %@", "[A-Za-z]+")
-    return predicate.evaluate(with: word)
+    return word.range(of: "^[A-Za-z]+$", options: .regularExpression) != nil
 }
 
 extension UIViewController {

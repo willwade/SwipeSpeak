@@ -10,7 +10,7 @@
 import UIKit
 import SafariServices
 
-@UIApplicationMain
+@main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
@@ -65,15 +65,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                                 message: NSLocalizedString("Do you want to view a tutorial about how to use the app?\nYou can always view it from the app settings.", comment: ""),
                                                 preferredStyle: .alert)
         
-        alertController.addAction(UIAlertAction.init(title: NSLocalizedString("Show", comment: ""), style: .default, handler: { (_) in
+        alertController.addAction(UIAlertAction(title: NSLocalizedString("Show", comment: ""), style: .default, handler: { (_) in
             UserDefaults.standard.set(true, forKey: Constants.tutorialShownKey)
             self.window?.rootViewController?.present(SFSafariViewController(url: Constants.tutorialURL), animated: true, completion: nil)
         }))
-        
-        alertController.addAction(UIAlertAction.init(title: NSLocalizedString("Later", comment: ""), style: .default, handler: { (_) in
+
+        alertController.addAction(UIAlertAction(title: NSLocalizedString("Later", comment: ""), style: .default, handler: { (_) in
         }))
-        
-        alertController.addAction(UIAlertAction.init(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: { (_) in
+
+        alertController.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: { (_) in
             UserDefaults.standard.set(true, forKey: Constants.tutorialShownKey)
             self.window?.rootViewController?.present(SFSafariViewController(url: Constants.tutorialURL), animated: true, completion: nil)
         }))
