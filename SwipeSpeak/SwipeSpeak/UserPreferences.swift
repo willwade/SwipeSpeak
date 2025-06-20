@@ -35,6 +35,10 @@ enum KeyboardLayout: Int {
             return NSLocalizedString("Keyboard 37", comment: "")
         }
     }
+
+    var displayName: String {
+        return localizedString()
+    }
 }
 
 struct WordKeys {

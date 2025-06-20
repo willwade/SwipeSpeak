@@ -28,6 +28,8 @@
 		DA57B1FA1F0D9EC100895E18 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA57B1F91F0D9EC100895E18 /* AppDelegate.swift */; };
 		7009779B245E4A87AD4C9ABA /* KeyboardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A094360083F94AFE8FAEE668 /* KeyboardViewModel.swift */; };
 		65BAB22629F944CE94D082B7 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6C57A2B87714BE3827B3AC4 /* SettingsViewModel.swift */; };
+		F1A2B3C4D5E6F7890ABCDEF1 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1234567890ABCDEF12345678 /* SettingsView.swift */; };
+		F2A3B4C5D6E7F8901BCDEF12 /* SwiftUIBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2345678901BCDEF123456789 /* SwiftUIBridge.swift */; };
 		DA57B1FF1F0D9EC100895E18 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA57B1FD1F0D9EC100895E18 /* Main.storyboard */; };
 		DDC6F1622E058E7F00EFC306 /* MarkdownView in Frameworks */ = {isa = PBXBuildFile; productRef = DDC6F1612E058E7F00EFC306 /* MarkdownView */; };
 		DDC6F1652E058EEA00EFC306 /* DZNEmptyDataSet in Frameworks */ = {isa = PBXBuildFile; productRef = DDC6F1642E058EEA00EFC306 /* DZNEmptyDataSet */; };
@@ -64,6 +66,8 @@
 		DA57B2051F0D9EC100895E18 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A094360083F94AFE8FAEE668 /* KeyboardViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardViewModel.swift; sourceTree = "<group>"; };
 		E6C57A2B87714BE3827B3AC4 /* SettingsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
+		1234567890ABCDEF12345678 /* SettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		2345678901BCDEF123456789 /* SwiftUIBridge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftUIBridge.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +121,15 @@
 			path = ViewModels;
 			sourceTree = "<group>";
 		};
+		9876543210FEDCBA98765432 /* SwiftUI Views */ = {
+			isa = PBXGroup;
+			children = (
+				1234567890ABCDEF12345678 /* SettingsView.swift */,
+				2345678901BCDEF123456789 /* SwiftUIBridge.swift */,
+			);
+			path = "SwiftUI Views";
+			sourceTree = "<group>";
+		};
 		DA57B1ED1F0D9EC100895E18 = {
 			isa = PBXGroup;
 			children = (
@@ -143,6 +156,7 @@
 				B9FD99F11FADFFEB00E34F9F /* LaunchScreen.storyboard */,
 				B9FD99F41FAE387600E34F9F /* View Controllers */,
 				4EC6D480B15646ECAD092CBA /* ViewModels */,
+				9876543210FEDCBA98765432 /* SwiftUI Views */,
 				DA07001C1F0DA15A003BEE3D /* WordPredictionEngine.swift */,
 				DA0700401F0DA72B003BEE3D /* PredictionEngine.swift */,
 				DA0700501F0DA72C003BEE3D /* NativePredictionEngine.swift */,
@@ -258,6 +272,8 @@
 				B95CB41F1FAFCB1F00F705EB /* SpeechVC.swift in Sources */,
 				7009779B245E4A87AD4C9ABA /* KeyboardViewModel.swift in Sources */,
 				65BAB22629F944CE94D082B7 /* SettingsViewModel.swift in Sources */,
+				F1A2B3C4D5E6F7890ABCDEF1 /* SettingsView.swift in Sources */,
+				F2A3B4C5D6E7F8901BCDEF12 /* SwiftUIBridge.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
