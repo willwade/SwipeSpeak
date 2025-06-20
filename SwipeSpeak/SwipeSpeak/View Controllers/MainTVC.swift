@@ -49,7 +49,7 @@ class MainTVC: UITableViewController {
     @IBOutlet weak var backspaceButton: UIButton!
     
     // Predictive Text Dictionary
-    private var wordPredictionEngine: WordPredictionEngine!
+    private var predictionEngineManager = PredictionEngineManager.shared
     fileprivate var enteredKeyList = [Int]()
     private var keyboardLabels = [UILabel]()
     private var keyboardView: UIView!
@@ -163,31 +163,42 @@ class MainTVC: UITableViewController {
     // MARK: - Setup
 
     private func setupWordPredictionEngine() {
-        wordPredictionEngine = WordPredictionEngine()
-        wordPredictionEngine.setKeyLetterGrouping(keyLetterGrouping, twoStrokes: usesTwoStrokesKeyboard)
-        
+        // Register native engine if not already registered
+        if predictionEngineManager.availableEngines.count == 1 {
+            let nativeEngine = NativePredictionEngine()
+            predictionEngineManager.registerEngine(nativeEngine, for: .native)
+        }
+
+        // Set key letter grouping for current engine
+        predictionEngineManager.currentEngine?.setKeyLetterGrouping(keyLetterGrouping, twoStrokes: usesTwoStrokesKeyboard)
+
+        // Only load words into custom engine (native engine uses system dictionary)
+        guard let customEngine = predictionEngineManager.engines[.custom] as? WordPredictionEngine else {
+            return
+        }
+
         DispatchQueue.global(qos: .userInitiated).async {
             let userWordRating = UserPreferences.shared.userWordRating
-            
+
             // Add user added words
             for userAddedWord in UserPreferences.shared.userAddedWords {
                 let wordRating = userWordRating[userAddedWord] ?? 0
                 do {
-                    try self.wordPredictionEngine.insert(userAddedWord, Constants.defaultWordFrequency + wordRating)
+                    try customEngine.insert(userAddedWord, Constants.defaultWordFrequency + wordRating)
                 } catch WordPredictionError.unsupportedWord(let invalidChar) {
                     print("Cannot add word '\(userAddedWord)', invalid char '\(invalidChar)'")
                 } catch {
                     print("Cannot add word '\(userAddedWord)', error: \(error)")
                 }
             }
-            
+
             // Add dictionary words
             for (word, frequency) in MainTVC.wordAndFrequencyList {
                 let wordRating = userWordRating[word]
                 let frequencyToUse = (wordRating != nil) ? Constants.defaultWordFrequency + wordRating! : frequency
-                
+
                 do {
-                    try self.wordPredictionEngine.insert(word, frequencyToUse)
+                    try customEngine.insert(word, frequencyToUse)
                 } catch WordPredictionError.unsupportedWord(_) {
                     //print("Cannot add word '\(word)', invalid char '\(invalidChar)'")
                 } catch {
@@ -383,7 +394,7 @@ class MainTVC: UITableViewController {
         guard let userInfo = notification.userInfo else { return }
         guard let word = userInfo[WordKeys.word] as? String, let freq = userInfo[WordKeys.frequency] as? Int else { return }
 
-        try? wordPredictionEngine.insert(word, freq)
+        try? predictionEngineManager.currentEngine?.insert(word, freq)
     }
     
     // MARK: User UI Interaction
@@ -580,9 +591,9 @@ class MainTVC: UITableViewController {
         resetAfterWordAdded()
         resetBuildWordMode()
         
-        if !wordPredictionEngine.contains(word) {
+        if let currentEngine = predictionEngineManager.currentEngine, !currentEngine.contains(word) {
             UserPreferences.shared.addWord(word)
-            try? wordPredictionEngine.insert(word, Constants.defaultWordFrequency)
+            try? currentEngine.insert(word, Constants.defaultWordFrequency)
         }
         
         UserPreferences.shared.incrementWordRating(word)
@@ -622,7 +633,7 @@ class MainTVC: UITableViewController {
         }
         
         // Possible words from input T9 digits.
-        let results = wordPredictionEngine.suggestions(for: enteredKeyList)
+        let results = predictionEngineManager.currentEngine?.suggestions(for: enteredKeyList) ?? []
         
         var prediction = [(String, Int)]()
 
@@ -659,7 +670,7 @@ class MainTVC: UITableViewController {
                     }
                 }
                 for digit in newDigits {
-                    prediction += wordPredictionEngine.suggestions(for: digit)
+                    prediction += predictionEngineManager.currentEngine?.suggestions(for: digit) ?? []
                 }
                 digits = newDigits
                 

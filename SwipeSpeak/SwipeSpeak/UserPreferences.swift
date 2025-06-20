@@ -67,6 +67,8 @@ private struct Keys {
     
     static let enableCloudSync  = "enableCloudSync"
 
+    static let predictionEngineType = "predictionEngineType"
+
     static let userAddedWords = "userAddedWords"
     static let userWordRating = "wordFrequencies"
 
@@ -84,9 +86,10 @@ private struct Keys {
             Keys.voiceIdentifier,
             Keys.speechRate,
             Keys.speechVolume,
-            
+
             //Keys.enableCloudSync,
-            
+            Keys.predictionEngineType,
+
             Keys.userAddedWords,
             Keys.userWordRating,
             Keys.sentenceHistory,
@@ -120,8 +123,9 @@ class UserPreferences {
             Keys.audioFeedback: true,
             Keys.speechRate: AVSpeechUtteranceDefaultSpeechRate,
             Keys.speechVolume: 1.0,
-            
+
             Keys.enableCloudSync: true,
+            Keys.predictionEngineType: "custom",
             ])
         
         if self.enableCloudSync {
@@ -229,12 +233,21 @@ class UserPreferences {
         }
         set(newValue) {
             userDefaults.set(newValue, forKey: Keys.enableCloudSync)
-            
+
             if newValue {
                 enableZephyr()
             } else {
                 disableZephyr()
             }
+        }
+    }
+
+    var predictionEngineType: String? {
+        get {
+            return userDefaults.string(forKey: Keys.predictionEngineType)
+        }
+        set(newValue) {
+            userDefaults.set(newValue, forKey: Keys.predictionEngineType)
         }
     }
     

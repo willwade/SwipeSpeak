@@ -12,9 +12,25 @@ import AVFoundation
 class VoicesVC: UITableViewController {
 
     private lazy var englishVoices: [AVSpeechSynthesisVoice] = {
-        return AVSpeechSynthesisVoice.speechVoices().filter({ (voice) -> Bool in
-            return voice.language.range(of: "en-") != nil
-        })
+        let allVoices = AVSpeechSynthesisVoice.speechVoices().filter { voice in
+            return voice.language.hasPrefix("en-")
+        }
+
+        // Sort voices to prioritize higher quality voices
+        return allVoices.sorted { voice1, voice2 in
+            // Prioritize enhanced/neural voices (iOS 15+)
+            if #available(iOS 15.0, *) {
+                let voice1Quality = voice1.quality
+                let voice2Quality = voice2.quality
+
+                if voice1Quality != voice2Quality {
+                    return voice1Quality.rawValue > voice2Quality.rawValue
+                }
+            }
+
+            // Then sort by name for consistency
+            return voice1.name < voice2.name
+        }
     }()
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -37,15 +53,29 @@ class VoicesVC: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "voiceCell", for: indexPath)
 
         let voice = englishVoices[indexPath.row]
-        cell.textLabel?.text = voice.name
-        cell.detailTextLabel?.text = (NSLocale.current as NSLocale).displayName(forKey: NSLocale.Key.identifier, value: voice.language)
+
+        // Enhanced voice name with quality indicator
+        var voiceName = voice.name
+        if #available(iOS 15.0, *) {
+            switch voice.quality {
+            case .enhanced:
+                voiceName += " (Enhanced)"
+            case .premium:
+                voiceName += " (Premium)"
+            default:
+                break
+            }
+        }
+
+        cell.textLabel?.text = voiceName
+        cell.detailTextLabel?.text = Locale.current.localizedString(forIdentifier: voice.language)
 
         if let voiceIdentifier = UserPreferences.shared.voiceIdentifier, voiceIdentifier == voice.identifier {
             cell.accessoryType = .checkmark
         } else {
             cell.accessoryType = .none
         }
-        
+
         return cell
     }
     
