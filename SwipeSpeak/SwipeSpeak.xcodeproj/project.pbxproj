@@ -54,6 +54,8 @@
 		DA07001A1F0DA0C2003BEE3D /* Utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
 		DA07001C1F0DA15A003BEE3D /* WordPredictionEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordPredictionEngine.swift; sourceTree = "<group>"; };
 		DA07001E1F0DA72A003BEE3D /* word_frequency_english_kilgarriff.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = word_frequency_english_kilgarriff.csv; sourceTree = "<group>"; };
+		DA0700401F0DA72B003BEE3D /* PredictionEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PredictionEngine.swift; sourceTree = "<group>"; };
+		DA0700501F0DA72C003BEE3D /* NativePredictionEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NativePredictionEngine.swift; sourceTree = "<group>"; };
 		DA0700201F0DA84A003BEE3D /* SettingsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsVC.swift; sourceTree = "<group>"; };
 		DA0700221F0DA889003BEE3D /* KeyboardSettingsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardSettingsVC.swift; sourceTree = "<group>"; };
 		DA0700241F0DA98F003BEE3D /* UserAddedWordListVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserAddedWordListVC.swift; sourceTree = "<group>"; };
@@ -151,6 +153,8 @@
 				B9FD99F11FADFFEB00E34F9F /* LaunchScreen.storyboard */,
 				B9FD99F41FAE387600E34F9F /* View Controllers */,
 				DA07001C1F0DA15A003BEE3D /* WordPredictionEngine.swift */,
+				DA0700401F0DA72B003BEE3D /* PredictionEngine.swift */,
+				DA0700501F0DA72C003BEE3D /* NativePredictionEngine.swift */,
 				DA0700181F0DA06B003BEE3D /* SwipeView.swift */,
 				DA07001A1F0DA0C2003BEE3D /* Utility.swift */,
 				B95CB41C1FAFC50E00F705EB /* UserPreferences.swift */,
@@ -294,6 +298,8 @@
 				DA07001B1F0DA0C2003BEE3D /* Utility.swift in Sources */,
 				DA0700191F0DA06B003BEE3D /* SwipeView.swift in Sources */,
 				DA07001D1F0DA15A003BEE3D /* WordPredictionEngine.swift in Sources */,
+				DA0700411F0DA72B003BEE3D /* PredictionEngine.swift in Sources */,
+				DA0700521F0DA72C003BEE3D /* NativePredictionEngine.swift in Sources */,
 				DA0700231F0DA889003BEE3D /* KeyboardSettingsVC.swift in Sources */,
 				B95CB41B1FAFBE2500F705EB /* VoicesVC.swift in Sources */,
 				DA0700271F0DB116003BEE3D /* SentenceHistoryVC.swift in Sources */,

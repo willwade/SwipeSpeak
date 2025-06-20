@@ -151,10 +151,13 @@ class PredictionEngineManager {
         // Register the existing custom engine
         let customEngine = WordPredictionEngine()
         registerEngine(customEngine, for: .custom)
-        
-        // Native engine will be registered when created
+
+        // Register the native engine
+        let nativeEngine = NativePredictionEngine()
+        registerEngine(nativeEngine, for: .native)
+
         // Hybrid engine will be registered when created
-        
+
         // Load user preference
         if let savedType = UserPreferences.shared.predictionEngineType,
            let type = PredictionEngineType(rawValue: savedType) {

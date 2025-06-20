@@ -163,12 +163,6 @@ class MainTVC: UITableViewController {
     // MARK: - Setup
 
     private func setupWordPredictionEngine() {
-        // Register native engine if not already registered
-        if predictionEngineManager.availableEngines.count == 1 {
-            let nativeEngine = NativePredictionEngine()
-            predictionEngineManager.registerEngine(nativeEngine, for: .native)
-        }
-
         // Set key letter grouping for current engine
         predictionEngineManager.currentEngine?.setKeyLetterGrouping(keyLetterGrouping, twoStrokes: usesTwoStrokesKeyboard)
 
