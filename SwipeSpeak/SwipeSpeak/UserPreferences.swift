@@ -9,6 +9,7 @@
 
 import Foundation
 import AVFoundation
+import Combine
 import Zephyr
 
 enum KeyboardLayout: Int {
@@ -98,11 +99,12 @@ private struct Keys {
     
 }
 
-class UserPreferences {
-    
+@MainActor
+class UserPreferences: ObservableObject {
+
     // MARK: Shared Instance
-    
-    @MainActor static let shared = UserPreferences()
+
+    static let shared = UserPreferences()
     
     // MARK: User Defaults
     
@@ -115,7 +117,7 @@ class UserPreferences {
     private init() {
         userDefaults.register(defaults: [
             Keys.keyboardLayout: KeyboardLayout.default.rawValue,
-            
+
             Keys.announceLettersCount: true,
             Keys.vibrate: false,
             Keys.longerPauseBetweenLetters: true,
@@ -127,10 +129,15 @@ class UserPreferences {
             Keys.enableCloudSync: true,
             Keys.predictionEngineType: "custom",
             ])
-        
+
+        // Initialize @Published properties from UserDefaults after defaults are registered
+        let savedLayout = userDefaults.integer(forKey: Keys.keyboardLayout)
+        self.keyboardLayout = KeyboardLayout(rawValue: savedLayout) ?? KeyboardLayout.default
+        self.enableCloudSync = userDefaults.bool(forKey: Keys.enableCloudSync)
+
         if self.enableCloudSync {
             enableZephyr()
-        }        
+        }
     }
     
     // MARK: Zephyr
@@ -150,16 +157,10 @@ class UserPreferences {
     
     // MARK: Properties
     
-    var keyboardLayout: KeyboardLayout {
-        get {
-            guard let layout = KeyboardLayout(rawValue: userDefaults.integer(forKey: Keys.keyboardLayout)) else {
-                return KeyboardLayout.default
-            }
-            return layout
-        }
-        set(newValue) {
-            userDefaults.set(newValue.rawValue, forKey: Keys.keyboardLayout)
-            
+    @Published var keyboardLayout: KeyboardLayout = .default {
+        didSet {
+            userDefaults.set(keyboardLayout.rawValue, forKey: Keys.keyboardLayout)
+            // Keep NotificationCenter for backward compatibility during migration
             NotificationCenter.default.post(name: Notification.Name.KeyboardLayoutDidChange, object: self)
         }
     }
@@ -227,14 +228,11 @@ class UserPreferences {
         }
     }
     
-    var enableCloudSync: Bool {
-        get {
-            return userDefaults.bool(forKey: Keys.enableCloudSync)
-        }
-        set(newValue) {
-            userDefaults.set(newValue, forKey: Keys.enableCloudSync)
+    @Published var enableCloudSync: Bool = true {
+        didSet {
+            userDefaults.set(enableCloudSync, forKey: Keys.enableCloudSync)
 
-            if newValue {
+            if enableCloudSync {
                 enableZephyr()
             } else {
                 disableZephyr()

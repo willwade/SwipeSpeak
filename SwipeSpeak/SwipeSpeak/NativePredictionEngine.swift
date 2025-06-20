@@ -59,23 +59,51 @@ class NativePredictionEngine: PredictionEngine {
             totalResponseTime += (endTime - startTime)
             queryCount += 1
         }
-        
+
         guard !keySequence.isEmpty else { return [] }
-        
+
         let cacheKey = keySequence.map(String.init).joined(separator:",")
-        
+
         // Check cache first
         if let cachedResult = getCachedSuggestions(for: cacheKey) {
             cacheHits += 1
             return cachedResult
         }
-        
+
         let suggestions = generateSuggestions(for: keySequence)
-        
+
         // Cache the result
         setCachedSuggestions(suggestions, for: cacheKey)
-        
+
         return suggestions
+    }
+
+    func suggestionsAsync(for keySequence: [Int]) async -> [(String, Int)] {
+        return await Task {
+            let startTime = CFAbsoluteTimeGetCurrent()
+            defer {
+                let endTime = CFAbsoluteTimeGetCurrent()
+                totalResponseTime += (endTime - startTime)
+                queryCount += 1
+            }
+
+            guard !keySequence.isEmpty else { return [] }
+
+            let cacheKey = keySequence.map(String.init).joined(separator:",")
+
+            // Check cache first
+            if let cachedResult = getCachedSuggestions(for: cacheKey) {
+                cacheHits += 1
+                return cachedResult
+            }
+
+            let suggestions = generateSuggestions(for: keySequence)
+
+            // Cache the result
+            setCachedSuggestions(suggestions, for: cacheKey)
+
+            return suggestions
+        }.value
     }
     
     func insert(_ word: String, frequency: Int) throws {

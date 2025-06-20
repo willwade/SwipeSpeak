@@ -51,6 +51,11 @@ protocol PredictionEngine {
     /// - Returns: Array of tuples containing (word, frequency/score)
     func suggestions(for keySequence: [Int]) -> [(String, Int)]
 
+    /// Get word suggestions for a given key sequence asynchronously
+    /// - Parameter keySequence: Array of integers representing key presses
+    /// - Returns: Array of tuples containing (word, frequency/score)
+    func suggestionsAsync(for keySequence: [Int]) async -> [(String, Int)]
+
     /// Insert a new word into the engine's dictionary
     /// - Parameters:
     ///   - word: The word to insert
@@ -146,6 +151,13 @@ class PredictionEngineManager {
     func suggestions(for keyString: [Int]) -> [(String, Int)] {
         return currentEngine?.suggestions(for: keyString) ?? []
     }
+
+    /// Get word suggestions asynchronously
+    /// - Parameter keySequence: Array of integers representing key presses
+    /// - Returns: Array of tuples containing (word, frequency/score)
+    func suggestionsAsync(for keySequence: [Int]) async -> [(String, Int)] {
+        return await currentEngine?.suggestionsAsync(for: keySequence) ?? []
+    }
     
     private func setupEngines() {
         // Register the existing custom engine
@@ -171,11 +183,11 @@ extension WordPredictionEngine: PredictionEngine {
     var engineType: PredictionEngineType {
         return .custom
     }
-    
+
     var isAvailable: Bool {
         return true
     }
-    
+
     var performanceMetrics: PredictionEngineMetrics? {
         return PredictionEngineMetrics(
             averageResponseTime: 0.001, // Very fast for Trie
@@ -184,5 +196,13 @@ extension WordPredictionEngine: PredictionEngine {
             memoryUsage: 0, // Would need to calculate
             lastUpdated: Date()
         )
+    }
+
+    func suggestionsAsync(for keySequence: [Int]) async -> [(String, Int)] {
+        // For the custom engine, delegate to the synchronous method
+        // In a real implementation, this could perform actual async work
+        return await Task {
+            return suggestions(for: keySequence)
+        }.value
     }
 }
