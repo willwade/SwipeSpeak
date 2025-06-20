@@ -7,115 +7,118 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		06B897FD9163A2567445AFB0D4F93054 /* MarkdownView-MarkdownView in Resources */ = {isa = PBXBuildFile; fileRef = 209039795703F925DC2A9D91BF5B7821 /* MarkdownView-MarkdownView */; };
 		15B27182B591769C57B55544260DC886 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8193349D819536E58C58A34C1B7DF545 /* Foundation.framework */; };
-		1BEA30D377C8EE448FBA83C47797EDAD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8193349D819536E58C58A34C1B7DF545 /* Foundation.framework */; };
-		1C99F949EE4599CB72886621B904E531 /* Zephyr-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 21CBC02ED595D78DFDD40789CBE05BCA /* Zephyr-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		266A61C0470A183CA7BB61D9BD6AC347 /* Zephyr-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CA3D9616CA6BF9C5D84A831DDDABF9B /* Zephyr-dummy.m */; };
-		27E7575BF6627922F018B185F381ED9B /* MarkdownView-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = FCA03C663C22F8E9A8E4A86C7F60975E /* MarkdownView-dummy.m */; };
-		2EFF1EFA2FF0D2F1AE44A9DDBB932425 /* UIScrollView+EmptyDataSet.h in Headers */ = {isa = PBXBuildFile; fileRef = D6A73581F3769E6B6F0544FBFA0E44DB /* UIScrollView+EmptyDataSet.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3379709A9A9F17C4191F81A040DA422C /* main.js in Resources */ = {isa = PBXBuildFile; fileRef = 0A3DF8C83386C382C7B5F51C7B4EC328 /* main.js */; };
-		51CCED293A523C5DD3B4D807557C40A1 /* index.html in Resources */ = {isa = PBXBuildFile; fileRef = 598A5449C9B1E3B43DA57396E31E02C3 /* index.html */; };
-		5F5426608460A8B17C1AE5C2351BAA19 /* UIScrollView+EmptyDataSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 90A1A4EB3BF9D826A19813539DF70998 /* UIScrollView+EmptyDataSet.m */; };
-		822262266B14607264EB12A79E53E837 /* main.css in Resources */ = {isa = PBXBuildFile; fileRef = 2977A68B1843A31FCDB3BF1A027A6D7D /* main.css */; };
+		15D9471D7577209F8A6E748EA5E7FD30 /* main.css in Resources */ = {isa = PBXBuildFile; fileRef = 3509B7D87A63C8987D18F3AA9C24E106 /* main.css */; };
+		1C99F949EE4599CB72886621B904E531 /* Zephyr-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 92F94B8D5332DABE6B330F6B49F60A74 /* Zephyr-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		266A61C0470A183CA7BB61D9BD6AC347 /* Zephyr-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = B4858D1B61695A82A2E1CD5125435889 /* Zephyr-dummy.m */; };
+		28B23294DDC160FE64865B9E07D77475 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8193349D819536E58C58A34C1B7DF545 /* Foundation.framework */; };
+		2EFF1EFA2FF0D2F1AE44A9DDBB932425 /* UIScrollView+EmptyDataSet.h in Headers */ = {isa = PBXBuildFile; fileRef = 33DB810559CCE3C6F0EEE1BF9846851F /* UIScrollView+EmptyDataSet.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		357BE5829F09B3E8B9A16F83DD13E157 /* MarkdownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C064243E7EB524F8A398D281040F096 /* MarkdownView.swift */; };
+		4FBD024D211FAE54FA06886C4F302F0E /* non_styled.html in Resources */ = {isa = PBXBuildFile; fileRef = F637E352D1D269054DF1B25B7572235E /* non_styled.html */; };
+		5233B15AEE80D0A7E443042825067B29 /* MarkdownView-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 96C25193C0C037BC9167DF63958952F1 /* MarkdownView-dummy.m */; };
+		5F5426608460A8B17C1AE5C2351BAA19 /* UIScrollView+EmptyDataSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 61AAC3D36151F0F6CF3113CAEF9BA335 /* UIScrollView+EmptyDataSet.m */; };
+		6E8A11636505D1B62D7E130496CD9615 /* styled.html in Resources */ = {isa = PBXBuildFile; fileRef = 595BBB729F108B1F86F9BDC532B325E9 /* styled.html */; };
+		7BB2A300EACB35BA646B36A205F941A7 /* MarkdownUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9042A742332D578461C26F51063C4C29 /* MarkdownUI.swift */; };
 		824EEC3B02FB7A5994C6036F80CAF032 /* Pods-SwipeSpeak-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A8CA571CD96B9F91770A6E227FE8A1A /* Pods-SwipeSpeak-dummy.m */; };
-		A6FCF74348D1907891FBDE3F2E331136 /* DZNEmptyDataSet-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C583E42E7F9CE23E29B83AAB6A8C8A5 /* DZNEmptyDataSet-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		AFD1D411A9387DCEC6F0034653E23787 /* DZNEmptyDataSet-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 99D47061223CF151228E4504D8702288 /* DZNEmptyDataSet-dummy.m */; };
+		A6FCF74348D1907891FBDE3F2E331136 /* DZNEmptyDataSet-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 14B40EEFED4F32FE21C20CE41F365222 /* DZNEmptyDataSet-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AFD1D411A9387DCEC6F0034653E23787 /* DZNEmptyDataSet-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F4765DB1F0BAAA29858376436B3B944 /* DZNEmptyDataSet-dummy.m */; };
 		D10AD6007631BC5D16427733470F55D5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8193349D819536E58C58A34C1B7DF545 /* Foundation.framework */; };
 		D5CF9CB7329F5C700BC8AA98548C769C /* Pods-SwipeSpeak-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = C4BF7D05F545E3973FB2BF83903B241E /* Pods-SwipeSpeak-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D5E8017DB130B39EED4A3263D3CB776F /* Zephyr.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A84DAD385DC2A15143869E2F0621507 /* Zephyr.swift */; };
+		D5E8017DB130B39EED4A3263D3CB776F /* Zephyr.swift in Sources */ = {isa = PBXBuildFile; fileRef = B75FB5CCA1FC195B90703A72D7CDE689 /* Zephyr.swift */; };
+		D74F5733109B6732895F4746C1B22039 /* MarkdownView-MarkdownView in Resources */ = {isa = PBXBuildFile; fileRef = 209039795703F925DC2A9D91BF5B7821 /* MarkdownView-MarkdownView */; };
 		D968461E31E8FF3FF6BA1DC621B0433B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECF4CA3AF5536D14B4E015504E7AEEC0 /* UIKit.framework */; };
 		DE161C288F9E9D1400677B63F8D65B56 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8193349D819536E58C58A34C1B7DF545 /* Foundation.framework */; };
-		F27D6B3F13758DCFC43687399F199942 /* MarkdownView-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 0F708A3F99BA5888D060AD29E3D9C104 /* MarkdownView-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		FCDAC14BCA711CDBB99EB0D3B882ABD3 /* MarkdownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDFE957E393EB380B2854A7F6D375DA2 /* MarkdownView.swift */; };
+		E2AAFDEEBA0CFD6E3D416348C9508DF3 /* MarkdownView-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 2333442A713A59F62CB3927CA7E30B70 /* MarkdownView-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F899C2B49B9D9A4A69350AA601DFD552 /* main.js in Resources */ = {isa = PBXBuildFile; fileRef = 7077C60F91D407F4D3C495A7E3624915 /* main.js */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		327681251B96635807126225DC374126 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 9CE7BB59885E11A7F43D648F9B1D6D12;
-			remoteInfo = MarkdownView;
-		};
-		415D6DE6B4D0EF8DC5C16E121CDEA2AB /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = A04E94702B62931D2A5061F58579BBC4;
-			remoteInfo = "MarkdownView-MarkdownView";
-		};
-		9674BFA8E7E2D04F6486E166CB5D5DDC /* PBXContainerItemProxy */ = {
+		0C089CF52902B949653971046D5B477E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 9B4DBC61E54B8DF29E82E9F0F6F0638D;
 			remoteInfo = Zephyr;
 		};
-		DA406137292DF485A43C5497E5D20E90 /* PBXContainerItemProxy */ = {
+		38975952E50097EC37491024365AB168 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = F1BCD9702276377FB5B3BDB6EAF709D7;
 			remoteInfo = DZNEmptyDataSet;
 		};
+		8E68895399A77419C0F1F59BC6F23715 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9CE7BB59885E11A7F43D648F9B1D6D12;
+			remoteInfo = MarkdownView;
+		};
+		C0B4EF3BFF859C564250875D1BA6D409 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A04E94702B62931D2A5061F58579BBC4;
+			remoteInfo = "MarkdownView-MarkdownView";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		02E91B21B81216D2F682F3EF10D8BB73 /* DZNEmptyDataSet-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "DZNEmptyDataSet-Info.plist"; sourceTree = "<group>"; };
-		0A3DF8C83386C382C7B5F51C7B4EC328 /* main.js */ = {isa = PBXFileReference; includeInIndex = 1; name = main.js; path = webassets/dist/main.js; sourceTree = "<group>"; };
-		0CA3D9616CA6BF9C5D84A831DDDABF9B /* Zephyr-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Zephyr-dummy.m"; sourceTree = "<group>"; };
-		0F708A3F99BA5888D060AD29E3D9C104 /* MarkdownView-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "MarkdownView-umbrella.h"; sourceTree = "<group>"; };
+		0989CE011293B12AE27858679536B509 /* MarkdownView.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = MarkdownView.release.xcconfig; sourceTree = "<group>"; };
+		0F5AE35B4D93D97C73395C20ACCBB15B /* DZNEmptyDataSet-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "DZNEmptyDataSet-Info.plist"; sourceTree = "<group>"; };
+		14B40EEFED4F32FE21C20CE41F365222 /* DZNEmptyDataSet-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "DZNEmptyDataSet-umbrella.h"; sourceTree = "<group>"; };
+		1955292A376F59313D6F30CC92D21155 /* Zephyr.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = Zephyr.modulemap; sourceTree = "<group>"; };
 		1D68EC6EB990216A470F998432ACB004 /* Pods-SwipeSpeak-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-SwipeSpeak-acknowledgements.plist"; sourceTree = "<group>"; };
 		209039795703F925DC2A9D91BF5B7821 /* MarkdownView-MarkdownView */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = "MarkdownView-MarkdownView"; path = MarkdownView.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
-		21CBC02ED595D78DFDD40789CBE05BCA /* Zephyr-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Zephyr-umbrella.h"; sourceTree = "<group>"; };
+		2333442A713A59F62CB3927CA7E30B70 /* MarkdownView-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "MarkdownView-umbrella.h"; sourceTree = "<group>"; };
 		253FA717919394DE0ABDDC5BDA91B879 /* Zephyr */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Zephyr; path = Zephyr.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		2977A68B1843A31FCDB3BF1A027A6D7D /* main.css */ = {isa = PBXFileReference; includeInIndex = 1; name = main.css; path = webassets/dist/main.css; sourceTree = "<group>"; };
+		2C064243E7EB524F8A398D281040F096 /* MarkdownView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MarkdownView.swift; path = Sources/MarkdownView/MarkdownView.swift; sourceTree = "<group>"; };
 		2DC65C46FA3EF189C09149D3A6959E58 /* Pods-SwipeSpeak-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-SwipeSpeak-acknowledgements.markdown"; sourceTree = "<group>"; };
+		33DB810559CCE3C6F0EEE1BF9846851F /* UIScrollView+EmptyDataSet.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIScrollView+EmptyDataSet.h"; path = "Source/UIScrollView+EmptyDataSet.h"; sourceTree = "<group>"; };
+		3509B7D87A63C8987D18F3AA9C24E106 /* main.css */ = {isa = PBXFileReference; includeInIndex = 1; name = main.css; path = Sources/MarkdownView/Resources/main.css; sourceTree = "<group>"; };
+		3703E516FB1C70AE17F89B95B8B72C4C /* Zephyr-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Zephyr-Info.plist"; sourceTree = "<group>"; };
+		3CEF76AFBCEABE595A070C5D177A0259 /* MarkdownView-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "MarkdownView-Info.plist"; sourceTree = "<group>"; };
 		3FF7CCFC0699BB0B57B32C155A88B57A /* Pods-SwipeSpeak-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-SwipeSpeak-frameworks.sh"; sourceTree = "<group>"; };
+		4339F8E86E72B7A5F059763C099E6C10 /* MarkdownView.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = MarkdownView.debug.xcconfig; sourceTree = "<group>"; };
 		4707190DFBBBA59457495BD9F7AD0895 /* Pods-SwipeSpeak.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SwipeSpeak.release.xcconfig"; sourceTree = "<group>"; };
-		4C583E42E7F9CE23E29B83AAB6A8C8A5 /* DZNEmptyDataSet-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "DZNEmptyDataSet-umbrella.h"; sourceTree = "<group>"; };
-		55E9B3E42C338FC7E4BFF65EFE077834 /* Zephyr.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = Zephyr.modulemap; sourceTree = "<group>"; };
-		598A5449C9B1E3B43DA57396E31E02C3 /* index.html */ = {isa = PBXFileReference; includeInIndex = 1; name = index.html; path = webassets/dist/index.html; sourceTree = "<group>"; };
+		595BBB729F108B1F86F9BDC532B325E9 /* styled.html */ = {isa = PBXFileReference; includeInIndex = 1; name = styled.html; path = Sources/MarkdownView/Resources/styled.html; sourceTree = "<group>"; };
 		5DA4577FE3BC4A03751108FFED07B385 /* DZNEmptyDataSet */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = DZNEmptyDataSet; path = DZNEmptyDataSet.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		6A84DAD385DC2A15143869E2F0621507 /* Zephyr.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Zephyr.swift; path = Sources/Zephyr.swift; sourceTree = "<group>"; };
-		6EDEC75C9B5B24A4B2F39A1F202B9542 /* Zephyr.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Zephyr.debug.xcconfig; sourceTree = "<group>"; };
+		61AAC3D36151F0F6CF3113CAEF9BA335 /* UIScrollView+EmptyDataSet.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIScrollView+EmptyDataSet.m"; path = "Source/UIScrollView+EmptyDataSet.m"; sourceTree = "<group>"; };
+		6F4765DB1F0BAAA29858376436B3B944 /* DZNEmptyDataSet-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "DZNEmptyDataSet-dummy.m"; sourceTree = "<group>"; };
 		702CE5644EF1F26425C05E058547C562 /* MarkdownView */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = MarkdownView; path = MarkdownView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		714141F800E5E9D55670987C1C1590D1 /* DZNEmptyDataSet.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = DZNEmptyDataSet.release.xcconfig; sourceTree = "<group>"; };
+		7077C60F91D407F4D3C495A7E3624915 /* main.js */ = {isa = PBXFileReference; includeInIndex = 1; name = main.js; path = Sources/MarkdownView/Resources/main.js; sourceTree = "<group>"; };
 		7675612B18B04DA6F659DB116F05EEAF /* Pods-SwipeSpeak.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SwipeSpeak.debug.xcconfig"; sourceTree = "<group>"; };
-		79AEA94E1AE798BA70D9108456FB2C59 /* MarkdownView.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = MarkdownView.modulemap; sourceTree = "<group>"; };
 		7A8CA571CD96B9F91770A6E227FE8A1A /* Pods-SwipeSpeak-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-SwipeSpeak-dummy.m"; sourceTree = "<group>"; };
-		7DB383788391CB4DD2ACF813C8462DE6 /* MarkdownView-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "MarkdownView-prefix.pch"; sourceTree = "<group>"; };
 		8193349D819536E58C58A34C1B7DF545 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS18.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		85F63742F08545BC977C6DA580935F28 /* MarkdownView-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "MarkdownView-Info.plist"; sourceTree = "<group>"; };
-		90A1A4EB3BF9D826A19813539DF70998 /* UIScrollView+EmptyDataSet.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIScrollView+EmptyDataSet.m"; path = "Source/UIScrollView+EmptyDataSet.m"; sourceTree = "<group>"; };
+		819B8D73E93034E9C2A18AD2E4B8ED64 /* DZNEmptyDataSet.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = DZNEmptyDataSet.modulemap; sourceTree = "<group>"; };
+		89084D551F80B5ACC26DAB505FE98D98 /* DZNEmptyDataSet.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = DZNEmptyDataSet.debug.xcconfig; sourceTree = "<group>"; };
+		8BCCBA5780F238AAF4ED8257F028BBF0 /* MarkdownView-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "MarkdownView-prefix.pch"; sourceTree = "<group>"; };
+		8E44CAD36A2EA49BC4EB11CCA7AFE799 /* Zephyr.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Zephyr.debug.xcconfig; sourceTree = "<group>"; };
+		8EE58705F715C69BD5F6C54705405D13 /* ResourceBundle-MarkdownView-MarkdownView-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "ResourceBundle-MarkdownView-MarkdownView-Info.plist"; sourceTree = "<group>"; };
+		9042A742332D578461C26F51063C4C29 /* MarkdownUI.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MarkdownUI.swift; path = Sources/MarkdownView/MarkdownUI.swift; sourceTree = "<group>"; };
 		926D005A4904464C5B721C336AFCBB13 /* Pods-SwipeSpeak-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-SwipeSpeak-Info.plist"; sourceTree = "<group>"; };
-		99D47061223CF151228E4504D8702288 /* DZNEmptyDataSet-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "DZNEmptyDataSet-dummy.m"; sourceTree = "<group>"; };
+		92F94B8D5332DABE6B330F6B49F60A74 /* Zephyr-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Zephyr-umbrella.h"; sourceTree = "<group>"; };
+		96C25193C0C037BC9167DF63958952F1 /* MarkdownView-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "MarkdownView-dummy.m"; sourceTree = "<group>"; };
 		9B7756BA3A6E431E90E0DCE28CE0DEF6 /* Pods-SwipeSpeak */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "Pods-SwipeSpeak"; path = Pods_SwipeSpeak.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		A30BFBA606F18904A959B6E8EFBE68BB /* Zephyr-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Zephyr-Info.plist"; sourceTree = "<group>"; };
-		A3E2BED6553FA0A4BB8053D6F527A4E3 /* DZNEmptyDataSet-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "DZNEmptyDataSet-prefix.pch"; sourceTree = "<group>"; };
-		A4BFE4BABC615E341CBC0D22494A362C /* MarkdownView.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = MarkdownView.release.xcconfig; sourceTree = "<group>"; };
-		A5E033C25EC8681968A5262853961D48 /* Zephyr-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Zephyr-prefix.pch"; sourceTree = "<group>"; };
-		B899027A54B851C5C438D00A3FD2A0E8 /* DZNEmptyDataSet.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = DZNEmptyDataSet.debug.xcconfig; sourceTree = "<group>"; };
+		A72A9BC12EE0272867204276590048B0 /* DZNEmptyDataSet-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "DZNEmptyDataSet-prefix.pch"; sourceTree = "<group>"; };
+		ABA9D43C93AFF20A40F1A48C08276C99 /* Zephyr.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Zephyr.release.xcconfig; sourceTree = "<group>"; };
+		B4858D1B61695A82A2E1CD5125435889 /* Zephyr-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Zephyr-dummy.m"; sourceTree = "<group>"; };
+		B75FB5CCA1FC195B90703A72D7CDE689 /* Zephyr.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Zephyr.swift; path = Sources/Zephyr.swift; sourceTree = "<group>"; };
 		C4BF7D05F545E3973FB2BF83903B241E /* Pods-SwipeSpeak-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-SwipeSpeak-umbrella.h"; sourceTree = "<group>"; };
-		C5559C91C95F705F25277625C847F936 /* MarkdownView.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = MarkdownView.debug.xcconfig; sourceTree = "<group>"; };
-		CB654D607B8811C725F270BD71816BE1 /* ResourceBundle-MarkdownView-MarkdownView-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "ResourceBundle-MarkdownView-MarkdownView-Info.plist"; sourceTree = "<group>"; };
-		D6A73581F3769E6B6F0544FBFA0E44DB /* UIScrollView+EmptyDataSet.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIScrollView+EmptyDataSet.h"; path = "Source/UIScrollView+EmptyDataSet.h"; sourceTree = "<group>"; };
-		DC625EFE3DF5EFF63051314A164E82D1 /* Zephyr.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Zephyr.release.xcconfig; sourceTree = "<group>"; };
-		DDFE957E393EB380B2854A7F6D375DA2 /* MarkdownView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MarkdownView.swift; path = MarkdownView/MarkdownView.swift; sourceTree = "<group>"; };
+		DEA10BFA6F72F27C709A7C058BA6A960 /* MarkdownView.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = MarkdownView.modulemap; sourceTree = "<group>"; };
+		DF7B2E8B5D19ABB7CDC73CF47D705F4B /* Zephyr-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Zephyr-prefix.pch"; sourceTree = "<group>"; };
 		ECF4CA3AF5536D14B4E015504E7AEEC0 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS18.0.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
-		F924E3B0D91B6A2D6E87AC58D71F227E /* DZNEmptyDataSet.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = DZNEmptyDataSet.modulemap; sourceTree = "<group>"; };
-		FCA03C663C22F8E9A8E4A86C7F60975E /* MarkdownView-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "MarkdownView-dummy.m"; sourceTree = "<group>"; };
+		EEB093255CB40676045AC2CCCB779B4F /* DZNEmptyDataSet.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = DZNEmptyDataSet.release.xcconfig; sourceTree = "<group>"; };
+		F637E352D1D269054DF1B25B7572235E /* non_styled.html */ = {isa = PBXFileReference; includeInIndex = 1; name = non_styled.html; path = Sources/MarkdownView/Resources/non_styled.html; sourceTree = "<group>"; };
 		FFA54DE1F1B33A7C64548181677C6452 /* Pods-SwipeSpeak.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-SwipeSpeak.modulemap"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		933A2A08F8C955223A60315839E618C7 /* Frameworks */ = {
+		7DAD2FCFBA60ABF0FB61F871B1663DC4 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1BEA30D377C8EE448FBA83C47797EDAD /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -135,19 +138,20 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D865D48FB50E1619BBEAA3DDC42379B0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				28B23294DDC160FE64865B9E07D77475 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E672724427269716049B769344D7C3DC /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				15B27182B591769C57B55544260DC886 /* Foundation.framework in Frameworks */,
 				D968461E31E8FF3FF6BA1DC621B0433B /* UIKit.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		F848AFB77C93E439C5A8792E4267E482 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -171,27 +175,22 @@
 			path = "Target Support Files/Pods-SwipeSpeak";
 			sourceTree = "<group>";
 		};
-		073EB93BDEEF0D9866C09E03F7782FA4 /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				55E9B3E42C338FC7E4BFF65EFE077834 /* Zephyr.modulemap */,
-				0CA3D9616CA6BF9C5D84A831DDDABF9B /* Zephyr-dummy.m */,
-				A30BFBA606F18904A959B6E8EFBE68BB /* Zephyr-Info.plist */,
-				A5E033C25EC8681968A5262853961D48 /* Zephyr-prefix.pch */,
-				21CBC02ED595D78DFDD40789CBE05BCA /* Zephyr-umbrella.h */,
-				6EDEC75C9B5B24A4B2F39A1F202B9542 /* Zephyr.debug.xcconfig */,
-				DC625EFE3DF5EFF63051314A164E82D1 /* Zephyr.release.xcconfig */,
-			);
-			name = "Support Files";
-			path = "../Target Support Files/Zephyr";
-			sourceTree = "<group>";
-		};
 		1628BF05B4CAFDCC3549A101F5A10A17 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				1DE6440B6853131A80C53DDA34375AAB /* iOS */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		19E363937971E75759DCCE1FAEBEE474 /* Zephyr */ = {
+			isa = PBXGroup;
+			children = (
+				B75FB5CCA1FC195B90703A72D7CDE689 /* Zephyr.swift */,
+				D4F4D3436E043D3C700947F896872E20 /* Support Files */,
+			);
+			name = Zephyr;
+			path = Zephyr;
 			sourceTree = "<group>";
 		};
 		1DE6440B6853131A80C53DDA34375AAB /* iOS */ = {
@@ -203,27 +202,17 @@
 			name = iOS;
 			sourceTree = "<group>";
 		};
-		3F8E5DD3C23CC1FD33A5A1985EC2339F /* Resources */ = {
+		22599EF7F05E44ABBA173F8A0EA2FB55 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				598A5449C9B1E3B43DA57396E31E02C3 /* index.html */,
-				2977A68B1843A31FCDB3BF1A027A6D7D /* main.css */,
-				0A3DF8C83386C382C7B5F51C7B4EC328 /* main.js */,
-			);
-			name = Resources;
-			sourceTree = "<group>";
-		};
-		4E701A904332CBFDC01ACB177A6BF9D0 /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				79AEA94E1AE798BA70D9108456FB2C59 /* MarkdownView.modulemap */,
-				FCA03C663C22F8E9A8E4A86C7F60975E /* MarkdownView-dummy.m */,
-				85F63742F08545BC977C6DA580935F28 /* MarkdownView-Info.plist */,
-				7DB383788391CB4DD2ACF813C8462DE6 /* MarkdownView-prefix.pch */,
-				0F708A3F99BA5888D060AD29E3D9C104 /* MarkdownView-umbrella.h */,
-				C5559C91C95F705F25277625C847F936 /* MarkdownView.debug.xcconfig */,
-				A4BFE4BABC615E341CBC0D22494A362C /* MarkdownView.release.xcconfig */,
-				CB654D607B8811C725F270BD71816BE1 /* ResourceBundle-MarkdownView-MarkdownView-Info.plist */,
+				DEA10BFA6F72F27C709A7C058BA6A960 /* MarkdownView.modulemap */,
+				96C25193C0C037BC9167DF63958952F1 /* MarkdownView-dummy.m */,
+				3CEF76AFBCEABE595A070C5D177A0259 /* MarkdownView-Info.plist */,
+				8BCCBA5780F238AAF4ED8257F028BBF0 /* MarkdownView-prefix.pch */,
+				2333442A713A59F62CB3927CA7E30B70 /* MarkdownView-umbrella.h */,
+				4339F8E86E72B7A5F059763C099E6C10 /* MarkdownView.debug.xcconfig */,
+				0989CE011293B12AE27858679536B509 /* MarkdownView.release.xcconfig */,
+				8EE58705F715C69BD5F6C54705405D13 /* ResourceBundle-MarkdownView-MarkdownView-Info.plist */,
 			);
 			name = "Support Files";
 			path = "../Target Support Files/MarkdownView";
@@ -241,50 +230,48 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		7A1583F3EF370FB3C31382CF14068486 /* DZNEmptyDataSet */ = {
+		79804090973127B65664070BB02AFFCE /* DZNEmptyDataSet */ = {
 			isa = PBXGroup;
 			children = (
-				D6A73581F3769E6B6F0544FBFA0E44DB /* UIScrollView+EmptyDataSet.h */,
-				90A1A4EB3BF9D826A19813539DF70998 /* UIScrollView+EmptyDataSet.m */,
-				7D32040A52386D7115B34C934402A906 /* Support Files */,
+				33DB810559CCE3C6F0EEE1BF9846851F /* UIScrollView+EmptyDataSet.h */,
+				61AAC3D36151F0F6CF3113CAEF9BA335 /* UIScrollView+EmptyDataSet.m */,
+				CFDF8B55E66D006FB45E68D7F660C177 /* Support Files */,
 			);
 			name = DZNEmptyDataSet;
 			path = DZNEmptyDataSet;
 			sourceTree = "<group>";
 		};
-		7D32040A52386D7115B34C934402A906 /* Support Files */ = {
+		87E12520492C8AAA911711247B3262A9 /* MarkdownView */ = {
 			isa = PBXGroup;
 			children = (
-				F924E3B0D91B6A2D6E87AC58D71F227E /* DZNEmptyDataSet.modulemap */,
-				99D47061223CF151228E4504D8702288 /* DZNEmptyDataSet-dummy.m */,
-				02E91B21B81216D2F682F3EF10D8BB73 /* DZNEmptyDataSet-Info.plist */,
-				A3E2BED6553FA0A4BB8053D6F527A4E3 /* DZNEmptyDataSet-prefix.pch */,
-				4C583E42E7F9CE23E29B83AAB6A8C8A5 /* DZNEmptyDataSet-umbrella.h */,
-				B899027A54B851C5C438D00A3FD2A0E8 /* DZNEmptyDataSet.debug.xcconfig */,
-				714141F800E5E9D55670987C1C1590D1 /* DZNEmptyDataSet.release.xcconfig */,
+				9042A742332D578461C26F51063C4C29 /* MarkdownUI.swift */,
+				2C064243E7EB524F8A398D281040F096 /* MarkdownView.swift */,
+				BA7043ABE52055EAB710DF24E088C553 /* Resources */,
+				22599EF7F05E44ABBA173F8A0EA2FB55 /* Support Files */,
 			);
-			name = "Support Files";
-			path = "../Target Support Files/DZNEmptyDataSet";
+			name = MarkdownView;
+			path = MarkdownView;
 			sourceTree = "<group>";
 		};
-		7D8C50849A96C20281794F419AA2D6E8 /* Pods */ = {
+		A5ED6DC9F199A99C97AF6B47815C6878 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				7A1583F3EF370FB3C31382CF14068486 /* DZNEmptyDataSet */,
-				EA3FDFA0A156E57CF2A57474979C6F37 /* MarkdownView */,
-				B6A27C94F9F1CFAAB3C642A20BFCDEAF /* Zephyr */,
+				79804090973127B65664070BB02AFFCE /* DZNEmptyDataSet */,
+				87E12520492C8AAA911711247B3262A9 /* MarkdownView */,
+				19E363937971E75759DCCE1FAEBEE474 /* Zephyr */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		B6A27C94F9F1CFAAB3C642A20BFCDEAF /* Zephyr */ = {
+		BA7043ABE52055EAB710DF24E088C553 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				6A84DAD385DC2A15143869E2F0621507 /* Zephyr.swift */,
-				073EB93BDEEF0D9866C09E03F7782FA4 /* Support Files */,
+				3509B7D87A63C8987D18F3AA9C24E106 /* main.css */,
+				7077C60F91D407F4D3C495A7E3624915 /* main.js */,
+				F637E352D1D269054DF1B25B7572235E /* non_styled.html */,
+				595BBB729F108B1F86F9BDC532B325E9 /* styled.html */,
 			);
-			name = Zephyr;
-			path = Zephyr;
+			name = Resources;
 			sourceTree = "<group>";
 		};
 		BDA2B94BCC32CD8AA9A09D3CD808EEE6 /* Targets Support Files */ = {
@@ -300,21 +287,40 @@
 			children = (
 				9D940727FF8FB9C785EB98E56350EF41 /* Podfile */,
 				1628BF05B4CAFDCC3549A101F5A10A17 /* Frameworks */,
-				7D8C50849A96C20281794F419AA2D6E8 /* Pods */,
+				A5ED6DC9F199A99C97AF6B47815C6878 /* Pods */,
 				66EE63C514B1AAE9017BB04EC24B53B9 /* Products */,
 				BDA2B94BCC32CD8AA9A09D3CD808EEE6 /* Targets Support Files */,
 			);
 			sourceTree = "<group>";
 		};
-		EA3FDFA0A156E57CF2A57474979C6F37 /* MarkdownView */ = {
+		CFDF8B55E66D006FB45E68D7F660C177 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				DDFE957E393EB380B2854A7F6D375DA2 /* MarkdownView.swift */,
-				3F8E5DD3C23CC1FD33A5A1985EC2339F /* Resources */,
-				4E701A904332CBFDC01ACB177A6BF9D0 /* Support Files */,
+				819B8D73E93034E9C2A18AD2E4B8ED64 /* DZNEmptyDataSet.modulemap */,
+				6F4765DB1F0BAAA29858376436B3B944 /* DZNEmptyDataSet-dummy.m */,
+				0F5AE35B4D93D97C73395C20ACCBB15B /* DZNEmptyDataSet-Info.plist */,
+				A72A9BC12EE0272867204276590048B0 /* DZNEmptyDataSet-prefix.pch */,
+				14B40EEFED4F32FE21C20CE41F365222 /* DZNEmptyDataSet-umbrella.h */,
+				89084D551F80B5ACC26DAB505FE98D98 /* DZNEmptyDataSet.debug.xcconfig */,
+				EEB093255CB40676045AC2CCCB779B4F /* DZNEmptyDataSet.release.xcconfig */,
 			);
-			name = MarkdownView;
-			path = MarkdownView;
+			name = "Support Files";
+			path = "../Target Support Files/DZNEmptyDataSet";
+			sourceTree = "<group>";
+		};
+		D4F4D3436E043D3C700947F896872E20 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				1955292A376F59313D6F30CC92D21155 /* Zephyr.modulemap */,
+				B4858D1B61695A82A2E1CD5125435889 /* Zephyr-dummy.m */,
+				3703E516FB1C70AE17F89B95B8B72C4C /* Zephyr-Info.plist */,
+				DF7B2E8B5D19ABB7CDC73CF47D705F4B /* Zephyr-prefix.pch */,
+				92F94B8D5332DABE6B330F6B49F60A74 /* Zephyr-umbrella.h */,
+				8E44CAD36A2EA49BC4EB11CCA7AFE799 /* Zephyr.debug.xcconfig */,
+				ABA9D43C93AFF20A40F1A48C08276C99 /* Zephyr.release.xcconfig */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/Zephyr";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -326,14 +332,6 @@
 			files = (
 				A6FCF74348D1907891FBDE3F2E331136 /* DZNEmptyDataSet-umbrella.h in Headers */,
 				2EFF1EFA2FF0D2F1AE44A9DDBB932425 /* UIScrollView+EmptyDataSet.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		6BD73389D3A10103B66066D2F4778DA0 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				F27D6B3F13758DCFC43687399F199942 /* MarkdownView-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -350,6 +348,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				1C99F949EE4599CB72886621B904E531 /* Zephyr-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AACB6679175A0C568EDE79FFCDBDF0C8 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E2AAFDEEBA0CFD6E3D416348C9508DF3 /* MarkdownView-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -376,17 +382,17 @@
 		};
 		9CE7BB59885E11A7F43D648F9B1D6D12 /* MarkdownView */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = DEF44DA26D9A8E5E2BC35DA816F4438F /* Build configuration list for PBXNativeTarget "MarkdownView" */;
+			buildConfigurationList = 5B92584F31B71615C09457856A9E01BD /* Build configuration list for PBXNativeTarget "MarkdownView" */;
 			buildPhases = (
-				6BD73389D3A10103B66066D2F4778DA0 /* Headers */,
-				6C2A75B39ACC200D6CD6094A92DC8FCC /* Sources */,
-				933A2A08F8C955223A60315839E618C7 /* Frameworks */,
-				45A98151D6093A06EC24AAEC89817D65 /* Resources */,
+				AACB6679175A0C568EDE79FFCDBDF0C8 /* Headers */,
+				E56541EBC2B78981206755255CE69B76 /* Sources */,
+				D865D48FB50E1619BBEAA3DDC42379B0 /* Frameworks */,
+				E48C2D0CECDF3CC60DAFDE498F1A94E1 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				F43CCFABF6704FA00C0C1673E5777F7A /* PBXTargetDependency */,
+				856163BB146277E0B984C32914EB034A /* PBXTargetDependency */,
 			);
 			name = MarkdownView;
 			productName = MarkdownView;
@@ -395,11 +401,11 @@
 		};
 		A04E94702B62931D2A5061F58579BBC4 /* MarkdownView-MarkdownView */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = A6D135669FD84CE69394658EEA46FDDF /* Build configuration list for PBXNativeTarget "MarkdownView-MarkdownView" */;
+			buildConfigurationList = 9088BB191D8E4F9112FD91E00296E4C0 /* Build configuration list for PBXNativeTarget "MarkdownView-MarkdownView" */;
 			buildPhases = (
-				289875FFBD0B301374B8674210A4F2B4 /* Sources */,
-				F848AFB77C93E439C5A8792E4267E482 /* Frameworks */,
-				72EED82205F1C5350149AAFB3DEF5581 /* Resources */,
+				8E9E2AC2F6E00D840288391A0D0FC2D7 /* Sources */,
+				7DAD2FCFBA60ABF0FB61F871B1663DC4 /* Frameworks */,
+				83AF25870F481A60315B15F0DFB51B3F /* Resources */,
 			);
 			buildRules = (
 			);
@@ -422,9 +428,9 @@
 			buildRules = (
 			);
 			dependencies = (
-				2EC916E239F9B3D4922EF610DD20C0C4 /* PBXTargetDependency */,
-				0AB53525A20D29476EC35128DEF05040 /* PBXTargetDependency */,
-				5CCFC8492375163A5D8130DBA27DC3D4 /* PBXTargetDependency */,
+				C477BD6A28FE25EE03594A18F4883B80 /* PBXTargetDependency */,
+				6A536D04F25DC56AB2D67EA9058DA013 /* PBXTargetDependency */,
+				7CB7323367FE6646C0802694A75F58C3 /* PBXTargetDependency */,
 			);
 			name = "Pods-SwipeSpeak";
 			productName = Pods_SwipeSpeak;
@@ -483,21 +489,14 @@
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		45A98151D6093A06EC24AAEC89817D65 /* Resources */ = {
+		83AF25870F481A60315B15F0DFB51B3F /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				06B897FD9163A2567445AFB0D4F93054 /* MarkdownView-MarkdownView in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		72EED82205F1C5350149AAFB3DEF5581 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				51CCED293A523C5DD3B4D807557C40A1 /* index.html in Resources */,
-				822262266B14607264EB12A79E53E837 /* main.css in Resources */,
-				3379709A9A9F17C4191F81A040DA422C /* main.js in Resources */,
+				15D9471D7577209F8A6E748EA5E7FD30 /* main.css in Resources */,
+				F899C2B49B9D9A4A69350AA601DFD552 /* main.js in Resources */,
+				4FBD024D211FAE54FA06886C4F302F0E /* non_styled.html in Resources */,
+				6E8A11636505D1B62D7E130496CD9615 /* styled.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -512,6 +511,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E48C2D0CECDF3CC60DAFDE498F1A94E1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D74F5733109B6732895F4746C1B22039 /* MarkdownView-MarkdownView in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -534,27 +541,18 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		289875FFBD0B301374B8674210A4F2B4 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		6C2A75B39ACC200D6CD6094A92DC8FCC /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				FCDAC14BCA711CDBB99EB0D3B882ABD3 /* MarkdownView.swift in Sources */,
-				27E7575BF6627922F018B185F381ED9B /* MarkdownView-dummy.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		75F8F07C85E24896C3F4E5B47C5AED28 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				824EEC3B02FB7A5994C6036F80CAF032 /* Pods-SwipeSpeak-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8E9E2AC2F6E00D840288391A0D0FC2D7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -567,32 +565,42 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		E56541EBC2B78981206755255CE69B76 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7BB2A300EACB35BA646B36A205F941A7 /* MarkdownUI.swift in Sources */,
+				357BE5829F09B3E8B9A16F83DD13E157 /* MarkdownView.swift in Sources */,
+				5233B15AEE80D0A7E443042825067B29 /* MarkdownView-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		0AB53525A20D29476EC35128DEF05040 /* PBXTargetDependency */ = {
+		6A536D04F25DC56AB2D67EA9058DA013 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = MarkdownView;
 			target = 9CE7BB59885E11A7F43D648F9B1D6D12 /* MarkdownView */;
-			targetProxy = 327681251B96635807126225DC374126 /* PBXContainerItemProxy */;
+			targetProxy = 8E68895399A77419C0F1F59BC6F23715 /* PBXContainerItemProxy */;
 		};
-		2EC916E239F9B3D4922EF610DD20C0C4 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = DZNEmptyDataSet;
-			target = F1BCD9702276377FB5B3BDB6EAF709D7 /* DZNEmptyDataSet */;
-			targetProxy = DA406137292DF485A43C5497E5D20E90 /* PBXContainerItemProxy */;
-		};
-		5CCFC8492375163A5D8130DBA27DC3D4 /* PBXTargetDependency */ = {
+		7CB7323367FE6646C0802694A75F58C3 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = Zephyr;
 			target = 9B4DBC61E54B8DF29E82E9F0F6F0638D /* Zephyr */;
-			targetProxy = 9674BFA8E7E2D04F6486E166CB5D5DDC /* PBXContainerItemProxy */;
+			targetProxy = 0C089CF52902B949653971046D5B477E /* PBXContainerItemProxy */;
 		};
-		F43CCFABF6704FA00C0C1673E5777F7A /* PBXTargetDependency */ = {
+		856163BB146277E0B984C32914EB034A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "MarkdownView-MarkdownView";
 			target = A04E94702B62931D2A5061F58579BBC4 /* MarkdownView-MarkdownView */;
-			targetProxy = 415D6DE6B4D0EF8DC5C16E121CDEA2AB /* PBXContainerItemProxy */;
+			targetProxy = C0B4EF3BFF859C564250875D1BA6D409 /* PBXContainerItemProxy */;
+		};
+		C477BD6A28FE25EE03594A18F4883B80 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = DZNEmptyDataSet;
+			target = F1BCD9702276377FB5B3BDB6EAF709D7 /* DZNEmptyDataSet */;
+			targetProxy = 38975952E50097EC37491024365AB168 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -634,26 +642,46 @@
 			};
 			name = Release;
 		};
-		2839AE7E40DE72EEEAF71989688E4BC1 /* Debug */ = {
+		1FDF7BECF6CF129ED749EBAFECE660A2 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C5559C91C95F705F25277625C847F936 /* MarkdownView.debug.xcconfig */;
+			baseConfigurationReference = 0989CE011293B12AE27858679536B509 /* MarkdownView.release.xcconfig */;
 			buildSettings = {
-				CODE_SIGNING_ALLOWED = NO;
-				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/MarkdownView";
-				IBSC_MODULE = MarkdownView;
-				INFOPLIST_FILE = "Target Support Files/MarkdownView/ResourceBundle-MarkdownView-MarkdownView-Info.plist";
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = NO;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				GCC_PREFIX_HEADER = "Target Support Files/MarkdownView/MarkdownView-prefix.pch";
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = "Target Support Files/MarkdownView/MarkdownView-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/MarkdownView/MarkdownView.modulemap";
+				PRODUCT_MODULE_NAME = MarkdownView;
 				PRODUCT_NAME = MarkdownView;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_INSTALL_OBJC_HEADER = YES;
+				SWIFT_VERSION = 5.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				WRAPPER_EXTENSION = bundle;
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
 			};
-			name = Debug;
+			name = Release;
 		};
 		2BD2993B0227C4684DBB17E7D2E84FEE /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B899027A54B851C5C438D00A3FD2A0E8 /* DZNEmptyDataSet.debug.xcconfig */;
+			baseConfigurationReference = 89084D551F80B5ACC26DAB505FE98D98 /* DZNEmptyDataSet.debug.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -686,11 +714,12 @@
 			};
 			name = Debug;
 		};
-		40A7DF9FAA60FD7A2D5F354A6B5FE3A1 /* Release */ = {
+		2EBA219C314249E42D3D9B8C247CDD6A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = DC625EFE3DF5EFF63051314A164E82D1 /* Zephyr.release.xcconfig */;
+			baseConfigurationReference = 8E44CAD36A2EA49BC4EB11CCA7AFE799 /* Zephyr.debug.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_ENABLE_OBJC_WEAK = NO;
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
@@ -714,86 +743,52 @@
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
 				SWIFT_INSTALL_OBJC_HEADER = YES;
-				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		5B8D4804BA9B4AC909A8F83C6F72868F /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = A4BFE4BABC615E341CBC0D22494A362C /* MarkdownView.release.xcconfig */;
-			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_MODULE_VERIFIER = NO;
-				ENABLE_USER_SCRIPT_SANDBOXING = NO;
-				GCC_PREFIX_HEADER = "Target Support Files/MarkdownView/MarkdownView-prefix.pch";
-				GENERATE_INFOPLIST_FILE = NO;
-				INFOPLIST_FILE = "Target Support Files/MarkdownView/MarkdownView-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/MarkdownView/MarkdownView.modulemap";
-				PRODUCT_MODULE_NAME = MarkdownView;
-				PRODUCT_NAME = MarkdownView;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_INSTALL_OBJC_HEADER = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		61C5AF9681A074B234CA01819BB921D2 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = C5559C91C95F705F25277625C847F936 /* MarkdownView.debug.xcconfig */;
-			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_MODULE_VERIFIER = NO;
-				ENABLE_USER_SCRIPT_SANDBOXING = NO;
-				GCC_PREFIX_HEADER = "Target Support Files/MarkdownView/MarkdownView-prefix.pch";
-				GENERATE_INFOPLIST_FILE = NO;
-				INFOPLIST_FILE = "Target Support Files/MarkdownView/MarkdownView-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/MarkdownView/MarkdownView.modulemap";
-				PRODUCT_MODULE_NAME = MarkdownView;
-				PRODUCT_NAME = MarkdownView;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_INSTALL_OBJC_HEADER = YES;
+				SWIFT_VERSION = 5.3;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
 			name = Debug;
 		};
-		6D756672A5FCFB4AA9F9D1F282E66CDF /* Release */ = {
+		5A24A76A6E0A2C5A7D171A6345EC4487 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A4BFE4BABC615E341CBC0D22494A362C /* MarkdownView.release.xcconfig */;
+			baseConfigurationReference = 4339F8E86E72B7A5F059763C099E6C10 /* MarkdownView.debug.xcconfig */;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = NO;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				GCC_PREFIX_HEADER = "Target Support Files/MarkdownView/MarkdownView-prefix.pch";
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = "Target Support Files/MarkdownView/MarkdownView-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/MarkdownView/MarkdownView.modulemap";
+				PRODUCT_MODULE_NAME = MarkdownView;
+				PRODUCT_NAME = MarkdownView;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_INSTALL_OBJC_HEADER = YES;
+				SWIFT_VERSION = 5.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		5B999F01CEFE6D0984D38725B60AD838 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4339F8E86E72B7A5F059763C099E6C10 /* MarkdownView.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGNING_ALLOWED = NO;
 				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/MarkdownView";
@@ -805,6 +800,43 @@
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = bundle;
+			};
+			name = Debug;
+		};
+		7319AC8240E435294EDB65001ACD89DC /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = ABA9D43C93AFF20A40F1A48C08276C99 /* Zephyr.release.xcconfig */;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = NO;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				GCC_PREFIX_HEADER = "Target Support Files/Zephyr/Zephyr-prefix.pch";
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = "Target Support Files/Zephyr/Zephyr-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/Zephyr/Zephyr.modulemap";
+				PRODUCT_MODULE_NAME = Zephyr;
+				PRODUCT_NAME = Zephyr;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_INSTALL_OBJC_HEADER = YES;
+				SWIFT_VERSION = 5.3;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
 		};
@@ -936,40 +968,22 @@
 			};
 			name = Release;
 		};
-		D94FDEA7C396388BD13546EB73DBD240 /* Debug */ = {
+		CDA1E9675C259146B9846AB519C05B30 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6EDEC75C9B5B24A4B2F39A1F202B9542 /* Zephyr.debug.xcconfig */;
+			baseConfigurationReference = 0989CE011293B12AE27858679536B509 /* MarkdownView.release.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_MODULE_VERIFIER = NO;
-				ENABLE_USER_SCRIPT_SANDBOXING = NO;
-				GCC_PREFIX_HEADER = "Target Support Files/Zephyr/Zephyr-prefix.pch";
-				GENERATE_INFOPLIST_FILE = NO;
-				INFOPLIST_FILE = "Target Support Files/Zephyr/Zephyr-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				CODE_SIGNING_ALLOWED = NO;
+				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/MarkdownView";
+				IBSC_MODULE = MarkdownView;
+				INFOPLIST_FILE = "Target Support Files/MarkdownView/ResourceBundle-MarkdownView-MarkdownView-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/Zephyr/Zephyr.modulemap";
-				PRODUCT_MODULE_NAME = Zephyr;
-				PRODUCT_NAME = Zephyr;
+				PRODUCT_NAME = MarkdownView;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_INSTALL_OBJC_HEADER = YES;
-				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
+				WRAPPER_EXTENSION = bundle;
 			};
-			name = Debug;
+			name = Release;
 		};
 		DE3DA625782BB571EEED7216F2E85861 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -1009,7 +1023,7 @@
 		};
 		E2F7054696B69F808C798A81402D94BA /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 714141F800E5E9D55670987C1C1590D1 /* DZNEmptyDataSet.release.xcconfig */;
+			baseConfigurationReference = EEB093255CB40676045AC2CCCB779B4F /* DZNEmptyDataSet.release.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -1067,8 +1081,8 @@
 		25E19B9A1DFCECA69B72A9252E926D2F /* Build configuration list for PBXNativeTarget "Zephyr" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				D94FDEA7C396388BD13546EB73DBD240 /* Debug */,
-				40A7DF9FAA60FD7A2D5F354A6B5FE3A1 /* Release */,
+				2EBA219C314249E42D3D9B8C247CDD6A /* Debug */,
+				7319AC8240E435294EDB65001ACD89DC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1082,20 +1096,20 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		A6D135669FD84CE69394658EEA46FDDF /* Build configuration list for PBXNativeTarget "MarkdownView-MarkdownView" */ = {
+		5B92584F31B71615C09457856A9E01BD /* Build configuration list for PBXNativeTarget "MarkdownView" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				2839AE7E40DE72EEEAF71989688E4BC1 /* Debug */,
-				6D756672A5FCFB4AA9F9D1F282E66CDF /* Release */,
+				5A24A76A6E0A2C5A7D171A6345EC4487 /* Debug */,
+				1FDF7BECF6CF129ED749EBAFECE660A2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		DEF44DA26D9A8E5E2BC35DA816F4438F /* Build configuration list for PBXNativeTarget "MarkdownView" */ = {
+		9088BB191D8E4F9112FD91E00296E4C0 /* Build configuration list for PBXNativeTarget "MarkdownView-MarkdownView" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				61C5AF9681A074B234CA01819BB921D2 /* Debug */,
-				5B8D4804BA9B4AC909A8F83C6F72868F /* Release */,
+				5B999F01CEFE6D0984D38725B60AD838 /* Debug */,
+				CDA1E9675C259146B9846AB519C05B30 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
