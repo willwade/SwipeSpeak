@@ -9,29 +9,37 @@
 
 import Foundation
 import UIKit
-import FirebaseAnalytics
 import SafariServices
 
 class SettingsVC: UITableViewController {
     
     @IBOutlet weak var keyboardLayoutLabel: UILabel!
+    @IBOutlet weak var predictionEngineLabel: UILabel!
 
     @IBOutlet weak var announceLettersCountSwitch: UISwitch!
     @IBOutlet weak var vibrateSwitch: UISwitch!
 
     @IBOutlet weak var longerPauseBetweenLettersSwitch: UISwitch!
- 
+
     @IBOutlet weak var enableAudioFeedbackSwitch: UISwitch!
     @IBOutlet weak var enableCouldSyncSwitch: UISwitch!
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+
         keyboardLayoutLabel.text = UserPreferences.shared.keyboardLayout.localizedString()
+
+        // Update prediction engine label
+        if let engineTypeString = UserPreferences.shared.predictionEngineType,
+           let engineType = PredictionEngineType(rawValue: engineTypeString) {
+            predictionEngineLabel.text = engineType.displayName
+        } else {
+            predictionEngineLabel.text = PredictionEngineType.custom.displayName
+        }
 
         announceLettersCountSwitch.isOn = UserPreferences.shared.announceLettersCount
         vibrateSwitch.isOn = UserPreferences.shared.vibrate
-        
+
         longerPauseBetweenLettersSwitch.isOn = UserPreferences.shared.longerPauseBetweenLetters
 
         enableAudioFeedbackSwitch.isOn = UserPreferences.shared.audioFeedback
@@ -49,17 +57,73 @@ class SettingsVC: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.section == 5 && indexPath.row == 2 {
+        if indexPath.section == 0 && indexPath.row == 1 {
+            showPredictionEngineSelection()
+        } else if indexPath.section == 5 && indexPath.row == 2 {
             askToClearWordRanking()
         } else if indexPath.section == 6 && indexPath.row == 0 {
             showTutorial()
         }
-        
+
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
     private func showTutorial() {
         present(SFSafariViewController(url: Constants.tutorialURL), animated: true, completion: nil)
+    }
+
+    private func showPredictionEngineSelection() {
+        let alertController = UIAlertController(
+            title: NSLocalizedString("Prediction Engine", comment: ""),
+            message: NSLocalizedString("Choose the word prediction engine to use", comment: ""),
+            preferredStyle: .actionSheet
+        )
+
+        let manager = PredictionEngineManager.shared
+
+        for engineType in PredictionEngineType.allCases {
+            let action = UIAlertAction(title: engineType.displayName, style: .default) { _ in
+                if manager.switchToEngine(engineType) {
+                    self.predictionEngineLabel.text = engineType.displayName
+
+                    // Show brief description
+                    let successAlert = UIAlertController(
+                        title: NSLocalizedString("Engine Changed", comment: ""),
+                        message: engineType.description,
+                        preferredStyle: .alert
+                    )
+                    successAlert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .default))
+                    self.present(successAlert, animated: true)
+                } else {
+                    // Engine not available
+                    let errorAlert = UIAlertController(
+                        title: NSLocalizedString("Engine Unavailable", comment: ""),
+                        message: NSLocalizedString("This prediction engine is not available on your device", comment: ""),
+                        preferredStyle: .alert
+                    )
+                    errorAlert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .default))
+                    self.present(errorAlert, animated: true)
+                }
+            }
+
+            // Mark current engine
+            if let currentType = UserPreferences.shared.predictionEngineType,
+               currentType == engineType.rawValue {
+                action.setValue(true, forKey: "checked")
+            }
+
+            alertController.addAction(action)
+        }
+
+        alertController.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel))
+
+        // For iPad
+        if let popover = alertController.popoverPresentationController {
+            popover.sourceView = predictionEngineLabel
+            popover.sourceRect = predictionEngineLabel.bounds
+        }
+
+        present(alertController, animated: true)
     }
     
     private func askToClearWordRanking() {
@@ -70,7 +134,6 @@ class SettingsVC: UITableViewController {
         let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel)
         let clearAction = UIAlertAction(title: NSLocalizedString("Clear", comment: ""), style: .destructive) { (action: UIAlertAction) in
             UserPreferences.shared.clearWordRating()
-            Analytics.logEvent("settings.reset_word_ranking", parameters: nil)
         }
         
         alertController.addAction(cancelAction)
@@ -82,19 +145,14 @@ class SettingsVC: UITableViewController {
     @IBAction func switchValueChanged(_ sender: UISwitch) {
         if sender === announceLettersCountSwitch {
             UserPreferences.shared.announceLettersCount = sender.isOn
-            Analytics.logEvent("settings.announce_letters_direction", parameters: ["is_on": sender.isOn.description])
         } else if sender === vibrateSwitch {
             UserPreferences.shared.vibrate = sender.isOn
-            Analytics.logEvent("settings.vibrate", parameters: ["is_on": sender.isOn.description])
         } else if sender === longerPauseBetweenLettersSwitch {
             UserPreferences.shared.longerPauseBetweenLetters = sender.isOn
-            Analytics.logEvent("settings.longer_pause_between_letters", parameters: ["is_on": sender.isOn.description])
         } else if sender === enableAudioFeedbackSwitch {
             UserPreferences.shared.audioFeedback = sender.isOn
-            Analytics.logEvent("settings.enable_audio_feedback", parameters: ["is_on": sender.isOn.description])
         } else if sender === enableCouldSyncSwitch {
             UserPreferences.shared.enableCloudSync = sender.isOn
-            Analytics.logEvent("settings.enable_cloud_sync", parameters: ["is_on": sender.isOn.description])
         }
     }
     

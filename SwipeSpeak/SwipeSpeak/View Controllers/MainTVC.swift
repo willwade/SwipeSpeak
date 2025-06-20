@@ -233,6 +233,10 @@ class MainTVC: UITableViewController {
             label.isUserInteractionEnabled = true
             label.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleLabelTapAction(_:))))
             label.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(handleLabelLongPressAction(_:))))
+
+            // Enhanced accessibility
+            label.isAccessibilityElement = true
+            label.accessibilityTraits = .button
         }
         
         if let buildTitleLabel = buildWordButton.titleLabel {
@@ -733,11 +737,21 @@ class MainTVC: UITableViewController {
     private func setSentenceText(_ text: String) {
         sentencePlaceholderTF.placeholder = text.isEmpty ? NSLocalizedString("Sentence", comment: "") : ""
         sentenceLabel.text = text
+
+        // Update accessibility
+        sentenceLabel.accessibilityLabel = text.isEmpty ?
+            NSLocalizedString("Sentence area. Tap letters to spell words", comment: "") :
+            NSLocalizedString("Current sentence: \(text)", comment: "")
     }
     
     private func setWordText(_ text: String) {
         wordPlaceholderTF.placeholder = text.isEmpty ? NSLocalizedString("Word", comment: "") : ""
         wordLabel.text = text
+
+        // Update accessibility
+        wordLabel.accessibilityLabel = text.isEmpty ?
+            NSLocalizedString("Word area. Current input is empty", comment: "") :
+            NSLocalizedString("Current word input: \(text)", comment: "")
     }
     
     private func resetKeysBoarder() {
