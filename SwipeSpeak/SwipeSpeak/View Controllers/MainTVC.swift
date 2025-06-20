@@ -549,7 +549,7 @@ class MainTVC: UITableViewController {
         announce(NSLocalizedString(arrowText, comment: ""))
     }
     
-    private func announce(_ text: String) {
+    func announce(_ text: String) {
         SpeechSynthesizer.shared.speak(text)
     }
     
@@ -573,7 +573,7 @@ class MainTVC: UITableViewController {
         return addWordToSentence(word: word, announce: announce)
     }
     
-    private func addWordToSentence(word: String, announce: Bool = false) -> Bool {
+    func addWordToSentence(word: String, announce: Bool = false) -> Bool {
         guard !word.isEmpty, !word.containsArrow() else {
             return false
         }
