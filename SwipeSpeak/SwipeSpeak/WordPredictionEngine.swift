@@ -27,85 +27,13 @@ enum PredictionEngineType: String, CaseIterable {
     }
 }
 
-protocol PredictionEngineProtocol {
-    func setKeyLetterGrouping(_ grouping: [String], twoStrokes: Bool)
-    func insert(_ word: String, _ frequency: Int) throws
-    func contains(_ word: String) -> Bool
-    func suggestions(for keyString: [Int]) -> [(String, Int)]
-}
 
-class NativePredictionEngine: PredictionEngineProtocol {
-    func setKeyLetterGrouping(_ grouping: [String], twoStrokes: Bool) {
-        // Native engine doesn't need key letter grouping
-    }
 
-    func insert(_ word: String, _ frequency: Int) throws {
-        // Native engine doesn't support custom word insertion
-    }
 
-    func contains(_ word: String) -> Bool {
-        // For native engine, assume all words are available
-        return true
-    }
 
-    func suggestions(for keyString: [Int]) -> [(String, Int)] {
-        // Native engine would use system dictionary
-        // For now, return empty array
-        return []
-    }
-}
 
-class PredictionEngineManager {
-    @MainActor static let shared = PredictionEngineManager()
 
-    var engines: [PredictionEngineType: PredictionEngineProtocol] = [:]
-    var currentEngineType: PredictionEngineType = .custom
-
-    var currentEngine: PredictionEngineProtocol? {
-        return engines[currentEngineType]
-    }
-
-    var availableEngines: [PredictionEngineType] {
-        return Array(engines.keys)
-    }
-
-    private init() {
-        // Register default custom engine
-        let customEngine = WordPredictionEngine()
-        registerEngine(customEngine, for: .custom)
-    }
-
-    func registerEngine(_ engine: PredictionEngineProtocol, for type: PredictionEngineType) {
-        engines[type] = engine
-    }
-
-    @MainActor func switchToEngine(_ type: PredictionEngineType) -> Bool {
-        guard engines[type] != nil else {
-            return false
-        }
-        currentEngineType = type
-        UserPreferences.shared.predictionEngineType = type.rawValue
-        return true
-    }
-
-    func setKeyLetterGrouping(_ grouping: [String], twoStrokes: Bool) {
-        currentEngine?.setKeyLetterGrouping(grouping, twoStrokes: twoStrokes)
-    }
-
-    func insert(_ word: String, _ frequency: Int) throws {
-        try currentEngine?.insert(word, frequency)
-    }
-
-    func contains(_ word: String) -> Bool {
-        return currentEngine?.contains(word) ?? false
-    }
-
-    func suggestions(for keyString: [Int]) -> [(String, Int)] {
-        return currentEngine?.suggestions(for: keyString) ?? []
-    }
-}
-
-class WordPredictionEngine: PredictionEngineProtocol {
+class WordPredictionEngine {
     
     // MARK: Classes
     

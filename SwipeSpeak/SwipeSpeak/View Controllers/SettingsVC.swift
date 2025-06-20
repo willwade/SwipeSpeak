@@ -24,8 +24,30 @@ class SettingsVC: UITableViewController {
     @IBOutlet weak var enableAudioFeedbackSwitch: UISwitch!
     @IBOutlet weak var enableCouldSyncSwitch: UISwitch!
 
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        // Ensure proper safe area handling for the table view
+        if #available(iOS 11.0, *) {
+            tableView.contentInsetAdjustmentBehavior = .automatic
+        }
+
+        // Force navigation bar to respect safe area
+        navigationController?.navigationBar.prefersLargeTitles = false
+        extendedLayoutIncludesOpaqueBars = false
+        edgesForExtendedLayout = []
+
+        // Ensure proper background color
+        view.backgroundColor = UIColor.systemGroupedBackground
+        tableView.backgroundColor = UIColor.systemGroupedBackground
+    }
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+
+        // Ensure navigation bar is properly configured
+        navigationController?.navigationBar.isTranslucent = false
+        navigationController?.navigationBar.barStyle = .default
 
         keyboardLayoutLabel?.text = UserPreferences.shared.keyboardLayout.localizedString()
 
