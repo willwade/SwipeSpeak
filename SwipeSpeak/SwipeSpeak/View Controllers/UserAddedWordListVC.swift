@@ -20,6 +20,22 @@ protocol DZNEmptyDataSetDelegate {
     func emptyDataSet(_ scrollView: UIScrollView!, didTap button: UIButton!)
 }
 
+extension UIScrollView {
+    var emptyDataSetSource: DZNEmptyDataSetSource? {
+        get { return nil }
+        set { /* TODO: Implement with proper DZNEmptyDataSet SPM dependency */ }
+    }
+
+    var emptyDataSetDelegate: DZNEmptyDataSetDelegate? {
+        get { return nil }
+        set { /* TODO: Implement with proper DZNEmptyDataSet SPM dependency */ }
+    }
+
+    func reloadEmptyDataSet() {
+        // TODO: Implement with proper DZNEmptyDataSet SPM dependency
+    }
+}
+
 class UserAddedWordListVC: UITableViewController {
     
     private var userAddedWords: [String] = []
@@ -146,7 +162,7 @@ extension UserAddedWordListVC: @preconcurrency DZNEmptyDataSetSource {
         return NSAttributedString(string: title, attributes: attribute)
     }
     
-    func description(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
+    func description(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
         let subtitle = NSLocalizedString("When you add words you will see them here.", comment: "")
         let attribute = [NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: .body),
                          NSAttributedString.Key.foregroundColor: UIColor.lightGray]

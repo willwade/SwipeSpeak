@@ -153,7 +153,7 @@ extension SentenceHistoryVC: @preconcurrency DZNEmptyDataSetSource {
         return NSAttributedString(string: title, attributes: attribute)
     }
     
-    func description(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
+    func description(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
         let subtitle = NSLocalizedString("When you create sentences you will see them here.", comment: "")
         let attribute = [NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: .body),
                          NSAttributedString.Key.foregroundColor: UIColor.lightGray]
