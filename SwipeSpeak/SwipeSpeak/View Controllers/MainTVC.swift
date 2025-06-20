@@ -14,7 +14,7 @@ class MainTVC: UITableViewController {
     
     // MARK: Constants
     
-    private static let wordAndFrequencyList: [(String, Int)] = {
+    nonisolated private static let wordAndFrequencyList: [(String, Int)] = {
         guard let path = Bundle.main.path(forResource: "word_frequency_english_ucrel", ofType: "csv"),
               let list = getWordAndFrequencyListFromCSV(path) else {
             print("Warning: Could not load word frequency list, using empty list")
@@ -177,34 +177,40 @@ class MainTVC: UITableViewController {
             return
         }
 
-        DispatchQueue.global(qos: .userInitiated).async {
-            let userWordRating = UserPreferences.shared.userWordRating
+        Task {
+            // Capture values on main actor
+            let userWordRating = await MainActor.run { UserPreferences.shared.userWordRating }
+            let userAddedWords = await MainActor.run { UserPreferences.shared.userAddedWords }
+            let wordAndFrequencyList = MainTVC.wordAndFrequencyList
 
-            // Add user added words
-            for userAddedWord in UserPreferences.shared.userAddedWords {
-                let wordRating = userWordRating[userAddedWord] ?? 0
-                do {
-                    try customEngine.insert(userAddedWord, Constants.defaultWordFrequency + wordRating)
-                } catch WordPredictionError.unsupportedWord(let invalidChar) {
-                    print("Cannot add word '\(userAddedWord)', invalid char '\(invalidChar)'")
-                } catch {
-                    print("Cannot add word '\(userAddedWord)', error: \(error)")
+            // Process on background queue
+            await Task.detached(priority: .userInitiated) {
+                // Add user added words
+                for userAddedWord in userAddedWords {
+                    let wordRating = userWordRating[userAddedWord] ?? 0
+                    do {
+                        try customEngine.insert(userAddedWord, Constants.defaultWordFrequency + wordRating)
+                    } catch WordPredictionError.unsupportedWord(let invalidChar) {
+                        print("Cannot add word '\(userAddedWord)', invalid char '\(invalidChar)'")
+                    } catch {
+                        print("Cannot add word '\(userAddedWord)', error: \(error)")
+                    }
                 }
-            }
 
-            // Add dictionary words
-            for (word, frequency) in MainTVC.wordAndFrequencyList {
-                let wordRating = userWordRating[word]
-                let frequencyToUse = (wordRating != nil) ? Constants.defaultWordFrequency + wordRating! : frequency
+                // Add dictionary words
+                for (word, frequency) in wordAndFrequencyList {
+                    let wordRating = userWordRating[word]
+                    let frequencyToUse = (wordRating != nil) ? Constants.defaultWordFrequency + wordRating! : frequency
 
-                do {
-                    try customEngine.insert(word, frequencyToUse)
-                } catch WordPredictionError.unsupportedWord(_) {
-                    //print("Cannot add word '\(word)', invalid char '\(invalidChar)'")
-                } catch {
-                    print("Cannot add word '\(word)', error: \(error)")
+                    do {
+                        try customEngine.insert(word, frequencyToUse)
+                    } catch WordPredictionError.unsupportedWord(_) {
+                        //print("Cannot add word '\(word)', invalid char '\(invalidChar)'")
+                    } catch {
+                        print("Cannot add word '\(word)', error: \(error)")
+                    }
                 }
-            }
+            }.value
         }
     }
     
@@ -959,7 +965,7 @@ class MainTVC: UITableViewController {
 
 // MARK: - SwipeViewDelegate
 
-extension MainTVC: SwipeViewDelegate {
+extension MainTVC: @preconcurrency SwipeViewDelegate {
 
     // MARK: Methods
 

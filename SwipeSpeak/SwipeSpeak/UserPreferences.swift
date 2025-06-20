@@ -102,7 +102,7 @@ class UserPreferences {
     
     // MARK: Shared Instance
     
-    static let shared = UserPreferences()
+    @MainActor static let shared = UserPreferences()
     
     // MARK: User Defaults
     
@@ -137,7 +137,7 @@ class UserPreferences {
 
     private func enableZephyr() {
         #if DEBUG
-            Zephyr.debugEnabled = true
+            // Zephyr.debugEnabled = true // Disabled for Swift 6 concurrency
         #endif
         
         Zephyr.sync(keys: Keys.iCloudSyncKeys())

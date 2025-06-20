@@ -9,7 +9,6 @@
 
 import UIKit
 import DZNEmptyDataSet
-import FirebaseAnalytics
 
 class UserAddedWordListVC: UITableViewController {
     
@@ -98,8 +97,6 @@ class UserAddedWordListVC: UITableViewController {
             self.tableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .automatic)
             self.tableView.reloadEmptyDataSet()
             self.configureRightBarButtonItems()
-            
-            Analytics.logEvent("added_word", parameters: nil)
         }
         
         saveAction.isEnabled = false
@@ -113,10 +110,12 @@ class UserAddedWordListVC: UITableViewController {
             textField.clearButtonMode = .whileEditing
             
             NotificationCenter.default.addObserver(forName: UITextField.textDidChangeNotification, object: textField, queue: OperationQueue.main, using: { _ in
-                if let text = textField.text, isWordValid(text) {
-                    saveAction.isEnabled = true
-                } else {
-                    saveAction.isEnabled = false
+                Task { @MainActor in
+                    if let text = textField.text, isWordValid(text) {
+                        saveAction.isEnabled = true
+                    } else {
+                        saveAction.isEnabled = false
+                    }
                 }
             })
         }
@@ -128,7 +127,7 @@ class UserAddedWordListVC: UITableViewController {
 
 // MARK: - DZNEmptyDataSetSource
 
-extension UserAddedWordListVC: DZNEmptyDataSetSource {
+extension UserAddedWordListVC: @preconcurrency DZNEmptyDataSetSource {
     
     func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
         let title = NSLocalizedString("No Added Words", comment: "")
@@ -154,7 +153,7 @@ extension UserAddedWordListVC: DZNEmptyDataSetSource {
 
 // MARK: - DZNEmptyDataSetDelegate
 
-extension UserAddedWordListVC: DZNEmptyDataSetDelegate {
+extension UserAddedWordListVC: @preconcurrency DZNEmptyDataSetDelegate {
     
     func emptyDataSet(_ scrollView: UIScrollView!, didTap button: UIButton!) {
         addWordButtonTouched()

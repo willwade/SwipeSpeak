@@ -13,7 +13,82 @@ enum WordPredictionError: Error {
     case unsupportedWord(invalidChar: Character)
 }
 
-class WordPredictionEngine {
+enum PredictionEngineType: String, CaseIterable {
+    case custom = "custom"
+    case native = "native"
+
+    var displayName: String {
+        switch self {
+        case .custom:
+            return "Custom"
+        case .native:
+            return "Native"
+        }
+    }
+}
+
+protocol PredictionEngineProtocol {
+    func setKeyLetterGrouping(_ grouping: [String], twoStrokes: Bool)
+    func insert(_ word: String, _ frequency: Int) throws
+    func contains(_ word: String) -> Bool
+    func suggestions(for keyString: [Int]) -> [(String, Int)]
+}
+
+class NativePredictionEngine: PredictionEngineProtocol {
+    func setKeyLetterGrouping(_ grouping: [String], twoStrokes: Bool) {
+        // Native engine doesn't need key letter grouping
+    }
+
+    func insert(_ word: String, _ frequency: Int) throws {
+        // Native engine doesn't support custom word insertion
+    }
+
+    func contains(_ word: String) -> Bool {
+        // For native engine, assume all words are available
+        return true
+    }
+
+    func suggestions(for keyString: [Int]) -> [(String, Int)] {
+        // Native engine would use system dictionary
+        // For now, return empty array
+        return []
+    }
+}
+
+class PredictionEngineManager {
+    @MainActor static let shared = PredictionEngineManager()
+
+    var engines: [PredictionEngineType: PredictionEngineProtocol] = [:]
+    var currentEngineType: PredictionEngineType = .custom
+
+    var currentEngine: PredictionEngineProtocol? {
+        return engines[currentEngineType]
+    }
+
+    var availableEngines: [PredictionEngineType] {
+        return Array(engines.keys)
+    }
+
+    private init() {
+        // Register default custom engine
+        let customEngine = WordPredictionEngine()
+        registerEngine(customEngine, for: .custom)
+    }
+
+    func registerEngine(_ engine: PredictionEngineProtocol, for type: PredictionEngineType) {
+        engines[type] = engine
+    }
+
+    func switchToEngine(_ type: PredictionEngineType) -> Bool {
+        if engines[type] != nil {
+            currentEngineType = type
+            return true
+        }
+        return false
+    }
+}
+
+class WordPredictionEngine: PredictionEngineProtocol {
     
     // MARK: Classes
     

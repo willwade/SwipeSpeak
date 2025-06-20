@@ -11,17 +11,17 @@ import AVFoundation
 
 class SpeechSynthesizer {
     
-    static let shared = SpeechSynthesizer()
+    @MainActor static let shared = SpeechSynthesizer()
 
     private let synthesizer = AVSpeechSynthesizer()
 
     private init() { }
     
-    func speak(_ text: String) {
+    @MainActor func speak(_ text: String) {
         speak(text, UserPreferences.shared.voiceIdentifier)
     }
-    
-    func speak(_ text: String, _ voiceIdentifier: String? = nil) {
+
+    @MainActor func speak(_ text: String, _ voiceIdentifier: String? = nil) {
         let utterance = AVSpeechUtterance(string: text)
 
         if let voiceIdentifier = voiceIdentifier,

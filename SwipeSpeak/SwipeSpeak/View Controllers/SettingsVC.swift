@@ -89,7 +89,7 @@ class SettingsVC: UITableViewController {
                     // Show brief description
                     let successAlert = UIAlertController(
                         title: NSLocalizedString("Engine Changed", comment: ""),
-                        message: engineType.description,
+                        message: engineType.displayName,
                         preferredStyle: .alert
                     )
                     successAlert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .default))

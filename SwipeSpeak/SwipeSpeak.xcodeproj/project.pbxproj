@@ -16,7 +16,7 @@
 		B95CB41D1FAFC50E00F705EB /* UserPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95CB41C1FAFC50E00F705EB /* UserPreferences.swift */; };
 		B95CB41F1FAFCB1F00F705EB /* SpeechVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95CB41E1FAFCB1F00F705EB /* SpeechVC.swift */; };
 		B98A9A021FB96FC5002D2FD9 /* AboutVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B98A9A011FB96FC5002D2FD9 /* AboutVC.swift */; };
-		B98C67B61FD87AD600C35FE5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B98C67B51FD87AD600C35FE5 /* GoogleService-Info.plist */; };
+
 		B991E2281FAEE26F0038074E /* MainTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B991E2271FAEE26F0038074E /* MainTVC.swift */; };
 		B9E23BDB1FEAAFAD00EE3998 /* word_frequency_english_ucrel.csv in Resources */ = {isa = PBXBuildFile; fileRef = B9E23BDA1FEAAFAD00EE3998 /* word_frequency_english_ucrel.csv */; };
 		B9FD99F31FADFFEB00E34F9F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B9FD99F11FADFFEB00E34F9F /* LaunchScreen.storyboard */; };
@@ -45,7 +45,7 @@
 		B95CB41E1FAFCB1F00F705EB /* SpeechVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechVC.swift; sourceTree = "<group>"; };
 		B95CB4201FB041C900F705EB /* SwipeSpeak.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SwipeSpeak.entitlements; sourceTree = "<group>"; };
 		B98A9A011FB96FC5002D2FD9 /* AboutVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutVC.swift; sourceTree = "<group>"; };
-		B98C67B51FD87AD600C35FE5 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+
 		B991E2271FAEE26F0038074E /* MainTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTVC.swift; sourceTree = "<group>"; };
 		B9E23BDA1FEAAFAD00EE3998 /* word_frequency_english_ucrel.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = word_frequency_english_ucrel.csv; sourceTree = "<group>"; };
 		B9FD99F21FADFFEB00E34F9F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -155,7 +155,6 @@
 				DA07001A1F0DA0C2003BEE3D /* Utility.swift */,
 				B95CB41C1FAFC50E00F705EB /* UserPreferences.swift */,
 				B928F1DF1FB49EEF00302E70 /* SpeechSynthesizer.swift */,
-				B98C67B51FD87AD600C35FE5 /* GoogleService-Info.plist */,
 				B93BCCA11FD7F8E5007BFCC3 /* Resources */,
 			);
 			path = SwipeSpeak;
@@ -173,7 +172,6 @@
 				DA57B1F31F0D9EC100895E18 /* Frameworks */,
 				DA57B1F41F0D9EC100895E18 /* Resources */,
 				BF9DC38AD4ACB38871A3E0D0 /* [CP] Embed Pods Frameworks */,
-				B9C89C842064D509008D12E6 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -235,26 +233,13 @@
 				B9E23BDB1FEAAFAD00EE3998 /* word_frequency_english_ucrel.csv in Resources */,
 				31656ADF20EEEAD700059AFA /* Assets.xcassets in Resources */,
 				B95CB4191FAFBCAA00F705EB /* Settings.storyboard in Resources */,
-				B98C67B61FD87AD600C35FE5 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		B9C89C842064D509008D12E6 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Fabric/run\"";
-		};
+
 		BF9DC38AD4ACB38871A3E0D0 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
