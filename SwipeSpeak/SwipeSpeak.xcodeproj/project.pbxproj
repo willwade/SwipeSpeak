@@ -30,6 +30,8 @@
 		65BAB22629F944CE94D082B7 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6C57A2B87714BE3827B3AC4 /* SettingsViewModel.swift */; };
 		F1A2B3C4D5E6F7890ABCDEF1 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1234567890ABCDEF12345678 /* SettingsView.swift */; };
 		F2A3B4C5D6E7F8901BCDEF12 /* SwiftUIBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2345678901BCDEF123456789 /* SwiftUIBridge.swift */; };
+		F3A4B5C6D7E8F9012CDEF123 /* TextDisplayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3456789012CDEF1234567890 /* TextDisplayView.swift */; };
+		F4A5B6C7D8E9F0123DEF1234 /* TextDisplayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4567890123DEF12345678901 /* TextDisplayViewModel.swift */; };
 		DA57B1FF1F0D9EC100895E18 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA57B1FD1F0D9EC100895E18 /* Main.storyboard */; };
 		DDC6F1622E058E7F00EFC306 /* MarkdownView in Frameworks */ = {isa = PBXBuildFile; productRef = DDC6F1612E058E7F00EFC306 /* MarkdownView */; };
 		DDC6F1652E058EEA00EFC306 /* DZNEmptyDataSet in Frameworks */ = {isa = PBXBuildFile; productRef = DDC6F1642E058EEA00EFC306 /* DZNEmptyDataSet */; };
@@ -68,6 +70,8 @@
 		E6C57A2B87714BE3827B3AC4 /* SettingsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		1234567890ABCDEF12345678 /* SettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		2345678901BCDEF123456789 /* SwiftUIBridge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftUIBridge.swift; sourceTree = "<group>"; };
+		3456789012CDEF1234567890 /* TextDisplayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextDisplayView.swift; sourceTree = "<group>"; };
+		4567890123DEF12345678901 /* TextDisplayViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextDisplayViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +121,7 @@
 			children = (
 				A094360083F94AFE8FAEE668 /* KeyboardViewModel.swift */,
 				E6C57A2B87714BE3827B3AC4 /* SettingsViewModel.swift */,
+				4567890123DEF12345678901 /* TextDisplayViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -126,6 +131,7 @@
 			children = (
 				1234567890ABCDEF12345678 /* SettingsView.swift */,
 				2345678901BCDEF123456789 /* SwiftUIBridge.swift */,
+				3456789012CDEF1234567890 /* TextDisplayView.swift */,
 			);
 			path = "SwiftUI Views";
 			sourceTree = "<group>";
@@ -274,6 +280,8 @@
 				65BAB22629F944CE94D082B7 /* SettingsViewModel.swift in Sources */,
 				F1A2B3C4D5E6F7890ABCDEF1 /* SettingsView.swift in Sources */,
 				F2A3B4C5D6E7F8901BCDEF12 /* SwiftUIBridge.swift in Sources */,
+				F3A4B5C6D7E8F9012CDEF123 /* TextDisplayView.swift in Sources */,
+				F4A5B6C7D8E9F0123DEF1234 /* TextDisplayViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -356,7 +364,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -409,7 +417,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
@@ -426,7 +434,7 @@
 				CODE_SIGN_ENTITLEMENTS = SwipeSpeak/Resources/SwipeSpeak.entitlements;
 				DEVELOPMENT_TEAM = 8YQUDE4F8S;
 				INFOPLIST_FILE = SwipeSpeak/Resources/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -445,7 +453,7 @@
 				CODE_SIGN_ENTITLEMENTS = SwipeSpeak/Resources/SwipeSpeak.entitlements;
 				DEVELOPMENT_TEAM = 8YQUDE4F8S;
 				INFOPLIST_FILE = SwipeSpeak/Resources/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

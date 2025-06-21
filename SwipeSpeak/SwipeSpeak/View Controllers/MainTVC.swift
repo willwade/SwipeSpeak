@@ -9,6 +9,7 @@
 
 import UIKit
 import AVFoundation
+import SwiftUI
 
 class MainTVC: UITableViewController {
     
@@ -54,6 +55,11 @@ class MainTVC: UITableViewController {
     private var keyboardLabels = [UILabel]()
     private var keyboardView: UIView!
     @IBOutlet weak var keyboardContainerView: UIView!
+
+    // SwiftUI Text Display Integration
+    private var textDisplayViewModel: TextDisplayViewModel!
+    private var textDisplayBridge: TextDisplayBridge!
+    private var textDisplayHostingController: UIHostingController<TextDisplayView>!
     
     private var keyLetterGrouping = [String]()
     @IBOutlet var predictionLabels: [UILabel]!
@@ -90,14 +96,17 @@ class MainTVC: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         // Initialize the speech engine
         _ = SpeechSynthesizer.shared
-        
+
+        // Setup SwiftUI text display integration
+        setupSwiftUITextDisplay()
+
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardLayoutDidChange(_:)),
                                                name: NSNotification.Name.KeyboardLayoutDidChange,
                                                object: nil)
-        
+
         NotificationCenter.default.addObserver(self, selector: #selector(userAddedWordsUpdated(_:)),
                                                name: NSNotification.Name.UserAddedWordsUpdated,
                                                object: nil)
@@ -161,6 +170,58 @@ class MainTVC: UITableViewController {
     }
     
     // MARK: - Setup
+
+    private func setupSwiftUITextDisplay() {
+        // Create the SwiftUI text display components
+        textDisplayViewModel = TextDisplayViewModel()
+        textDisplayBridge = TextDisplayBridge(viewModel: textDisplayViewModel, mainTVC: self)
+
+        let textDisplayView = TextDisplayView(viewModel: textDisplayViewModel)
+        textDisplayHostingController = UIHostingController(rootView: textDisplayView)
+
+        // Add as child view controller
+        addChild(textDisplayHostingController)
+
+        // Configure the hosting controller's view
+        textDisplayHostingController.view.translatesAutoresizingMaskIntoConstraints = false
+        textDisplayHostingController.view.backgroundColor = .clear
+
+        // We'll add it to the table view in setupUI after the outlets are connected
+    }
+
+    private func setupSwiftUITextDisplayOverlay() {
+        guard let hostingController = textDisplayHostingController else { return }
+
+        // Hide the original UIKit labels
+        sentenceLabel.isHidden = true
+        wordLabel.isHidden = true
+        for label in predictionLabels {
+            label.isHidden = true
+        }
+
+        // Add the SwiftUI view as an overlay
+        view.addSubview(hostingController.view)
+        hostingController.didMove(toParent: self)
+
+        // Position the SwiftUI view to cover the text display area
+        NSLayoutConstraint.activate([
+            hostingController.view.topAnchor.constraint(equalTo: tableView.topAnchor),
+            hostingController.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            hostingController.view.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            hostingController.view.heightAnchor.constraint(equalToConstant: 200) // Adjust height as needed
+        ])
+
+        // Ensure the SwiftUI view doesn't interfere with table view scrolling
+        hostingController.view.isUserInteractionEnabled = true
+
+        // Initialize with current text values
+        textDisplayBridge.updateSentenceText(sentenceLabel.text ?? "")
+        textDisplayBridge.updateWordText(wordLabel.text ?? "")
+
+        // Update predictions if they exist
+        let currentPredictions = predictionLabels.map { $0.text ?? "" }
+        textDisplayBridge.updatePredictions(currentPredictions)
+    }
 
     private func setupWordPredictionEngine() {
         // Set key letter grouping for current engine
@@ -226,7 +287,10 @@ class MainTVC: UITableViewController {
                               delegate: self)
 
         swipeParentView.superview?.addSubview(swipeView)
- 
+
+        // Setup SwiftUI text display overlay
+        setupSwiftUITextDisplayOverlay()
+
         setSentenceText("")
         
         for label in highlightableLabels {
@@ -719,6 +783,10 @@ class MainTVC: UITableViewController {
         for i in 0 ..< min(numPredictionLabels - 1, prediction.count) {
             predictionLabels[i].text = prediction[i].0
         }
+
+        // Update SwiftUI component
+        let currentPredictions = predictionLabels.map { $0.text ?? "" }
+        textDisplayBridge?.updatePredictions(currentPredictions)
     }
     
     private func highlight(label: UILabel) {
@@ -742,6 +810,9 @@ class MainTVC: UITableViewController {
         sentenceLabel.accessibilityLabel = text.isEmpty ?
             NSLocalizedString("Sentence area. Tap letters to spell words", comment: "") :
             NSLocalizedString("Current sentence: \(text)", comment: "")
+
+        // Update SwiftUI component
+        textDisplayBridge?.updateSentenceText(text)
     }
     
     private func setWordText(_ text: String) {
@@ -752,6 +823,9 @@ class MainTVC: UITableViewController {
         wordLabel.accessibilityLabel = text.isEmpty ?
             NSLocalizedString("Word area. Current input is empty", comment: "") :
             NSLocalizedString("Current word input: \(text)", comment: "")
+
+        // Update SwiftUI component
+        textDisplayBridge?.updateWordText(text)
     }
     
     private func resetKeysBoarder() {

@@ -173,7 +173,7 @@ struct PredictionLabelView: View {
         ZStack {
             RoundedRectangle(cornerRadius: 6)
                 .fill(text.isEmpty ? Color.clear : Color(.tertiarySystemBackground))
-                .stroke(isHighlighted ? Color.blue : Color(.separator), 
+                .stroke(isHighlighted ? Color.blue : Color(.separator),
                        lineWidth: isHighlighted ? 2 : (text.isEmpty ? 0 : 1))
             
             Text(text)
