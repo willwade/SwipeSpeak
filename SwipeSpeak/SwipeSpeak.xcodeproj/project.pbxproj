@@ -11,13 +11,9 @@
 		65BAB22629F944CE94D082B7 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6C57A2B87714BE3827B3AC4 /* SettingsViewModel.swift */; };
 		7009779B245E4A87AD4C9ABA /* KeyboardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A094360083F94AFE8FAEE668 /* KeyboardViewModel.swift */; };
 		B928F1E01FB49EEF00302E70 /* SpeechSynthesizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B928F1DF1FB49EEF00302E70 /* SpeechSynthesizer.swift */; };
-		B93BCCA01FD7F8DC007BFCC3 /* AcknowledgementsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B93BCC9F1FD7F8DC007BFCC3 /* AcknowledgementsVC.swift */; };
-		B95CB4191FAFBCAA00F705EB /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B95CB4171FAFBCAA00F705EB /* Settings.storyboard */; };
-		B95CB41B1FAFBE2500F705EB /* VoicesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95CB41A1FAFBE2500F705EB /* VoicesVC.swift */; };
 		B95CB41D1FAFC50E00F705EB /* UserPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95CB41C1FAFC50E00F705EB /* UserPreferences.swift */; };
-		B95CB41F1FAFCB1F00F705EB /* SpeechVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95CB41E1FAFCB1F00F705EB /* SpeechVC.swift */; };
-		B98A9A021FB96FC5002D2FD9 /* AboutVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B98A9A011FB96FC5002D2FD9 /* AboutVC.swift */; };
-		B991E2281FAEE26F0038074E /* MainTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B991E2271FAEE26F0038074E /* MainTVC.swift */; };
+
+
 		B9E23BDB1FEAAFAD00EE3998 /* word_frequency_english_ucrel.csv in Resources */ = {isa = PBXBuildFile; fileRef = B9E23BDA1FEAAFAD00EE3998 /* word_frequency_english_ucrel.csv */; };
 		B9FD99F31FADFFEB00E34F9F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B9FD99F11FADFFEB00E34F9F /* LaunchScreen.storyboard */; };
 		DA0700191F0DA06B003BEE3D /* SwipeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0700181F0DA06B003BEE3D /* SwipeView.swift */; };
@@ -25,12 +21,11 @@
 		DA07001D1F0DA15A003BEE3D /* WordPredictionEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA07001C1F0DA15A003BEE3D /* WordPredictionEngine.swift */; };
 		// DA0700411F0DA72B003BEE3D /* PredictionEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0700401F0DA72B003BEE3D /* PredictionEngine.swift */; };
 		// DA0700511F0DA72C003BEE3D /* NativePredictionEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0700501F0DA72C003BEE3D /* NativePredictionEngine.swift */; };
-		DA0700211F0DA84A003BEE3D /* SettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0700201F0DA84A003BEE3D /* SettingsVC.swift */; };
-		DA0700231F0DA889003BEE3D /* KeyboardSettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0700221F0DA889003BEE3D /* KeyboardSettingsVC.swift */; };
+
 		DA57B1FA1F0D9EC100895E18 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA57B1F91F0D9EC100895E18 /* AppDelegate.swift */; };
 		ABCD1234567890ABCDEF1234 /* SwipeSpeakApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABCD1234567890ABCDEF1235 /* SwipeSpeakApp.swift */; };
 		MAIN1234567890ABCDEF1234 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = MAIN1234567890ABCDEF1235 /* MainViewModel.swift */; };
-		DA57B1FF1F0D9EC100895E18 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA57B1FD1F0D9EC100895E18 /* Main.storyboard */; };
+
 		DD2C9D702E07C19C0006658A /* KeyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2C9D6D2E07C19C0006658A /* KeyView.swift */; };
 		DD2C9D712E07C19C0006658A /* KeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2C9D6C2E07C19C0006658A /* KeyboardView.swift */; };
 		DD2C9D722E07C19C0006658A /* SwipeGestureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2C9D6E2E07C19C0006658A /* SwipeGestureView.swift */; };
@@ -42,7 +37,7 @@
 		F1A2B3C4D5E6F7890ABCDEF1 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1234567890ABCDEF12345678 /* SettingsView.swift */; };
 		F1A2B3C4D5E6F7890ABCDEF2 /* UserAddedWordsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1A2B3C4D5E6F7890ABCDEF3 /* UserAddedWordsView.swift */; };
 		F1A2B3C4D5E6F7890ABCDEF4 /* SentenceHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1A2B3C4D5E6F7890ABCDEF5 /* SentenceHistoryView.swift */; };
-		F2A3B4C5D6E7F8901BCDEF12 /* SwiftUIBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2345678901BCDEF123456789 /* SwiftUIBridge.swift */; };
+
 		F3A4B5C6D7E8F9012CDEF123 /* TextDisplayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3456789012CDEF1234567890 /* TextDisplayView.swift */; };
 		F4A5B6C7D8E9F0123DEF1234 /* TextDisplayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4567890123DEF12345678901 /* TextDisplayViewModel.swift */; };
 		F7A8B9CADBE2F3456G234567 /* CloudKitSyncManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 789012345G234567890123456 /* CloudKitSyncManager.swift */; };
@@ -60,37 +55,33 @@
 
 /* Begin PBXFileReference section */
 		1234567890ABCDEF12345678 /* SettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
-		2345678901BCDEF123456789 /* SwiftUIBridge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftUIBridge.swift; sourceTree = "<group>"; };
+
 		31656ADE20EEEAD700059AFA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3456789012CDEF1234567890 /* TextDisplayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextDisplayView.swift; sourceTree = "<group>"; };
 		4567890123DEF12345678901 /* TextDisplayViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextDisplayViewModel.swift; sourceTree = "<group>"; };
 		789012345G234567890123456 /* CloudKitSyncManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudKitSyncManager.swift; sourceTree = "<group>"; };
 		A094360083F94AFE8FAEE668 /* KeyboardViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardViewModel.swift; sourceTree = "<group>"; };
 		B928F1DF1FB49EEF00302E70 /* SpeechSynthesizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechSynthesizer.swift; sourceTree = "<group>"; };
-		B93BCC9F1FD7F8DC007BFCC3 /* AcknowledgementsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcknowledgementsVC.swift; sourceTree = "<group>"; };
+
 		B952C900200FB0370020161E /* word_frequency_german.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = word_frequency_german.csv; sourceTree = "<group>"; };
-		B95CB4181FAFBCAA00F705EB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Settings.storyboard; sourceTree = "<group>"; };
-		B95CB41A1FAFBE2500F705EB /* VoicesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoicesVC.swift; sourceTree = "<group>"; };
+
 		B95CB41C1FAFC50E00F705EB /* UserPreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPreferences.swift; sourceTree = "<group>"; };
-		B95CB41E1FAFCB1F00F705EB /* SpeechVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechVC.swift; sourceTree = "<group>"; };
 		B95CB4201FB041C900F705EB /* SwipeSpeak.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SwipeSpeak.entitlements; sourceTree = "<group>"; };
-		B98A9A011FB96FC5002D2FD9 /* AboutVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutVC.swift; sourceTree = "<group>"; };
-		B991E2271FAEE26F0038074E /* MainTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTVC.swift; sourceTree = "<group>"; };
+
 		B9E23BDA1FEAAFAD00EE3998 /* word_frequency_english_ucrel.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = word_frequency_english_ucrel.csv; sourceTree = "<group>"; };
 		B9FD99F21FADFFEB00E34F9F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DA0700181F0DA06B003BEE3D /* SwipeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwipeView.swift; sourceTree = "<group>"; };
 		DA07001A1F0DA0C2003BEE3D /* Utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
 		DA07001C1F0DA15A003BEE3D /* WordPredictionEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordPredictionEngine.swift; sourceTree = "<group>"; };
 		DA07001E1F0DA72A003BEE3D /* word_frequency_english_kilgarriff.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = word_frequency_english_kilgarriff.csv; sourceTree = "<group>"; };
-		DA0700201F0DA84A003BEE3D /* SettingsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsVC.swift; sourceTree = "<group>"; };
-		DA0700221F0DA889003BEE3D /* KeyboardSettingsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardSettingsVC.swift; sourceTree = "<group>"; };
+
 		DA0700401F0DA72B003BEE3D /* PredictionEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PredictionEngine.swift; sourceTree = "<group>"; };
 		DA0700501F0DA72C003BEE3D /* NativePredictionEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NativePredictionEngine.swift; sourceTree = "<group>"; };
 		DA57B1F61F0D9EC100895E18 /* SwipeSpeak.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwipeSpeak.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA57B1F91F0D9EC100895E18 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ABCD1234567890ABCDEF1235 /* SwipeSpeakApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeSpeakApp.swift; sourceTree = "<group>"; };
 		MAIN1234567890ABCDEF1235 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
-		DA57B1FE1F0D9EC100895E18 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+
 		DA57B2051F0D9EC100895E18 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DD2C9D482E07ADD80006658A /* SwipeSpeakTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwipeSpeakTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD2C9D6C2E07C19C0006658A /* KeyboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardView.swift; sourceTree = "<group>"; };
@@ -150,7 +141,7 @@
 				DD2C9D6E2E07C19C0006658A /* SwipeGestureView.swift */,
 				DD2C9D6F2E07C19C0006658A /* VisualFeedbackSystem.swift */,
 				1234567890ABCDEF12345678 /* SettingsView.swift */,
-				2345678901BCDEF123456789 /* SwiftUIBridge.swift */,
+
 				3456789012CDEF1234567890 /* TextDisplayView.swift */,
 				F1A2B3C4D5E6F7890ABCDEF3 /* UserAddedWordsView.swift */,
 				F1A2B3C4D5E6F7890ABCDEF5 /* SentenceHistoryView.swift */,
@@ -170,20 +161,7 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
-		B9FD99F41FAE387600E34F9F /* View Controllers */ = {
-			isa = PBXGroup;
-			children = (
-				B991E2271FAEE26F0038074E /* MainTVC.swift */,
-				DA0700201F0DA84A003BEE3D /* SettingsVC.swift */,
-				DA0700221F0DA889003BEE3D /* KeyboardSettingsVC.swift */,
-				B95CB41E1FAFCB1F00F705EB /* SpeechVC.swift */,
-				B95CB41A1FAFBE2500F705EB /* VoicesVC.swift */,
-				B98A9A011FB96FC5002D2FD9 /* AboutVC.swift */,
-				B93BCC9F1FD7F8DC007BFCC3 /* AcknowledgementsVC.swift */,
-			);
-			path = "View Controllers";
-			sourceTree = "<group>";
-		};
+
 		DA57B1ED1F0D9EC100895E18 = {
 			isa = PBXGroup;
 			children = (
@@ -208,10 +186,9 @@
 				DA57B1F91F0D9EC100895E18 /* AppDelegate.swift */,
 				ABCD1234567890ABCDEF1235 /* SwipeSpeakApp.swift */,
 				31656ADE20EEEAD700059AFA /* Assets.xcassets */,
-				DA57B1FD1F0D9EC100895E18 /* Main.storyboard */,
-				B95CB4171FAFBCAA00F705EB /* Settings.storyboard */,
+
 				B9FD99F11FADFFEB00E34F9F /* LaunchScreen.storyboard */,
-				B9FD99F41FAE387600E34F9F /* View Controllers */,
+
 				4EC6D480B15646ECAD092CBA /* ViewModels */,
 				9876543210FEDCBA98765432 /* SwiftUI Views */,
 				DA07001C1F0DA15A003BEE3D /* WordPredictionEngine.swift */,
@@ -326,10 +303,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				B9FD99F31FADFFEB00E34F9F /* LaunchScreen.storyboard in Resources */,
-				DA57B1FF1F0D9EC100895E18 /* Main.storyboard in Resources */,
+
 				B9E23BDB1FEAAFAD00EE3998 /* word_frequency_english_ucrel.csv in Resources */,
 				31656ADF20EEEAD700059AFA /* Assets.xcassets in Resources */,
-				B95CB4191FAFBCAA00F705EB /* Settings.storyboard in Resources */,
+
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -361,18 +338,15 @@
 				DA07001D1F0DA15A003BEE3D /* WordPredictionEngine.swift in Sources */,
 				// DA0700411F0DA72B003BEE3D /* PredictionEngine.swift in Sources */,
 				// DA0700511F0DA72C003BEE3D /* NativePredictionEngine.swift in Sources */,
-				DA0700231F0DA889003BEE3D /* KeyboardSettingsVC.swift in Sources */,
-				B95CB41B1FAFBE2500F705EB /* VoicesVC.swift in Sources */,
+
 				DA57B1FA1F0D9EC100895E18 /* AppDelegate.swift in Sources */,
 				ABCD1234567890ABCDEF1234 /* SwipeSpeakApp.swift in Sources */,
 				MAIN1234567890ABCDEF1234 /* MainViewModel.swift in Sources */,
-				B93BCCA01FD7F8DC007BFCC3 /* AcknowledgementsVC.swift in Sources */,
-				DA0700211F0DA84A003BEE3D /* SettingsVC.swift in Sources */,
-				B95CB41F1FAFCB1F00F705EB /* SpeechVC.swift in Sources */,
+
 				7009779B245E4A87AD4C9ABA /* KeyboardViewModel.swift in Sources */,
 				65BAB22629F944CE94D082B7 /* SettingsViewModel.swift in Sources */,
 				F1A2B3C4D5E6F7890ABCDEF1 /* SettingsView.swift in Sources */,
-				F2A3B4C5D6E7F8901BCDEF12 /* SwiftUIBridge.swift in Sources */,
+
 				F3A4B5C6D7E8F9012CDEF123 /* TextDisplayView.swift in Sources */,
 				DDA3615A2E08328400E0A9DA /* CommonUIComponents.swift in Sources */,
 				DDA3615B2E08328400E0A9DA /* GestureVisualizationOverlay.swift in Sources */,
@@ -401,14 +375,7 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		B95CB4171FAFBCAA00F705EB /* Settings.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				B95CB4181FAFBCAA00F705EB /* Base */,
-			);
-			name = Settings.storyboard;
-			sourceTree = "<group>";
-		};
+
 		B9FD99F11FADFFEB00E34F9F /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -417,14 +384,7 @@
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
-		DA57B1FD1F0D9EC100895E18 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				DA57B1FE1F0D9EC100895E18 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
+
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */

@@ -121,6 +121,12 @@ extension String {
     subscript (i: Int) -> Character {
         return self[self.index(self.startIndex, offsetBy: i)]
     }
+
+    /// Check if string contains arrow symbols used in SwipeSpeak keyboard layouts
+    func containsArrow() -> Bool {
+        let arrowSymbols = ["↑", "→", "←", "↓", "↗︎", "↖︎", "↘︎", "↙︎"]
+        return arrowSymbols.contains { self.contains($0) }
+    }
 }
 
 var appVersion: String {
