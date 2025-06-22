@@ -15,7 +15,7 @@ struct SentenceHistoryView: View {
     @State private var isEditing = false
     
     // Environment for navigation
-    @Environment(\.uikitDismiss) private var dismiss
+    @Environment(\.dismiss) private var dismiss
     
     // Date formatter for displaying sentence dates
     private let dateFormatter: DateFormatter = {
@@ -205,13 +205,11 @@ private struct SentenceRowView: View {
 
 #Preview {
     SentenceHistoryView()
-        .withUIKitDismiss {}
 }
 
 #Preview("Empty State") {
     // Preview with empty history
     SentenceHistoryView()
-        .withUIKitDismiss {}
         .onAppear {
             UserPreferences.shared.clearSentenceHistory()
         }
@@ -220,7 +218,6 @@ private struct SentenceRowView: View {
 #Preview("With History") {
     // Preview with sample sentences
     SentenceHistoryView()
-        .withUIKitDismiss {}
         .onAppear {
             UserPreferences.shared.clearSentenceHistory()
             UserPreferences.shared.addSentence("Hello world")

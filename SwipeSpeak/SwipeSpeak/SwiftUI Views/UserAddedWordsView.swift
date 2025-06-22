@@ -16,7 +16,7 @@ struct UserAddedWordsView: View {
     @State private var isEditing = false
     
     // Environment for navigation
-    @Environment(\.uikitDismiss) private var dismiss
+    @Environment(\.dismiss) private var dismiss
     
     var body: some View {
         NavigationView {
@@ -173,13 +173,11 @@ struct UserAddedWordsView: View {
 
 #Preview {
     UserAddedWordsView()
-        .withUIKitDismiss {}
 }
 
 #Preview("Empty State") {
     // Preview with empty words list
     UserAddedWordsView()
-        .withUIKitDismiss {}
         .onAppear {
             UserPreferences.shared.clearWords()
         }
@@ -188,7 +186,6 @@ struct UserAddedWordsView: View {
 #Preview("With Words") {
     // Preview with sample words
     UserAddedWordsView()
-        .withUIKitDismiss {}
         .onAppear {
             UserPreferences.shared.clearWords()
             UserPreferences.shared.addWord("hello")

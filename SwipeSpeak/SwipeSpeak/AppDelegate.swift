@@ -4,33 +4,31 @@
 //
 //  Created by Xiaoyi Zhang on 7/5/17.
 //  Updated by Daniel Tsirulnikov on 11/9/17.
-//  Copyright © 2017 TeamGleason. All rights reserved.
+//  Copyright © 2025 TeamGleason. All rights reserved.
 //
 
 import UIKit
 import SafariServices
 
-@main
-class AppDelegate: UIResponder, UIApplicationDelegate {
-
-    var window: UIWindow?
+// AppDelegate for SwiftUI App - handles app lifecycle events
+class AppDelegate: NSObject, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
-        window?.tintColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
-        window?.backgroundColor = UIColor.white
-        
+        // Set global app appearance
+        UIView.appearance().tintColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
+
         if #available(iOS 11, *) {
             UIScrollView.appearance().contentInsetAdjustmentBehavior = .never
         }
-        
+
         // Starting with 1.1 we only use the `keys4` and `strokes2` keyboard layouts
         if UserPreferences.shared.keyboardLayout != .keys4 &&
             UserPreferences.shared.keyboardLayout != .strokes2 &&
             UserPreferences.shared.keyboardLayout != .msr {
             UserPreferences.shared.keyboardLayout = .strokes2
         }
-        
+
         return true
     }
 
@@ -72,7 +70,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         alertController.addAction(UIAlertAction(title: NSLocalizedString("Show", comment: ""), style: .default, handler: { (_) in
             UserDefaults.standard.set(true, forKey: Constants.tutorialShownKey)
-            self.window?.rootViewController?.present(SFSafariViewController(url: Constants.tutorialURL), animated: true, completion: nil)
+            self.presentTutorial()
         }))
 
         alertController.addAction(UIAlertAction(title: NSLocalizedString("Later", comment: ""), style: .default, handler: { (_) in
@@ -80,10 +78,32 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         alertController.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: { (_) in
             UserDefaults.standard.set(true, forKey: Constants.tutorialShownKey)
-            self.window?.rootViewController?.present(SFSafariViewController(url: Constants.tutorialURL), animated: true, completion: nil)
+            self.presentTutorial()
         }))
-        
-        self.window?.rootViewController?.present(alertController, animated: true, completion: nil)
+
+        self.presentAlert(alertController)
+    }
+
+    private func presentAlert(_ alertController: UIAlertController) {
+        // Get the current window scene and root view controller
+        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+              let window = windowScene.windows.first,
+              let rootViewController = window.rootViewController else {
+            return
+        }
+
+        rootViewController.present(alertController, animated: true, completion: nil)
+    }
+
+    private func presentTutorial() {
+        // Get the current window scene and root view controller
+        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+              let window = windowScene.windows.first,
+              let rootViewController = window.rootViewController else {
+            return
+        }
+
+        rootViewController.present(SFSafariViewController(url: Constants.tutorialURL), animated: true, completion: nil)
     }
 
 }

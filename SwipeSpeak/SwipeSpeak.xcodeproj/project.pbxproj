@@ -26,6 +26,7 @@
 		DA0700211F0DA84A003BEE3D /* SettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0700201F0DA84A003BEE3D /* SettingsVC.swift */; };
 		DA0700231F0DA889003BEE3D /* KeyboardSettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0700221F0DA889003BEE3D /* KeyboardSettingsVC.swift */; };
 		DA57B1FA1F0D9EC100895E18 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA57B1F91F0D9EC100895E18 /* AppDelegate.swift */; };
+		ABCD1234567890ABCDEF1234 /* SwipeSpeakApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABCD1234567890ABCDEF1235 /* SwipeSpeakApp.swift */; };
 		DA57B1FF1F0D9EC100895E18 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA57B1FD1F0D9EC100895E18 /* Main.storyboard */; };
 		DD2C9D702E07C19C0006658A /* KeyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2C9D6D2E07C19C0006658A /* KeyView.swift */; };
 		DD2C9D712E07C19C0006658A /* KeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2C9D6C2E07C19C0006658A /* KeyboardView.swift */; };
@@ -84,6 +85,7 @@
 		DA0700501F0DA72C003BEE3D /* NativePredictionEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NativePredictionEngine.swift; sourceTree = "<group>"; };
 		DA57B1F61F0D9EC100895E18 /* SwipeSpeak.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwipeSpeak.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA57B1F91F0D9EC100895E18 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		ABCD1234567890ABCDEF1235 /* SwipeSpeakApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeSpeakApp.swift; sourceTree = "<group>"; };
 		DA57B1FE1F0D9EC100895E18 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		DA57B2051F0D9EC100895E18 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DD2C9D482E07ADD80006658A /* SwipeSpeakTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwipeSpeakTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -199,6 +201,7 @@
 			isa = PBXGroup;
 			children = (
 				DA57B1F91F0D9EC100895E18 /* AppDelegate.swift */,
+				ABCD1234567890ABCDEF1235 /* SwipeSpeakApp.swift */,
 				31656ADE20EEEAD700059AFA /* Assets.xcassets */,
 				DA57B1FD1F0D9EC100895E18 /* Main.storyboard */,
 				B95CB4171FAFBCAA00F705EB /* Settings.storyboard */,
@@ -354,6 +357,7 @@
 				DA0700231F0DA889003BEE3D /* KeyboardSettingsVC.swift in Sources */,
 				B95CB41B1FAFBE2500F705EB /* VoicesVC.swift in Sources */,
 				DA57B1FA1F0D9EC100895E18 /* AppDelegate.swift in Sources */,
+				ABCD1234567890ABCDEF1234 /* SwipeSpeakApp.swift in Sources */,
 				B93BCCA01FD7F8DC007BFCC3 /* AcknowledgementsVC.swift in Sources */,
 				DA0700211F0DA84A003BEE3D /* SettingsVC.swift in Sources */,
 				B95CB41F1FAFCB1F00F705EB /* SpeechVC.swift in Sources */,
