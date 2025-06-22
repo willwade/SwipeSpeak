@@ -63,8 +63,7 @@ class MainTVC: UITableViewController {
 
     // SwiftUI Keyboard Integration
     private var keyboardViewModel: KeyboardViewModel!
-    // TODO: Temporarily commented out due to KeyboardView not found error
-    // private var keyboardHostingController: UIHostingController<KeyboardView>!
+    private var keyboardHostingController: UIHostingController<KeyboardView>!
     
     private var keyLetterGrouping = [String]()
     @IBOutlet var predictionLabels: [UILabel]!
@@ -228,17 +227,15 @@ class MainTVC: UITableViewController {
         // Setup callbacks for SwiftUI keyboard interactions
         setupSwiftUIKeyboardCallbacks()
 
-        // TODO: Temporarily commented out due to KeyboardView not found error
-        // let keyboardView = KeyboardView(viewModel: keyboardViewModel)
-        // keyboardHostingController = UIHostingController(rootView: keyboardView)
+        let keyboardView = KeyboardView(viewModel: keyboardViewModel)
+        keyboardHostingController = UIHostingController(rootView: keyboardView)
 
-        // TODO: Temporarily commented out due to KeyboardView not found error
         // Add as child view controller
-        // addChild(keyboardHostingController)
+        addChild(keyboardHostingController)
 
         // Configure the hosting controller's view
-        // keyboardHostingController.view.translatesAutoresizingMaskIntoConstraints = false
-        // keyboardHostingController.view.backgroundColor = .clear
+        keyboardHostingController.view.translatesAutoresizingMaskIntoConstraints = false
+        keyboardHostingController.view.backgroundColor = .clear
 
         // We'll add it to the keyboard container in setupUI after the outlets are connected
     }
@@ -257,7 +254,7 @@ class MainTVC: UITableViewController {
             self?.backspace(noSound: true) // noSound because KeyboardViewModel already plays sound
         }
 
-        keyboardViewModel.onSpace = { [weak self] in
+        keyboardViewModel.onSpace = {
             // Space is handled by word completion in SwiftUI keyboard
         }
 
@@ -279,11 +276,8 @@ class MainTVC: UITableViewController {
     }
 
     private func setupSwiftUIKeyboardOverlay() {
-        // TODO: Temporarily commented out due to KeyboardView not found error
-        // guard let hostingController = keyboardHostingController else { return }
+        guard let hostingController = keyboardHostingController else { return }
 
-        // TODO: Temporarily commented out due to KeyboardView not found error
-        /*
         // Add the SwiftUI keyboard view to the keyboard container
         keyboardContainerView.addSubview(hostingController.view)
         hostingController.didMove(toParent: self)
@@ -301,7 +295,6 @@ class MainTVC: UITableViewController {
 
         // Update the keyboard layout to match user preferences
         keyboardViewModel.keyboardLayout = UserPreferences.shared.keyboardLayout
-        */
 
         // Setup binding to sync KeyboardViewModel with legacy enteredKeyList
         setupKeyboardViewModelBinding()
@@ -404,22 +397,8 @@ class MainTVC: UITableViewController {
     private func setupUI() {
         tableView.isScrollEnabled = false
 
-        // TODO: Temporarily reverted to UIKit keyboard setup due to KeyboardView not found error
-        setupKeyboard()
-
-        guard let swipeParentView = self.view else {
-            print("Error: self.view is nil in setupUI")
-            return
-        }
-
-        swipeView = SwipeView(frame: swipeParentView.frame,
-                              keyboardContainerView: self.view,
-                              keyboardLabels:  keyboardLabels,
-                              isTwoStrokes: usesTwoStrokesKeyboard,
-                              useTwoStrokesLogic: UserPreferences.shared.keyboardLayout == .strokes2,
-                              delegate: self)
-
-        swipeParentView.superview?.addSubview(swipeView)
+        // Setup SwiftUI keyboard overlay (replaces UIKit keyboard setup)
+        setupSwiftUIKeyboardOverlay()
 
         // Setup SwiftUI text display overlay
         setupSwiftUITextDisplayOverlay()
@@ -448,7 +427,7 @@ class MainTVC: UITableViewController {
     
     private func setupKeyboard() {
         if keyboardView != nil && keyboardView.superview != nil {
-            swipeView.removeFromSuperview()
+            // Note: SwiftUI keyboard is now managed by setupSwiftUIKeyboardOverlay()
             keyboardView.removeFromSuperview()
             keyboardLabels.removeAll()
         }
@@ -626,9 +605,9 @@ class MainTVC: UITableViewController {
             return
         }
         
-        // Remove first stroke.
-        if swipeView.firstStroke != nil {
-            swipeView.firstStroke = nil
+        // Remove first stroke or last character.
+        if keyboardViewModel.firstStroke != nil {
+            keyboardViewModel.firstStroke = nil
         } else { // Remove last character.
             enteredKeyList.removeLast()
             updatePredictions()
@@ -658,7 +637,7 @@ class MainTVC: UITableViewController {
         enteredKeyList.removeAll()
         updatePredictions()
         updateKeyboardIndicator(-1)
-        swipeView.firstStroke = nil
+        keyboardViewModel.firstStroke = nil
     }
     
     @IBAction func handleLabelTapAction(_ sender: UITapGestureRecognizer) {
@@ -805,7 +784,7 @@ class MainTVC: UITableViewController {
         UserPreferences.shared.incrementWordRating(word)
         setupWordPredictionEngine()
 
-        swipeView.firstStroke = nil
+        keyboardViewModel.firstStroke = nil
         
         return true
     }
