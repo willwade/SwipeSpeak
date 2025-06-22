@@ -197,6 +197,10 @@ struct KeyboardView: View {
     
     private func handleRegularKeyTap(_ key: SwiftUIKeyboardKey) {
         print("🔍 KeyboardView: handleRegularKeyTap called for key \(key.index)")
+
+        // For regular keyboards, switch to individual letters when a key is pressed
+        switchToIndividualLetters(for: key.index)
+
         viewModel.keyEntered(key.index, isSwipe: false)
     }
 
@@ -254,6 +258,64 @@ struct KeyboardView: View {
     private func handleMSRKeySwipe(_ key: SwiftUIKeyboardKey, direction: SwipeDirection, velocity: CGSize) {
         let swipeKeyIndex = SwipeDirection.keyIndex(for: velocity, numberOfKeys: keyboardConfig.keys.count)
         viewModel.msrKeyEntered(key: swipeKeyIndex, isSwipe: true)
+    }
+
+    /// Switch keyboard to show individual letters for the pressed key group
+    private func switchToIndividualLetters(for keyIndex: Int) {
+        guard keyIndex < keyboardConfig.keys.count else { return }
+
+        let pressedKey = keyboardConfig.keys[keyIndex]
+        let letters = pressedKey.letters
+
+        // Only switch if this key has multiple letters
+        guard letters.count > 1 else { return }
+
+        // Create new keys showing individual letters
+        var newKeys = keyboardConfig.keys
+
+        // Split the letters across all available keys
+        let individualLetters = Array(letters)
+        for (index, _) in newKeys.enumerated() {
+            if index < individualLetters.count {
+                let letter = String(individualLetters[index])
+                newKeys[index] = SwiftUIKeyboardKey(
+                    index: index,
+                    text: letter.uppercased(),
+                    letters: letter,
+                    isSpecial: false,
+                    textColor: .black,
+                    backgroundColor: .clear
+                )
+            } else {
+                // Clear remaining keys or keep them as they were
+                newKeys[index] = SwiftUIKeyboardKey(
+                    index: index,
+                    text: "",
+                    letters: "",
+                    isSpecial: false,
+                    textColor: .black,
+                    backgroundColor: .clear
+                )
+            }
+        }
+
+        // Update the keyboard configuration
+        keyboardConfig = KeyboardLayoutConfig(
+            layout: keyboardConfig.layout,
+            gridColumns: keyboardConfig.gridColumns,
+            keyLetterGrouping: keyboardConfig.keyLetterGrouping,
+            keys: newKeys
+        )
+
+        // Reset back to original layout after a delay
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+            self.resetToOriginalLayout()
+        }
+    }
+
+    /// Reset keyboard back to original grouped layout
+    private func resetToOriginalLayout() {
+        keyboardConfig = KeyboardLayoutConfig.config(for: viewModel.keyboardLayout)
     }
     
     private func highlightKey(_ index: Int) {
