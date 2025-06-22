@@ -33,9 +33,11 @@
 		DD2C9D712E07C19C0006658A /* KeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2C9D6C2E07C19C0006658A /* KeyboardView.swift */; };
 		DD2C9D722E07C19C0006658A /* SwipeGestureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2C9D6E2E07C19C0006658A /* SwipeGestureView.swift */; };
 		DD2C9D732E07C19C0006658A /* VisualFeedbackSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2C9D6F2E07C19C0006658A /* VisualFeedbackSystem.swift */; };
+		DDA361572E08327400E0A9DA /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA361562E08327400E0A9DA /* BaseViewModel.swift */; };
+		DDA3615A2E08328400E0A9DA /* CommonUIComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA361582E08328400E0A9DA /* CommonUIComponents.swift */; };
+		DDA3615B2E08328400E0A9DA /* GestureVisualizationOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA361592E08328400E0A9DA /* GestureVisualizationOverlay.swift */; };
 		DDC6F1622E058E7F00EFC306 /* MarkdownView in Frameworks */ = {isa = PBXBuildFile; productRef = DDC6F1612E058E7F00EFC306 /* MarkdownView */; };
 		DDC6F1652E058EEA00EFC306 /* DZNEmptyDataSet in Frameworks */ = {isa = PBXBuildFile; productRef = DDC6F1642E058EEA00EFC306 /* DZNEmptyDataSet */; };
-
 		F1A2B3C4D5E6F7890ABCDEF1 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1234567890ABCDEF12345678 /* SettingsView.swift */; };
 		F2A3B4C5D6E7F8901BCDEF12 /* SwiftUIBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2345678901BCDEF123456789 /* SwiftUIBridge.swift */; };
 		F3A4B5C6D7E8F9012CDEF123 /* TextDisplayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3456789012CDEF1234567890 /* TextDisplayView.swift */; };
@@ -92,6 +94,9 @@
 		DD2C9D6D2E07C19C0006658A /* KeyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyView.swift; sourceTree = "<group>"; };
 		DD2C9D6E2E07C19C0006658A /* SwipeGestureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeGestureView.swift; sourceTree = "<group>"; };
 		DD2C9D6F2E07C19C0006658A /* VisualFeedbackSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisualFeedbackSystem.swift; sourceTree = "<group>"; };
+		DDA361562E08327400E0A9DA /* BaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
+		DDA361582E08328400E0A9DA /* CommonUIComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonUIComponents.swift; sourceTree = "<group>"; };
+		DDA361592E08328400E0A9DA /* GestureVisualizationOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GestureVisualizationOverlay.swift; sourceTree = "<group>"; };
 		E6C57A2B87714BE3827B3AC4 /* SettingsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -122,6 +127,7 @@
 		4EC6D480B15646ECAD092CBA /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				DDA361562E08327400E0A9DA /* BaseViewModel.swift */,
 				A094360083F94AFE8FAEE668 /* KeyboardViewModel.swift */,
 				E6C57A2B87714BE3827B3AC4 /* SettingsViewModel.swift */,
 				4567890123DEF12345678901 /* TextDisplayViewModel.swift */,
@@ -132,6 +138,8 @@
 		9876543210FEDCBA98765432 /* SwiftUI Views */ = {
 			isa = PBXGroup;
 			children = (
+				DDA361582E08328400E0A9DA /* CommonUIComponents.swift */,
+				DDA361592E08328400E0A9DA /* GestureVisualizationOverlay.swift */,
 				DD2C9D6C2E07C19C0006658A /* KeyboardView.swift */,
 				DD2C9D6D2E07C19C0006658A /* KeyView.swift */,
 				DD2C9D6E2E07C19C0006658A /* SwipeGestureView.swift */,
@@ -339,6 +347,7 @@
 				DD2C9D712E07C19C0006658A /* KeyboardView.swift in Sources */,
 				DD2C9D722E07C19C0006658A /* SwipeGestureView.swift in Sources */,
 				DD2C9D732E07C19C0006658A /* VisualFeedbackSystem.swift in Sources */,
+				DDA361572E08327400E0A9DA /* BaseViewModel.swift in Sources */,
 				B991E2281FAEE26F0038074E /* MainTVC.swift in Sources */,
 				B95CB41D1FAFC50E00F705EB /* UserPreferences.swift in Sources */,
 				B928F1E01FB49EEF00302E70 /* SpeechSynthesizer.swift in Sources */,
@@ -358,6 +367,8 @@
 				F1A2B3C4D5E6F7890ABCDEF1 /* SettingsView.swift in Sources */,
 				F2A3B4C5D6E7F8901BCDEF12 /* SwiftUIBridge.swift in Sources */,
 				F3A4B5C6D7E8F9012CDEF123 /* TextDisplayView.swift in Sources */,
+				DDA3615A2E08328400E0A9DA /* CommonUIComponents.swift in Sources */,
+				DDA3615B2E08328400E0A9DA /* GestureVisualizationOverlay.swift in Sources */,
 				F4A5B6C7D8E9F0123DEF1234 /* TextDisplayViewModel.swift in Sources */,
 				F7A8B9CADBE2F3456G234567 /* CloudKitSyncManager.swift in Sources */,
 			);
@@ -673,7 +684,6 @@
 				kind = branch;
 			};
 		};
-
 		DDC6F1692E058F9900EFC306 /* XCRemoteSwiftPackageReference "ViewInspector" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/nalexn/ViewInspector";
@@ -695,7 +705,6 @@
 			package = DDC6F1632E058EEA00EFC306 /* XCRemoteSwiftPackageReference "DZNEmptyDataSet" */;
 			productName = DZNEmptyDataSet;
 		};
-
 /* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = DA57B1EE1F0D9EC100895E18 /* Project object */;

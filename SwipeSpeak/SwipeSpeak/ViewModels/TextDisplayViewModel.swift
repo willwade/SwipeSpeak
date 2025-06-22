@@ -21,7 +21,7 @@ class TextDisplayViewModel: ObservableObject {
     @Published var predictions: [String] = Array(repeating: "", count: 6)
     @Published var isWordHighlighted: Bool = false
     @Published var highlightedPredictionIndex: Int? = nil
-    
+
     // MARK: - Private Properties
 
     private var cancellables = Set<AnyCancellable>()
@@ -36,7 +36,7 @@ class TextDisplayViewModel: ObservableObject {
     var onAnnounce: ((String) -> Void)?
     
     // MARK: - Initialization
-    
+
     init() {
         setupBindings()
     }
@@ -140,7 +140,7 @@ class TextDisplayViewModel: ObservableObject {
     }
     
     // MARK: - Private Methods
-    
+
     private func setupBindings() {
         // Listen for user preferences changes that might affect display
         NotificationCenter.default.publisher(for: UserDefaults.didChangeNotification)

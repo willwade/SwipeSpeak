@@ -427,9 +427,9 @@ struct AcknowledgementsView: View {
                 }
                 
                 VStack(alignment: .leading, spacing: 8) {
-                    Text("Zephyr")
+                    Text("CloudKit")
                         .fontWeight(.semibold)
-                    Text("Used for iCloud synchronization")
+                    Text("Native iCloud synchronization")
                         .font(.caption)
                         .foregroundColor(.secondary)
                 }

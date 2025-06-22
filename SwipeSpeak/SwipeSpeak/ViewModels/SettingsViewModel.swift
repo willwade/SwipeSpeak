@@ -31,17 +31,17 @@ class SettingsViewModel: ObservableObject {
     
     /// Loading state for voice loading
     @Published var isLoadingVoices: Bool = false
-    
+
     /// Error state for settings operations
     @Published var errorMessage: String?
-    
+
     // MARK: - Dependencies
-    
+
     private let userPreferences: UserPreferences
     // private let predictionManager: PredictionEngineManager // Temporarily commented out
-    
+
     // MARK: - Private Properties
-    
+
     private var cancellables = Set<AnyCancellable>()
     
     // MARK: - Initialization
@@ -52,14 +52,14 @@ class SettingsViewModel: ObservableObject {
     ) {
         self.userPreferences = userPreferences
         // self.predictionManager = predictionManager // Temporarily commented out
-        
+
         setupBindings()
         loadAvailableVoices()
         loadEngineMetrics()
     }
     
     // MARK: - Setup
-    
+
     private func setupBindings() {
         // Monitor prediction engine changes - Note: predictionEngineType is not @Published yet
         // This will be updated when we fully migrate UserPreferences

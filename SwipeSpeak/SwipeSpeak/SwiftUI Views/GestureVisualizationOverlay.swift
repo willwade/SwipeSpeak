@@ -81,9 +81,7 @@ class GestureOverlayManager: ObservableObject {
         clearTimer?.invalidate()
     }
     
-    deinit {
-        clearTimer?.invalidate()
-    }
+    // Note: Timer cleanup handled automatically by ARC
 }
 
 // MARK: - Preview

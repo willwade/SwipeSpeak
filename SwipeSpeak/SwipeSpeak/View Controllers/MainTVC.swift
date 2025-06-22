@@ -310,7 +310,7 @@ class MainTVC: UITableViewController {
         hideUIKitKeyboardViews()
 
         // Add the SwiftUI keyboard view to the keyboard container
-        print("🔍 MainTVC: Adding SwiftUI keyboard to container: \(keyboardContainerView)")
+        print("🔍 MainTVC: Adding SwiftUI keyboard to container: \(keyboardContainerView?.description ?? "nil")")
         keyboardContainerView.addSubview(hostingController.view)
         hostingController.didMove(toParent: self)
 
@@ -389,7 +389,7 @@ class MainTVC: UITableViewController {
         }
 
         // Add the SwiftUI view as an overlay
-        print("🔍 MainTVC: Adding SwiftUI text display to main view: \(view)")
+        print("🔍 MainTVC: Adding SwiftUI text display to main view: \(view?.description ?? "nil")")
         view.addSubview(hostingController.view)
         hostingController.didMove(toParent: self)
 
@@ -504,10 +504,10 @@ class MainTVC: UITableViewController {
     
     private func setupUI() {
         print("🔍 MainTVC: setupUI called")
-        print("🔍 MainTVC: tableView: \(tableView)")
-        print("🔍 MainTVC: keyboardContainerView: \(keyboardContainerView)")
-        print("🔍 MainTVC: sentenceLabel: \(sentenceLabel)")
-        print("🔍 MainTVC: wordLabel: \(wordLabel)")
+        print("🔍 MainTVC: tableView: \(tableView?.description ?? "nil")")
+        print("🔍 MainTVC: keyboardContainerView: \(keyboardContainerView?.description ?? "nil")")
+        print("🔍 MainTVC: sentenceLabel: \(sentenceLabel?.description ?? "nil")")
+        print("🔍 MainTVC: wordLabel: \(wordLabel?.description ?? "nil")")
         print("🔍 MainTVC: predictionLabels count: \(predictionLabels.count)")
 
         tableView.isScrollEnabled = false
@@ -673,7 +673,7 @@ class MainTVC: UITableViewController {
         //setupWordPredictionEngine()
         
         guard let userInfo = notification.userInfo else { return }
-        guard let word = userInfo[WordKeys.word] as? String, let freq = userInfo[WordKeys.frequency] as? Int else { return }
+        guard let _ = userInfo[WordKeys.word] as? String, let _ = userInfo[WordKeys.frequency] as? Int else { return }
 
         // try? predictionEngineManager.currentEngine?.insert(word, freq) // Temporarily commented out
     }
@@ -937,12 +937,12 @@ class MainTVC: UITableViewController {
             }
         } else {
             // Add characters after input to get more predictions.
-            var digits = [enteredKeyList]
-            var searchLevel = 0
-            var maxSearchLevel = 4
+            let _ = [enteredKeyList]
+            let _ = 0
+            let _ = 4
             
             if usesTwoStrokesKeyboard {
-                maxSearchLevel = 2
+                // maxSearchLevel = 2 // Temporarily disabled
             }
             
             // TEMPORARILY DISABLED: Prediction expansion logic causes explosion with mock predictions

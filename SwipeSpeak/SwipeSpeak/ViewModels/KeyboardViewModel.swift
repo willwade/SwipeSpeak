@@ -64,13 +64,13 @@ class KeyboardViewModel: ObservableObject {
     var onPredictionSelected: ((String) -> Void)?
 
     // MARK: - Dependencies
-    
+
     // private let predictionManager: PredictionEngineManager // Temporarily commented out
     private let userPreferences: UserPreferences
     private let speechSynthesizer: SpeechSynthesizer
-    
+
     // MARK: - Private Properties
-    
+
     private var cancellables = Set<AnyCancellable>()
     
     // MARK: - Initialization
@@ -83,19 +83,19 @@ class KeyboardViewModel: ObservableObject {
         // self.predictionManager = predictionManager // Temporarily commented out
         self.userPreferences = userPreferences
         self.speechSynthesizer = speechSynthesizer
-        
+
         setupBindings()
     }
     
     // MARK: - Setup
-    
+
     private func setupBindings() {
         // Bind to user preferences changes
         userPreferences.$keyboardLayout
             .receive(on: DispatchQueue.main)
             .assign(to: \.keyboardLayout, on: self)
             .store(in: &cancellables)
-        
+
         // Update two-strokes mode based on keyboard layout
         $keyboardLayout
             .map { layout in
@@ -103,7 +103,7 @@ class KeyboardViewModel: ObservableObject {
             }
             .assign(to: \.isTwoStrokesMode, on: self)
             .store(in: &cancellables)
-        
+
         // Note: Predictions are now handled by MainTVC, not KeyboardViewModel
         // This simplifies the architecture and avoids duplication
     }
@@ -375,6 +375,7 @@ extension KeyboardViewModel {
     }
 
     private func vibrate() {
-        SwipeSpeak.vibrate()
+        let generator = UIImpactFeedbackGenerator(style: .medium)
+        generator.impactOccurred()
     }
 }
