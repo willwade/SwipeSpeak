@@ -317,9 +317,11 @@ class MainTVC: UITableViewController {
     private func setupSwiftUITextDisplayOverlay() {
         guard let hostingController = textDisplayHostingController else { return }
 
-        // Hide the original UIKit labels
+        // Hide the original UIKit labels and text fields
         sentenceLabel.isHidden = true
         wordLabel.isHidden = true
+        sentencePlaceholderTF.isHidden = true
+        wordPlaceholderTF.isHidden = true
         for label in predictionLabels {
             label.isHidden = true
         }
@@ -328,12 +330,15 @@ class MainTVC: UITableViewController {
         view.addSubview(hostingController.view)
         hostingController.didMove(toParent: self)
 
-        // Position the SwiftUI view to cover the text display area
+        // Position the SwiftUI view to cover the text display area (first 3 table sections)
+        // Calculate the height of the first 3 sections (sentence, word, predictions)
+        let textDisplayHeight: CGFloat = 44 + 44 + 88 // Approximate heights of the 3 sections
+
         NSLayoutConstraint.activate([
             hostingController.view.topAnchor.constraint(equalTo: tableView.topAnchor),
             hostingController.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             hostingController.view.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            hostingController.view.heightAnchor.constraint(equalToConstant: 200) // Adjust height as needed
+            hostingController.view.heightAnchor.constraint(equalToConstant: textDisplayHeight)
         ])
 
         // Ensure the SwiftUI view doesn't interfere with table view scrolling
@@ -426,60 +431,31 @@ class MainTVC: UITableViewController {
     }
     
     private func setupKeyboard() {
+        // DISABLED: UIKit keyboard setup is now replaced by SwiftUI keyboard
+        // The SwiftUI keyboard is managed by setupSwiftUIKeyboardOverlay()
+
+        // Clean up any existing UIKit keyboard views
         if keyboardView != nil && keyboardView.superview != nil {
-            // Note: SwiftUI keyboard is now managed by setupSwiftUIKeyboardOverlay()
             keyboardView.removeFromSuperview()
             keyboardLabels.removeAll()
         }
-        
+
+        // Set up keyLetterGrouping for legacy compatibility (still needed for build word mode)
         switch UserPreferences.shared.keyboardLayout {
         case .keys4:
-            keyboardView = keysView4Keys
             keyLetterGrouping = Constants.keyLetterGrouping4Keys
-            break
         case .keys6:
-            keyboardView = keysView6Keys
             keyLetterGrouping = Constants.keyLetterGrouping6Keys
-            break
         case .keys8:
-            keyboardView = keysView8Keys
             keyLetterGrouping = Constants.keyLetterGrouping8Keys
-            break
         case .strokes2:
-            keyboardView = keysView2Strokes
             keyLetterGrouping = Constants.keyLetterGroupingSteve
-            break
         case .msr:
-            keyboardView = keyboardMSMaster
             keyLetterGrouping = Constants.keyLetterGroupingMSR
-            break
         }
-        
-        keyboardContainerView.backgroundColor = UIColor.white
-        keyboardView.backgroundColor = UIColor.white
-        
-        let keyboardSize = MainTVC.keyboardSize(keyboardContainerView)
-        keyboardView.frame = CGRect(x: 0, y: 0, width: keyboardSize.width, height: keyboardSize.height)
-        
-        keyboardContainerView.addSubview(keyboardView)
-        
-        keyboardView.center = CGPoint(x: keyboardContainerView.bounds.width/2.0,
-                                      y: keyboardContainerView.bounds.height/2.0)
-        
-        for subview in keyboardView.subviews {
-            guard let label = subview as? UILabel else { continue }
-            
-            label.isUserInteractionEnabled = true
-            label.layer.borderColor = UIColor.green.cgColor
-            
-            keyboardLabels.append(label)
-        }
-        
-        if UserPreferences.shared.keyboardLayout == .msr {
-            changeKeyboardKeysToMaster()
-        }
-        
-        adjustKeysFont()
+
+        // Ensure container has clear background for SwiftUI keyboard
+        keyboardContainerView.backgroundColor = UIColor.clear
     }
     
     private static func keyboardSize(_ keyboardContainerView: UIView) -> CGSize {
@@ -563,7 +539,12 @@ class MainTVC: UITableViewController {
     // MARK: - Notifications
 
     @objc private func keyboardLayoutDidChange(_ notification: Notification) {
-        setupUI()
+        // Update keyboard layout grouping for legacy compatibility
+        setupKeyboard()
+
+        // Update SwiftUI keyboard layout
+        keyboardViewModel.keyboardLayout = UserPreferences.shared.keyboardLayout
+
         setupWordPredictionEngine()
     }
     

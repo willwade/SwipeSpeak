@@ -156,7 +156,7 @@ class SwipeView: UIView {
                 return
             }
             
-            let majorityDirection = swipeDirectionList.index(of: max)!
+            let majorityDirection = swipeDirectionList.firstIndex(of: max)!
             
             if isTwoStrokes {
                 if firstStroke == nil {
