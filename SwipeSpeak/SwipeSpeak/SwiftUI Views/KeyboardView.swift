@@ -11,7 +11,7 @@ import SwiftUI
 // MARK: - Keyboard Data Models
 
 /// Represents a keyboard key with its display text and properties
-struct KeyboardKey: Identifiable, Hashable {
+struct SwiftUIKeyboardKey: Identifiable, Hashable {
     let id = UUID()
     let index: Int
     let text: String
@@ -35,7 +35,7 @@ struct KeyboardLayoutConfig {
     let layout: KeyboardLayout
     let gridColumns: [GridItem]
     let keyLetterGrouping: [String]
-    let keys: [KeyboardKey]
+    let keys: [SwiftUIKeyboardKey]
     
     static func config(for layout: KeyboardLayout) -> KeyboardLayoutConfig {
         switch layout {
@@ -77,9 +77,9 @@ struct KeyboardLayoutConfig {
         }
     }
     
-    private static func createKeys(for layout: KeyboardLayout, grouping: [String]) -> [KeyboardKey] {
+    private static func createKeys(for layout: KeyboardLayout, grouping: [String]) -> [SwiftUIKeyboardKey] {
         return grouping.enumerated().map { index, letters in
-            KeyboardKey(
+            SwiftUIKeyboardKey(
                 index: index,
                 text: letters.uppercased(),
                 letters: letters,
@@ -90,10 +90,10 @@ struct KeyboardLayoutConfig {
         }
     }
     
-    private static func createMSRKeys() -> [KeyboardKey] {
+    private static func createMSRKeys() -> [SwiftUIKeyboardKey] {
         return Constants.MSRKeyboardMasterKeys1.enumerated().map { index, text in
             let isSpecial = text.contains(Constants.MSRKeyYes) || text.contains(Constants.MSRKeyNo)
-            return KeyboardKey(
+            return SwiftUIKeyboardKey(
                 index: index,
                 text: text,
                 letters: "",

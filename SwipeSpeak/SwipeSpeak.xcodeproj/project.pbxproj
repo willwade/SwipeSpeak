@@ -29,6 +29,10 @@
 		DA0700271F0DB116003BEE3D /* SentenceHistoryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0700261F0DB116003BEE3D /* SentenceHistoryVC.swift */; };
 		DA57B1FA1F0D9EC100895E18 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA57B1F91F0D9EC100895E18 /* AppDelegate.swift */; };
 		DA57B1FF1F0D9EC100895E18 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA57B1FD1F0D9EC100895E18 /* Main.storyboard */; };
+		DD2C9D702E07C19C0006658A /* KeyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2C9D6D2E07C19C0006658A /* KeyView.swift */; };
+		DD2C9D712E07C19C0006658A /* KeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2C9D6C2E07C19C0006658A /* KeyboardView.swift */; };
+		DD2C9D722E07C19C0006658A /* SwipeGestureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2C9D6E2E07C19C0006658A /* SwipeGestureView.swift */; };
+		DD2C9D732E07C19C0006658A /* VisualFeedbackSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2C9D6F2E07C19C0006658A /* VisualFeedbackSystem.swift */; };
 		DDC6F1622E058E7F00EFC306 /* MarkdownView in Frameworks */ = {isa = PBXBuildFile; productRef = DDC6F1612E058E7F00EFC306 /* MarkdownView */; };
 		DDC6F1652E058EEA00EFC306 /* DZNEmptyDataSet in Frameworks */ = {isa = PBXBuildFile; productRef = DDC6F1642E058EEA00EFC306 /* DZNEmptyDataSet */; };
 		DDC6F1682E058F6500EFC306 /* Zephyr in Frameworks */ = {isa = PBXBuildFile; productRef = DDC6F1672E058F6500EFC306 /* Zephyr */; };
@@ -82,6 +86,10 @@
 		DA57B1FE1F0D9EC100895E18 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		DA57B2051F0D9EC100895E18 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DD2C9D482E07ADD80006658A /* SwipeSpeakTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwipeSpeakTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		DD2C9D6C2E07C19C0006658A /* KeyboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardView.swift; sourceTree = "<group>"; };
+		DD2C9D6D2E07C19C0006658A /* KeyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyView.swift; sourceTree = "<group>"; };
+		DD2C9D6E2E07C19C0006658A /* SwipeGestureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeGestureView.swift; sourceTree = "<group>"; };
+		DD2C9D6F2E07C19C0006658A /* VisualFeedbackSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisualFeedbackSystem.swift; sourceTree = "<group>"; };
 		E6C57A2B87714BE3827B3AC4 /* SettingsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -123,6 +131,10 @@
 		9876543210FEDCBA98765432 /* SwiftUI Views */ = {
 			isa = PBXGroup;
 			children = (
+				DD2C9D6C2E07C19C0006658A /* KeyboardView.swift */,
+				DD2C9D6D2E07C19C0006658A /* KeyView.swift */,
+				DD2C9D6E2E07C19C0006658A /* SwipeGestureView.swift */,
+				DD2C9D6F2E07C19C0006658A /* VisualFeedbackSystem.swift */,
 				1234567890ABCDEF12345678 /* SettingsView.swift */,
 				2345678901BCDEF123456789 /* SwiftUIBridge.swift */,
 				3456789012CDEF1234567890 /* TextDisplayView.swift */,
@@ -322,6 +334,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				B98A9A021FB96FC5002D2FD9 /* AboutVC.swift in Sources */,
+				DD2C9D702E07C19C0006658A /* KeyView.swift in Sources */,
+				DD2C9D712E07C19C0006658A /* KeyboardView.swift in Sources */,
+				DD2C9D722E07C19C0006658A /* SwipeGestureView.swift in Sources */,
+				DD2C9D732E07C19C0006658A /* VisualFeedbackSystem.swift in Sources */,
 				B991E2281FAEE26F0038074E /* MainTVC.swift in Sources */,
 				B95CB41D1FAFC50E00F705EB /* UserPreferences.swift in Sources */,
 				B928F1E01FB49EEF00302E70 /* SpeechSynthesizer.swift in Sources */,

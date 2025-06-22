@@ -359,15 +359,15 @@ class AnimationPerformanceMonitor: ObservableObject {
 
 /// Optimized animation preferences
 struct AnimationPreferences {
-    static var reduceMotion: Bool {
+    @MainActor static var reduceMotion: Bool {
         UIAccessibility.isReduceMotionEnabled
     }
 
-    static var prefersCrossFadeTransitions: Bool {
+    @MainActor static var prefersCrossFadeTransitions: Bool {
         UIAccessibility.prefersCrossFadeTransitions
     }
 
-    static func optimizedAnimation<V: Equatable>(_ animation: Animation, value: V) -> Animation {
+    @MainActor static func optimizedAnimation<V: Equatable>(_ animation: Animation, value: V) -> Animation {
         if reduceMotion {
             return .linear(duration: 0.1)
         }

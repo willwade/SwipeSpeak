@@ -10,7 +10,7 @@ import SwiftUI
 
 /// Individual keyboard key view with gesture support
 struct KeyView: View {
-    let key: KeyboardKey
+    let key: SwiftUIKeyboardKey
     let isHighlighted: Bool
     let onTap: () -> Void
     let onSwipe: (SwipeDirection, CGSize) -> Void
@@ -131,8 +131,8 @@ struct KeyView: View {
         let velocity = value.velocity
         
         // Determine if this was a tap or swipe
-        let dragDistance = sqrt(translation.x * translation.x + translation.y * translation.y)
-        let velocityMagnitude = sqrt(velocity.x * velocity.x + velocity.y * velocity.y)
+        let dragDistance = sqrt(translation.width * translation.width + translation.height * translation.height)
+        let velocityMagnitude = sqrt(velocity.width * velocity.width + velocity.height * velocity.height)
         
         // Thresholds for swipe detection
         let minimumSwipeDistance: CGFloat = 20
@@ -162,8 +162,8 @@ struct KeyView: View {
     
     private func determineSwipeDirection(translation: CGSize, velocity: CGSize) -> SwipeDirection {
         // Use both translation and velocity to determine direction
-        let combinedX = translation.x + velocity.x * 0.1
-        let combinedY = translation.y + velocity.y * 0.1
+        let combinedX = translation.width + velocity.width * 0.1
+        let combinedY = translation.height + velocity.height * 0.1
         
         // Determine primary direction
         if abs(combinedX) > abs(combinedY) {
@@ -208,7 +208,7 @@ struct PulseAnimationModifier: ViewModifier {
     VStack(spacing: 20) {
         // Regular key
         KeyView(
-            key: KeyboardKey(index: 0, text: "ABCDEF", letters: "abcdef"),
+            key: SwiftUIKeyboardKey(index: 0, text: "ABCDEF", letters: "abcdef"),
             isHighlighted: false,
             onTap: { print("Tapped") },
             onSwipe: { direction, velocity in print("Swiped \(direction) with velocity \(velocity)") }
@@ -216,7 +216,7 @@ struct PulseAnimationModifier: ViewModifier {
 
         // Highlighted key
         KeyView(
-            key: KeyboardKey(index: 1, text: "GHIJKL", letters: "ghijkl"),
+            key: SwiftUIKeyboardKey(index: 1, text: "GHIJKL", letters: "ghijkl"),
             isHighlighted: true,
             onTap: { print("Tapped") },
             onSwipe: { direction, velocity in print("Swiped \(direction) with velocity \(velocity)") }
@@ -224,7 +224,7 @@ struct PulseAnimationModifier: ViewModifier {
 
         // Special MSR key
         KeyView(
-            key: KeyboardKey(
+            key: SwiftUIKeyboardKey(
                 index: 2,
                 text: "G 👍🏻 F\nI    H",
                 letters: "",

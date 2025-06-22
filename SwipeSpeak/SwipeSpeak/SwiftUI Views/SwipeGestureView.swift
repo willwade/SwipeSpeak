@@ -70,8 +70,8 @@ struct SwipeGestureView<Content: View>: View {
         
         // Track velocity over time for more accurate direction detection
         let currentVelocity = CGSize(
-            width: value.velocity.x,
-            height: value.velocity.y
+            width: value.velocity.width,
+            height: value.velocity.height
         )
         
         velocityHistory.append(currentVelocity)
@@ -97,8 +97,8 @@ struct SwipeGestureView<Content: View>: View {
         let finalVelocity = value.velocity
         
         // Calculate gesture metrics
-        let dragDistance = sqrt(translation.x * translation.x + translation.y * translation.y)
-        let velocityMagnitude = sqrt(finalVelocity.x * finalVelocity.x + finalVelocity.y * finalVelocity.y)
+        let dragDistance = sqrt(translation.width * translation.width + translation.height * translation.height)
+        let velocityMagnitude = sqrt(finalVelocity.width * finalVelocity.width + finalVelocity.height * finalVelocity.height)
         
         // Determine if this was a tap or swipe
         if dragDistance < minimumSwipeDistance && velocityMagnitude < minimumSwipeVelocity {
