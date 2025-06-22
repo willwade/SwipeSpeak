@@ -46,6 +46,23 @@ class KeyboardViewModel: ObservableObject {
     /// Current MSR keyboard state
     @Published var msrKeyboardState: MSRKeyboardState = .master
 
+    // MARK: - Callback Properties for MainTVC Integration
+
+    /// Called when a word is completed and should be added to the text display
+    var onWordCompleted: ((String) -> Void)?
+
+    /// Called when a letter is added to the current word
+    var onLetterAdded: ((String) -> Void)?
+
+    /// Called when backspace should be performed
+    var onBackspace: (() -> Void)?
+
+    /// Called when space should be added
+    var onSpace: (() -> Void)?
+
+    /// Called when a prediction is selected
+    var onPredictionSelected: ((String) -> Void)?
+
     // MARK: - Dependencies
     
     private let predictionManager: PredictionEngineManager
@@ -164,25 +181,33 @@ class KeyboardViewModel: ObservableObject {
         currentWord = word
         enteredKeys.removeAll()
         predictions.removeAll()
-        
+
         playSoundWordAdded()
+
+        // Notify MainTVC
+        onPredictionSelected?(word)
     }
     
     /// Add current word to sentence
     func addWordToSentence() {
         guard !currentWord.isEmpty else { return }
-        
+
+        let wordToAdd = currentWord
+
         if currentSentence.isEmpty {
             currentSentence = currentWord
         } else {
             currentSentence += " " + currentWord
         }
-        
+
         currentWord = ""
         enteredKeys.removeAll()
         predictions.removeAll()
-        
+
         playSoundWordAdded()
+
+        // Notify MainTVC
+        onWordCompleted?(wordToAdd)
     }
     
     /// Speak current sentence
@@ -221,8 +246,21 @@ class KeyboardViewModel: ObservableObject {
                 await updatePredictions(for: enteredKeys)
             }
         }
-        
+
         playSoundBackspace()
+
+        // Notify MainTVC
+        onBackspace?()
+    }
+
+    /// Add space - completes current word and adds space
+    func addSpace() {
+        if !currentWord.isEmpty {
+            addWordToSentence()
+        }
+
+        // Notify MainTVC
+        onSpace?()
     }
     
     // MARK: - Private Methods
