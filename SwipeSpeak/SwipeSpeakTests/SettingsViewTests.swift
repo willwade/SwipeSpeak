@@ -8,7 +8,7 @@
 
 import XCTest
 import SwiftUI
-import ViewInspector
+// import ViewInspector // Commented out until ViewInspector is properly configured
 @testable import SwipeSpeak
 
 final class SettingsViewTests: XCTestCase {
