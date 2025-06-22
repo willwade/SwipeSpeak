@@ -29,20 +29,29 @@ class CloudKitSyncManager: ObservableObject {
     @Published var isCloudAvailable: Bool = false
     
     // MARK: - Private Properties
-    
-    private let container = CKContainer.default()
-    private let database: CKDatabase
+
+    private let container: CKContainer?
+    private let database: CKDatabase?
     private var cancellables = Set<AnyCancellable>()
-    
+
     // MARK: - Singleton
-    
+
     static let shared = CloudKitSyncManager()
-    
+
     // MARK: - Initialization
-    
+
     private init() {
-        self.database = container.privateCloudDatabase
-        checkCloudKitAvailability()
+        // Safely initialize CloudKit container
+        self.container = CKContainer.default()
+        self.database = container?.privateCloudDatabase
+
+        if container != nil {
+            print("CloudKit container initialized successfully")
+            checkCloudKitAvailability()
+        } else {
+            print("Failed to initialize CloudKit container")
+            isCloudAvailable = false
+        }
     }
     
     // MARK: - Public Methods
@@ -80,6 +89,12 @@ class CloudKitSyncManager: ObservableObject {
     // MARK: - Private Methods
     
     private func checkCloudKitAvailability() {
+        guard let container = container else {
+            isCloudAvailable = false
+            print("CloudKit container not available")
+            return
+        }
+
         Task {
             do {
                 let status = try await container.accountStatus()
@@ -96,17 +111,20 @@ class CloudKitSyncManager: ObservableObject {
     }
     
     private func syncUserPreferences() async {
-        guard isCloudAvailable else { return }
-        
+        guard isCloudAvailable, let database = database else {
+            print("CloudKit not available or database not initialized")
+            return
+        }
+
         await MainActor.run {
             syncStatus = .syncing
         }
-        
+
         do {
             // Create or update user preferences record
             let record = try await createUserPreferencesRecord()
             let savedRecord = try await database.save(record)
-            
+
             await MainActor.run {
                 self.syncStatus = .success
                 self.lastSyncDate = Date()
@@ -162,12 +180,15 @@ class CloudKitSyncManager: ObservableObject {
     
     /// Fetch and apply user preferences from CloudKit
     func fetchUserPreferences() async {
-        guard isCloudAvailable else { return }
-        
+        guard isCloudAvailable, let database = database else {
+            print("CloudKit not available or database not initialized")
+            return
+        }
+
         do {
             let recordID = CKRecord.ID(recordName: "UserPreferences")
             let record = try await database.record(for: recordID)
-            
+
             await MainActor.run {
                 self.applyUserPreferences(from: record)
             }

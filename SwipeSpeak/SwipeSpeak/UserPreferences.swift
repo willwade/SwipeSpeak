@@ -154,11 +154,20 @@ class UserPreferences: ObservableObject {
     // MARK: CloudKit Sync
 
     private func enableCloudKitSync() {
-        CloudKitSyncManager.shared.startMonitoring(keys: Keys.iCloudSyncKeys())
+        // Check if CloudKit is available before enabling sync
+        if CloudKitSyncManager.shared.isCloudAvailable {
+            CloudKitSyncManager.shared.startMonitoring(keys: Keys.iCloudSyncKeys())
 
-        // Fetch existing preferences from CloudKit
-        Task {
-            await CloudKitSyncManager.shared.fetchUserPreferences()
+            // Fetch existing preferences from CloudKit
+            Task {
+                await CloudKitSyncManager.shared.fetchUserPreferences()
+            }
+        } else {
+            print("CloudKit not available, sync disabled")
+            // Automatically disable cloud sync if CloudKit is not available
+            DispatchQueue.main.async {
+                self.enableCloudSync = false
+            }
         }
     }
 
