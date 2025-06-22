@@ -151,7 +151,7 @@ struct KeyboardView: View {
     
     // MARK: - Private Methods
     
-    private func handleKeyTap(_ key: KeyboardKey) {
+    private func handleKeyTap(_ key: SwiftUIKeyboardKey) {
         highlightKey(key.index)
         
         if keyboardConfig.layout == .msr {
@@ -163,7 +163,7 @@ struct KeyboardView: View {
         }
     }
     
-    private func handleKeySwipe(_ key: KeyboardKey, direction: SwipeDirection, velocity: CGSize) {
+    private func handleKeySwipe(_ key: SwiftUIKeyboardKey, direction: SwipeDirection, velocity: CGSize) {
         highlightKey(key.index)
 
         if keyboardConfig.layout == .msr {
@@ -175,16 +175,16 @@ struct KeyboardView: View {
         }
     }
     
-    private func handleRegularKeyTap(_ key: KeyboardKey) {
-        viewModel.keyEntered(key: key.index, isSwipe: false)
+    private func handleRegularKeyTap(_ key: SwiftUIKeyboardKey) {
+        viewModel.keyEntered(key.index, isSwipe: false)
     }
-    
-    private func handleRegularKeySwipe(_ key: KeyboardKey, direction: SwipeDirection, velocity: CGSize) {
+
+    private func handleRegularKeySwipe(_ key: SwiftUIKeyboardKey, direction: SwipeDirection, velocity: CGSize) {
         let swipeKeyIndex = SwipeDirection.keyIndex(for: velocity, numberOfKeys: keyboardConfig.keys.count)
-        viewModel.keyEntered(key: swipeKeyIndex, isSwipe: true)
+        viewModel.keyEntered(swipeKeyIndex, isSwipe: true)
     }
     
-    private func handleTwoStrokeKeyTap(_ key: KeyboardKey) {
+    private func handleTwoStrokeKeyTap(_ key: SwiftUIKeyboardKey) {
         if viewModel.isTwoStrokesMode {
             if viewModel.firstStroke == nil {
                 viewModel.firstStrokeEntered(key: key.index, isSwipe: false)
@@ -192,11 +192,11 @@ struct KeyboardView: View {
                 viewModel.secondStrokeEntered(key: key.index, isSwipe: false)
             }
         } else {
-            viewModel.keyEntered(key: key.index, isSwipe: false)
+            viewModel.keyEntered(key.index, isSwipe: false)
         }
     }
     
-    private func handleTwoStrokeKeySwipe(_ key: KeyboardKey, direction: SwipeDirection, velocity: CGSize) {
+    private func handleTwoStrokeKeySwipe(_ key: SwiftUIKeyboardKey, direction: SwipeDirection, velocity: CGSize) {
         let numberOfKeys: Int
         if viewModel.isTwoStrokesMode {
             if viewModel.firstStroke == nil {
@@ -221,16 +221,16 @@ struct KeyboardView: View {
                 viewModel.secondStrokeEntered(key: swipeKeyIndex, isSwipe: true)
             }
         } else {
-            viewModel.keyEntered(key: swipeKeyIndex, isSwipe: true)
+            viewModel.keyEntered(swipeKeyIndex, isSwipe: true)
         }
     }
     
-    private func handleMSRKeyTap(_ key: KeyboardKey) {
+    private func handleMSRKeyTap(_ key: SwiftUIKeyboardKey) {
         // MSR keyboard logic will be implemented based on current key state
         viewModel.msrKeyEntered(key: key.index, isSwipe: false)
     }
-    
-    private func handleMSRKeySwipe(_ key: KeyboardKey, direction: SwipeDirection, velocity: CGSize) {
+
+    private func handleMSRKeySwipe(_ key: SwiftUIKeyboardKey, direction: SwipeDirection, velocity: CGSize) {
         let swipeKeyIndex = SwipeDirection.keyIndex(for: velocity, numberOfKeys: keyboardConfig.keys.count)
         viewModel.msrKeyEntered(key: swipeKeyIndex, isSwipe: true)
     }
@@ -258,7 +258,7 @@ enum SwipeDirection: CaseIterable {
 
     /// Calculate key index based on velocity and number of keys, matching UIKit SwipeView logic
     static func keyIndex(for velocity: CGSize, numberOfKeys: Int) -> Int {
-        var degree = Double(atan2(velocity.y, velocity.x)) * 180 / Double.pi
+        var degree = Double(atan2(velocity.height, velocity.width)) * 180 / Double.pi
         if degree < 0 {
             degree += 360
         }
@@ -350,10 +350,10 @@ enum SwipeDirection: CaseIterable {
 
     /// Simple direction detection for basic swipe recognition
     static func direction(for velocity: CGSize) -> SwipeDirection {
-        if abs(velocity.x) > abs(velocity.y) {
-            return velocity.x > 0 ? .right : .left
+        if abs(velocity.width) > abs(velocity.height) {
+            return velocity.width > 0 ? .right : .left
         } else {
-            return velocity.y > 0 ? .down : .up
+            return velocity.height > 0 ? .down : .up
         }
     }
 }
