@@ -167,8 +167,9 @@ struct KeyboardView: View {
     // MARK: - Private Methods
     
     private func handleKeyTap(_ key: SwiftUIKeyboardKey) {
+        print("🔍 KeyboardView: handleKeyTap called for key \(key.index) with layout \(keyboardConfig.layout)")
         highlightKey(key.index)
-        
+
         if keyboardConfig.layout == .msr {
             handleMSRKeyTap(key)
         } else if keyboardConfig.layout == .strokes2 {
@@ -191,6 +192,7 @@ struct KeyboardView: View {
     }
     
     private func handleRegularKeyTap(_ key: SwiftUIKeyboardKey) {
+        print("🔍 KeyboardView: handleRegularKeyTap called for key \(key.index)")
         viewModel.keyEntered(key.index, isSwipe: false)
     }
 

@@ -264,15 +264,18 @@ class MainTVC: UITableViewController {
     }
 
     private func updateCurrentWordDisplay() {
-        // Update the word label with the current word from KeyboardViewModel
-        setWordText(keyboardViewModel.currentWord)
+        print("🔍 MainTVC: updateCurrentWordDisplay called - wordLabel.text: '\(wordLabel.text ?? "")'")
+        // Update the KeyboardViewModel with the current word from MainTVC
+        keyboardViewModel.updateCurrentWord(wordLabel.text ?? "")
 
         // Update the text display view model
-        textDisplayViewModel.setWordText(keyboardViewModel.currentWord)
+        textDisplayViewModel.setWordText(wordLabel.text ?? "")
 
         // Update predictions in text display
-        let predictions = keyboardViewModel.predictions.map { $0.0 }
-        textDisplayViewModel.updatePredictions(predictions)
+        let currentPredictions = predictionLabels.map { $0.text ?? "" }
+        let predictionsWithFreq = currentPredictions.enumerated().map { ($0.element, 100 - $0.offset) }
+        keyboardViewModel.updatePredictions(predictionsWithFreq)
+        textDisplayViewModel.updatePredictions(currentPredictions)
     }
 
     private func setupSwiftUIKeyboardOverlay() {
@@ -305,6 +308,7 @@ class MainTVC: UITableViewController {
         keyboardViewModel.$enteredKeys
             .receive(on: DispatchQueue.main)
             .sink { [weak self] keys in
+                print("🔍 MainTVC: Received enteredKeys update: \(keys)")
                 self?.enteredKeyList = keys
                 self?.updatePredictions()
                 self?.updateCurrentWordDisplay()

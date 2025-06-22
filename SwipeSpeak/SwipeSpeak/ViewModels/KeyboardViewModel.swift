@@ -104,31 +104,26 @@ class KeyboardViewModel: ObservableObject {
             .assign(to: \.isTwoStrokesMode, on: self)
             .store(in: &cancellables)
         
-        // Update predictions when keys change
-        $enteredKeys
-            .debounce(for: .milliseconds(100), scheduler: DispatchQueue.main)
-            .sink { [weak self] keys in
-                Task {
-                    await self?.updatePredictions(for: keys)
-                }
-            }
-            .store(in: &cancellables)
+        // Note: Predictions are now handled by MainTVC, not KeyboardViewModel
+        // This simplifies the architecture and avoids duplication
     }
     
     // MARK: - Public Methods
     
     /// Handle key entry
     func keyEntered(_ key: Int, isSwipe: Bool) {
+        print("🔍 KeyboardViewModel: keyEntered called - key: \(key), isSwipe: \(isSwipe)")
         enteredKeys.append(key)
+        print("🔍 KeyboardViewModel: enteredKeys now: \(enteredKeys)")
         updateKeyboardIndicator(for: key)
-        
+
         // Play audio feedback
         if isSwipe {
             playSoundSwipe()
         } else {
             playSoundClick()
         }
-        
+
         // Vibrate if enabled
         if userPreferences.vibrate {
             vibrate()
@@ -262,12 +257,27 @@ class KeyboardViewModel: ObservableObject {
         // Notify MainTVC
         onSpace?()
     }
+
+    /// Update current word from MainTVC (used instead of internal prediction system)
+    func updateCurrentWord(_ word: String) {
+        print("🔍 KeyboardViewModel: updateCurrentWord called with: '\(word)'")
+        currentWord = word
+    }
+
+    /// Update predictions from MainTVC (used instead of internal prediction system)
+    func updatePredictions(_ newPredictions: [(String, Int)]) {
+        print("🔍 KeyboardViewModel: updatePredictions called with \(newPredictions.count) predictions")
+        predictions = newPredictions
+    }
     
     // MARK: - Private Methods
     
     private func updatePredictions(for keys: [Int]) async {
+        print("🔍 KeyboardViewModel: updatePredictions called for keys: \(keys)")
         guard !keys.isEmpty else {
             predictions = []
+            currentWord = ""
+            print("🔍 KeyboardViewModel: No keys, cleared predictions and currentWord")
             return
         }
 
@@ -275,12 +285,25 @@ class KeyboardViewModel: ObservableObject {
 
         // Use the synchronous method for now, wrapped in Task for async context
         let suggestions = await Task {
-            return predictionManager.suggestions(for: keys)
+            print("🔍 KeyboardViewModel: Calling predictionManager.suggestions for keys: \(keys)")
+            let results = predictionManager.suggestions(for: keys)
+            print("🔍 KeyboardViewModel: Got \(results.count) suggestions: \(results.prefix(3))")
+            return results
         }.value
 
         await MainActor.run {
             self.predictions = suggestions
             self.isLoadingPredictions = false
+
+            // Update currentWord with the first prediction (trimmed to match entered keys)
+            if let firstPrediction = suggestions.first {
+                let trimmedWord = String(firstPrediction.0.prefix(keys.count))
+                self.currentWord = trimmedWord
+                print("🔍 KeyboardViewModel: Updated currentWord to: '\(trimmedWord)' from prediction: '\(firstPrediction.0)'")
+            } else {
+                self.currentWord = ""
+                print("🔍 KeyboardViewModel: No predictions found, cleared currentWord")
+            }
         }
     }
     
