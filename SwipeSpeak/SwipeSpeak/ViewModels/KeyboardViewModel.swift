@@ -39,7 +39,13 @@ class KeyboardViewModel: ObservableObject {
     
     /// Loading state for predictions
     @Published var isLoadingPredictions: Bool = false
-    
+
+    /// First stroke in two-stroke mode
+    @Published var firstStroke: Int? = nil
+
+    /// Current MSR keyboard state
+    @Published var msrKeyboardState: MSRKeyboardState = .master
+
     // MARK: - Dependencies
     
     private let predictionManager: PredictionEngineManager
@@ -113,14 +119,15 @@ class KeyboardViewModel: ObservableObject {
     }
     
     /// Handle first stroke in two-strokes mode
-    func firstStrokeEntered(_ key: Int, isSwipe: Bool) {
+    func firstStrokeEntered(key: Int, isSwipe: Bool) {
+        firstStroke = key
         updateKeyboardIndicator(for: key)
-        
+
         // Add arrow to current word for visual feedback
         if let arrow = Constants.arrows2StrokesMap[key] {
             currentWord += arrow
         }
-        
+
         // Play audio feedback
         if isSwipe {
             playSoundSwipe()
@@ -130,16 +137,26 @@ class KeyboardViewModel: ObservableObject {
     }
     
     /// Handle second stroke in two-strokes mode
-    func secondStrokeEntered(_ key: Int, isSwipe: Bool) {
+    func secondStrokeEntered(key: Int, isSwipe: Bool) {
         enteredKeys.append(key)
         updateKeyboardIndicator(for: key)
-        
+
+        // Reset first stroke
+        firstStroke = nil
+
         // Play audio feedback
         if isSwipe {
             playSoundSwipe()
         } else {
             playSoundClick()
         }
+    }
+
+    /// Handle MSR keyboard key entry
+    func msrKeyEntered(key: Int, isSwipe: Bool) {
+        // MSR keyboard logic - will be implemented based on current state
+        // For now, delegate to regular key entry
+        keyEntered(key, isSwipe: isSwipe)
     }
     
     /// Select a prediction

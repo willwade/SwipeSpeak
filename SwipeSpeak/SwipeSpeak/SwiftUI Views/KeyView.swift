@@ -1,0 +1,228 @@
+//
+//  KeyView.swift
+//  SwipeSpeak
+//
+//  Created by SwiftUI Migration on 22/06/2025.
+//  Copyright © 2025 TeamGleason. All rights reserved.
+//
+
+import SwiftUI
+
+/// Individual keyboard key view with gesture support
+struct KeyView: View {
+    let key: KeyboardKey
+    let isHighlighted: Bool
+    let onTap: () -> Void
+    let onSwipe: (SwipeDirection) -> Void
+    
+    @State private var dragOffset: CGSize = .zero
+    @State private var isPressed: Bool = false
+    
+    var body: some View {
+        ZStack {
+            // Key Background
+            RoundedRectangle(cornerRadius: 8)
+                .fill(keyBackgroundColor)
+                .stroke(keyBorderColor, lineWidth: keyBorderWidth)
+                .shadow(color: .black.opacity(0.1), radius: 2, x: 0, y: 1)
+            
+            // Key Text
+            Text(key.text)
+                .font(keyFont)
+                .foregroundColor(key.textColor)
+                .multilineTextAlignment(.center)
+                .lineLimit(nil)
+                .minimumScaleFactor(0.5)
+                .padding(8)
+        }
+        .frame(minHeight: keyHeight)
+        .scaleEffect(isPressed ? 0.95 : 1.0)
+        .animation(.easeInOut(duration: 0.1), value: isPressed)
+        .animation(.easeInOut(duration: 0.2), value: isHighlighted)
+        .gesture(
+            DragGesture(minimumDistance: 0)
+                .onChanged { value in
+                    handleDragChanged(value)
+                }
+                .onEnded { value in
+                    handleDragEnded(value)
+                }
+        )
+        .accessibilityLabel(accessibilityLabel)
+        .accessibilityHint(accessibilityHint)
+        .accessibilityAddTraits(.isButton)
+    }
+    
+    // MARK: - Computed Properties
+    
+    private var keyBackgroundColor: Color {
+        if isHighlighted {
+            return .blue.opacity(0.3)
+        } else if isPressed {
+            return .gray.opacity(0.2)
+        } else {
+            return key.backgroundColor.opacity(0.1)
+        }
+    }
+    
+    private var keyBorderColor: Color {
+        if isHighlighted {
+            return .blue
+        } else {
+            return .green
+        }
+    }
+    
+    private var keyBorderWidth: CGFloat {
+        isHighlighted ? 3.0 : 1.0
+    }
+    
+    private var keyFont: Font {
+        // Adjust font size based on device and content
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            return .system(size: 24, weight: .medium)
+        } else {
+            return .system(size: 18, weight: .medium)
+        }
+    }
+    
+    private var keyHeight: CGFloat {
+        // Adjust height based on device
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            return 80
+        } else {
+            return 60
+        }
+    }
+    
+    private var accessibilityLabel: String {
+        if key.isSpecial {
+            return key.text
+        } else {
+            return "Key with letters: \(key.letters)"
+        }
+    }
+    
+    private var accessibilityHint: String {
+        "Tap to select this key, or swipe in any direction for different keys"
+    }
+    
+    // MARK: - Gesture Handling
+    
+    private func handleDragChanged(_ value: DragGesture.Value) {
+        dragOffset = value.translation
+        
+        if !isPressed {
+            isPressed = true
+            // Provide haptic feedback on initial press
+            let impactFeedback = UIImpactFeedbackGenerator(style: .light)
+            impactFeedback.impactOccurred()
+        }
+    }
+    
+    private func handleDragEnded(_ value: DragGesture.Value) {
+        defer {
+            dragOffset = .zero
+            isPressed = false
+        }
+        
+        let translation = value.translation
+        let velocity = value.velocity
+        
+        // Determine if this was a tap or swipe
+        let dragDistance = sqrt(translation.x * translation.x + translation.y * translation.y)
+        let velocityMagnitude = sqrt(velocity.x * velocity.x + velocity.y * velocity.y)
+        
+        // Thresholds for swipe detection
+        let minimumSwipeDistance: CGFloat = 20
+        let minimumSwipeVelocity: CGFloat = 100
+        
+        if dragDistance < minimumSwipeDistance && velocityMagnitude < minimumSwipeVelocity {
+            // This was a tap
+            onTap()
+        } else {
+            // This was a swipe - determine direction
+            let swipeDirection = determineSwipeDirection(translation: translation, velocity: velocity)
+            onSwipe(swipeDirection)
+        }
+    }
+    
+    private func determineSwipeDirection(translation: CGSize, velocity: CGSize) -> SwipeDirection {
+        // Use both translation and velocity to determine direction
+        let combinedX = translation.x + velocity.x * 0.1
+        let combinedY = translation.y + velocity.y * 0.1
+        
+        // Determine primary direction
+        if abs(combinedX) > abs(combinedY) {
+            return combinedX > 0 ? .right : .left
+        } else {
+            return combinedY > 0 ? .down : .up
+        }
+    }
+}
+
+// MARK: - Key Animation Modifiers
+
+extension KeyView {
+    /// Adds a pulse animation for key highlighting
+    func pulseAnimation() -> some View {
+        self.modifier(PulseAnimationModifier(isHighlighted: isHighlighted))
+    }
+}
+
+struct PulseAnimationModifier: ViewModifier {
+    let isHighlighted: Bool
+    @State private var scale: CGFloat = 1.0
+    
+    func body(content: Content) -> some View {
+        content
+            .scaleEffect(scale)
+            .onChange(of: isHighlighted) { _, highlighted in
+                if highlighted {
+                    withAnimation(.easeInOut(duration: 0.1).repeatCount(2, autoreverses: true)) {
+                        scale = 1.1
+                    }
+                } else {
+                    scale = 1.0
+                }
+            }
+    }
+}
+
+// MARK: - Preview
+
+#Preview {
+    VStack(spacing: 20) {
+        // Regular key
+        KeyView(
+            key: KeyboardKey(index: 0, text: "ABCDEF", letters: "abcdef"),
+            isHighlighted: false,
+            onTap: { print("Tapped") },
+            onSwipe: { direction in print("Swiped \(direction)") }
+        )
+        
+        // Highlighted key
+        KeyView(
+            key: KeyboardKey(index: 1, text: "GHIJKL", letters: "ghijkl"),
+            isHighlighted: true,
+            onTap: { print("Tapped") },
+            onSwipe: { direction in print("Swiped \(direction)") }
+        )
+        
+        // Special MSR key
+        KeyView(
+            key: KeyboardKey(
+                index: 2,
+                text: "G 👍🏻 F\nI    H",
+                letters: "",
+                isSpecial: true,
+                textColor: .red
+            ),
+            isHighlighted: false,
+            onTap: { print("Tapped") },
+            onSwipe: { direction in print("Swiped \(direction)") }
+        )
+    }
+    .padding()
+    .background(Color.gray.opacity(0.1))
+}

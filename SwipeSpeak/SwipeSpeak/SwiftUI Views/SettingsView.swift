@@ -233,8 +233,11 @@ struct KeyboardSettingsView: View {
     var body: some View {
         Form {
             Section {
-                Picker("Layout", selection: $viewModel.selectedKeyboardLayout) {
-                    ForEach(KeyboardLayout.allCases, id: \.self) { layout in
+                Picker("Layout", selection: Binding(
+                    get: { viewModel.currentKeyboardLayout },
+                    set: { viewModel.updateKeyboardLayout($0) }
+                )) {
+                    ForEach(viewModel.availableLayouts, id: \.self) { layout in
                         Text(layout.localizedString())
                             .tag(layout)
                     }
@@ -247,9 +250,18 @@ struct KeyboardSettingsView: View {
             }
 
             Section {
-                Toggle("Audio Feedback", isOn: $viewModel.audioFeedbackEnabled)
-                Toggle("Vibration Feedback", isOn: $viewModel.vibrationFeedbackEnabled)
-                Toggle("Pause on Prediction", isOn: $viewModel.pauseOnPredictionEnabled)
+                Toggle("Audio Feedback", isOn: Binding(
+                    get: { viewModel.isAudioFeedbackEnabled },
+                    set: { _ in viewModel.toggleAudioFeedback() }
+                ))
+                Toggle("Vibration Feedback", isOn: Binding(
+                    get: { viewModel.isVibrationEnabled },
+                    set: { _ in viewModel.toggleVibration() }
+                ))
+                Toggle("Longer Pause Between Letters", isOn: Binding(
+                    get: { viewModel.isLongerPauseEnabled },
+                    set: { _ in viewModel.toggleLongerPause() }
+                ))
             } header: {
                 Text("Feedback")
             } footer: {
@@ -257,8 +269,11 @@ struct KeyboardSettingsView: View {
             }
 
             Section {
-                Picker("Prediction Engine", selection: $viewModel.selectedPredictionEngine) {
-                    ForEach(PredictionEngineType.allCases, id: \.self) { engine in
+                Picker("Prediction Engine", selection: Binding(
+                    get: { viewModel.currentPredictionEngine },
+                    set: { viewModel.updatePredictionEngine($0) }
+                )) {
+                    ForEach(viewModel.availableEngines, id: \.self) { engine in
                         Text(engine.displayName)
                             .tag(engine)
                     }

@@ -41,6 +41,12 @@ enum KeyboardLayout: Int {
     }
 }
 
+/// MSR Keyboard State
+enum MSRKeyboardState {
+    case master
+    case detail(keyIndex: Int)
+}
+
 struct WordKeys {
     static let word = "sentence"
     static let frequency = "freq"
