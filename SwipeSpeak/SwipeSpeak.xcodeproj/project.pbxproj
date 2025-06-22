@@ -23,10 +23,13 @@
 		DA0700191F0DA06B003BEE3D /* SwipeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0700181F0DA06B003BEE3D /* SwipeView.swift */; };
 		DA07001B1F0DA0C2003BEE3D /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA07001A1F0DA0C2003BEE3D /* Utility.swift */; };
 		DA07001D1F0DA15A003BEE3D /* WordPredictionEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA07001C1F0DA15A003BEE3D /* WordPredictionEngine.swift */; };
+		// DA0700411F0DA72B003BEE3D /* PredictionEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0700401F0DA72B003BEE3D /* PredictionEngine.swift */; };
+		// DA0700511F0DA72C003BEE3D /* NativePredictionEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0700501F0DA72C003BEE3D /* NativePredictionEngine.swift */; };
 		DA0700211F0DA84A003BEE3D /* SettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0700201F0DA84A003BEE3D /* SettingsVC.swift */; };
 		DA0700231F0DA889003BEE3D /* KeyboardSettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0700221F0DA889003BEE3D /* KeyboardSettingsVC.swift */; };
 		DA57B1FA1F0D9EC100895E18 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA57B1F91F0D9EC100895E18 /* AppDelegate.swift */; };
 		ABCD1234567890ABCDEF1234 /* SwipeSpeakApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABCD1234567890ABCDEF1235 /* SwipeSpeakApp.swift */; };
+		MAIN1234567890ABCDEF1234 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = MAIN1234567890ABCDEF1235 /* MainViewModel.swift */; };
 		DA57B1FF1F0D9EC100895E18 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA57B1FD1F0D9EC100895E18 /* Main.storyboard */; };
 		DD2C9D702E07C19C0006658A /* KeyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2C9D6D2E07C19C0006658A /* KeyView.swift */; };
 		DD2C9D712E07C19C0006658A /* KeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2C9D6C2E07C19C0006658A /* KeyboardView.swift */; };
@@ -86,6 +89,7 @@
 		DA57B1F61F0D9EC100895E18 /* SwipeSpeak.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwipeSpeak.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA57B1F91F0D9EC100895E18 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ABCD1234567890ABCDEF1235 /* SwipeSpeakApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeSpeakApp.swift; sourceTree = "<group>"; };
+		MAIN1234567890ABCDEF1235 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		DA57B1FE1F0D9EC100895E18 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		DA57B2051F0D9EC100895E18 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DD2C9D482E07ADD80006658A /* SwipeSpeakTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwipeSpeakTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -129,6 +133,7 @@
 			children = (
 				DDA361562E08327400E0A9DA /* BaseViewModel.swift */,
 				A094360083F94AFE8FAEE668 /* KeyboardViewModel.swift */,
+				MAIN1234567890ABCDEF1235 /* MainViewModel.swift */,
 				E6C57A2B87714BE3827B3AC4 /* SettingsViewModel.swift */,
 				4567890123DEF12345678901 /* TextDisplayViewModel.swift */,
 			);
@@ -354,10 +359,13 @@
 				DA07001B1F0DA0C2003BEE3D /* Utility.swift in Sources */,
 				DA0700191F0DA06B003BEE3D /* SwipeView.swift in Sources */,
 				DA07001D1F0DA15A003BEE3D /* WordPredictionEngine.swift in Sources */,
+				// DA0700411F0DA72B003BEE3D /* PredictionEngine.swift in Sources */,
+				// DA0700511F0DA72C003BEE3D /* NativePredictionEngine.swift in Sources */,
 				DA0700231F0DA889003BEE3D /* KeyboardSettingsVC.swift in Sources */,
 				B95CB41B1FAFBE2500F705EB /* VoicesVC.swift in Sources */,
 				DA57B1FA1F0D9EC100895E18 /* AppDelegate.swift in Sources */,
 				ABCD1234567890ABCDEF1234 /* SwipeSpeakApp.swift in Sources */,
+				MAIN1234567890ABCDEF1234 /* MainViewModel.swift in Sources */,
 				B93BCCA01FD7F8DC007BFCC3 /* AcknowledgementsVC.swift in Sources */,
 				DA0700211F0DA84A003BEE3D /* SettingsVC.swift in Sources */,
 				B95CB41F1FAFCB1F00F705EB /* SpeechVC.swift in Sources */,

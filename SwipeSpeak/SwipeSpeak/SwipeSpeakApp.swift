@@ -20,52 +20,82 @@ struct SwipeSpeakApp: App {
     }
 }
 
-// MARK: - Main View (Temporary placeholder)
+// MARK: - Main View
 
 struct MainView: View {
-    @State private var showingSettings = false
-    @State private var showingHistory = false
-    
+    @StateObject private var mainViewModel = MainViewModel()
+
     var body: some View {
-        NavigationView {
-            VStack {
-                // Temporary placeholder - will be replaced with full implementation in Phase 2
-                Text("SwipeSpeak")
-                    .font(.largeTitle)
-                    .padding()
-                
-                Text("SwiftUI Migration in Progress...")
-                    .font(.subheadline)
-                    .foregroundColor(.secondary)
-                    .padding()
-                
-                Spacer()
-                
-                // Temporary buttons to test navigation
-                VStack(spacing: 20) {
-                    Button("Settings") {
-                        showingSettings = true
-                    }
-                    .buttonStyle(.borderedProminent)
-                    
-                    Button("History") {
-                        showingHistory = true
-                    }
-                    .buttonStyle(.borderedProminent)
-                }
-                .padding()
-                
-                Spacer()
-            }
-            .navigationBarHidden(true)
-            .sheet(isPresented: $showingSettings) {
-                SettingsView()
-            }
-            .sheet(isPresented: $showingHistory) {
-                SentenceHistoryView()
-            }
+        VStack(spacing: 0) {
+            // Navigation Bar
+            NavigationBarView(viewModel: mainViewModel)
+
+            // Text Display Area (sentence + word + predictions)
+            TextDisplayView(viewModel: mainViewModel.textDisplayViewModel)
+                .frame(maxWidth: .infinity)
+                .frame(height: 200) // Fixed height for text display area
+
+            // Keyboard Area - expand to fill remaining space
+            KeyboardView(viewModel: mainViewModel.keyboardViewModel)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
-        .navigationViewStyle(StackNavigationViewStyle()) // Ensure single view on all devices
+        .background(Color(.systemBackground))
+        .onAppear {
+            mainViewModel.onViewDidAppear()
+        }
+        .sheet(isPresented: $mainViewModel.showingSettings) {
+            SettingsView()
+        }
+        .sheet(isPresented: $mainViewModel.showingHistory) {
+            SentenceHistoryView()
+        }
+    }
+}
+
+// MARK: - Navigation Bar
+
+struct NavigationBarView: View {
+    @ObservedObject var viewModel: MainViewModel
+
+    var body: some View {
+        HStack {
+            // Settings Button
+            Button("Settings") {
+                viewModel.presentSettings()
+            }
+            .font(.system(size: 16, weight: .medium))
+            .foregroundColor(.blue)
+            .accessibilityLabel("Settings")
+            .accessibilityHint("Open app settings")
+
+            Spacer()
+
+            // App Title
+            Text("SwipeSpeak")
+                .font(.headline)
+                .fontWeight(.semibold)
+                .foregroundColor(.primary)
+
+            Spacer()
+
+            // History Button
+            Button("History") {
+                viewModel.presentHistory()
+            }
+            .font(.system(size: 16, weight: .medium))
+            .foregroundColor(.blue)
+            .accessibilityLabel("History")
+            .accessibilityHint("View sentence history")
+        }
+        .padding(.horizontal, 20)
+        .padding(.vertical, 12)
+        .background(Color(.systemBackground))
+        .overlay(
+            Rectangle()
+                .fill(Color(.separator))
+                .frame(height: 0.5),
+            alignment: .bottom
+        )
     }
 }
 
