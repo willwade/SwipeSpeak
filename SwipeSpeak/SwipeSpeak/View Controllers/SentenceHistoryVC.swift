@@ -146,14 +146,14 @@ class SentenceHistoryVC: UITableViewController {
 
 extension SentenceHistoryVC: @preconcurrency DZNEmptyDataSetSource {
     
-    func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
+    func title(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
         let title = NSLocalizedString("No History", comment: "")
         let attribute = [NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: .title1),
                          NSAttributedString.Key.foregroundColor: UIColor.darkGray]
         return NSAttributedString(string: title, attributes: attribute)
     }
     
-    func description(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
+    func description(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
         let subtitle = NSLocalizedString("When you create sentences you will see them here.", comment: "")
         let attribute = [NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: .body),
                          NSAttributedString.Key.foregroundColor: UIColor.lightGray]

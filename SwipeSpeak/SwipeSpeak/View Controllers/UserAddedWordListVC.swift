@@ -129,21 +129,21 @@ class UserAddedWordListVC: UITableViewController {
 
 extension UserAddedWordListVC: @preconcurrency DZNEmptyDataSetSource {
     
-    func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
+    func title(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
         let title = NSLocalizedString("No Added Words", comment: "")
         let attribute = [NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: .title1),
                          NSAttributedString.Key.foregroundColor: UIColor.darkGray]
         return NSAttributedString(string: title, attributes: attribute)
     }
     
-    func description(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
+    func description(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
         let subtitle = NSLocalizedString("When you add words you will see them here.", comment: "")
         let attribute = [NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: .body),
                          NSAttributedString.Key.foregroundColor: UIColor.lightGray]
         return NSAttributedString(string: subtitle, attributes: attribute)
     }
     
-    func buttonTitle(forEmptyDataSet scrollView: UIScrollView!, for state: UIControl.State) -> NSAttributedString! {
+    func buttonTitle(forEmptyDataSet scrollView: UIScrollView, for state: UIControl.State) -> NSAttributedString? {
         let title = NSLocalizedString("Add Word", comment: "")
         let attribute = [NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: .headline),
                          NSAttributedString.Key.foregroundColor: UIColor.darkGray]
@@ -155,7 +155,7 @@ extension UserAddedWordListVC: @preconcurrency DZNEmptyDataSetSource {
 
 extension UserAddedWordListVC: @preconcurrency DZNEmptyDataSetDelegate {
     
-    func emptyDataSet(_ scrollView: UIScrollView!, didTap button: UIButton!) {
+    func emptyDataSet(_ scrollView: UIScrollView, didTap button: UIButton) {
         addWordButtonTouched()
     }
     

@@ -91,7 +91,7 @@ class SpeechSynthesizer: NSObject, ObservableObject {
 }
 
 // MARK: - AVSpeechSynthesizerDelegate
-extension SpeechSynthesizer: @preconcurrency AVSpeechSynthesizerDelegate {
+extension SpeechSynthesizer: AVSpeechSynthesizerDelegate {
     nonisolated func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didStart utterance: AVSpeechUtterance) {
         Task { @MainActor in
             self.isSpeaking = true
