@@ -112,9 +112,7 @@ class KeyboardViewModel: ObservableObject {
     
     /// Handle key entry
     func keyEntered(_ key: Int, isSwipe: Bool) {
-        print("🔍 KeyboardViewModel: keyEntered called - key: \(key), isSwipe: \(isSwipe)")
         enteredKeys.append(key)
-        print("🔍 KeyboardViewModel: enteredKeys now: \(enteredKeys)")
         updateKeyboardIndicator(for: key)
 
         // Play audio feedback
@@ -166,8 +164,6 @@ class KeyboardViewModel: ObservableObject {
 
     /// Handle MSR keyboard key entry
     func msrKeyEntered(key: Int, isSwipe: Bool) {
-        print("🔍 KeyboardViewModel: msrKeyEntered called - key: \(key), state: \(msrKeyboardState)")
-
         switch msrKeyboardState {
         case .master:
             // First stroke - switch to detail view for this key
@@ -299,18 +295,15 @@ class KeyboardViewModel: ObservableObject {
 
     /// Update predictions from MainTVC (used instead of internal prediction system)
     func updatePredictions(_ newPredictions: [(String, Int)]) {
-        print("🔍 KeyboardViewModel: updatePredictions called with \(newPredictions.count) predictions")
         predictions = newPredictions
     }
     
     // MARK: - Private Methods
     
     private func updatePredictions(for keys: [Int]) async {
-        print("🔍 KeyboardViewModel: updatePredictions called for keys: \(keys)")
         guard !keys.isEmpty else {
             predictions = []
             currentWord = ""
-            print("🔍 KeyboardViewModel: No keys, cleared predictions and currentWord")
             return
         }
 
@@ -318,10 +311,8 @@ class KeyboardViewModel: ObservableObject {
 
         // Use the synchronous method for now, wrapped in Task for async context
         let suggestions = await Task {
-            print("🔍 KeyboardViewModel: Calling predictionManager.suggestions for keys: \(keys)")
             // let results = predictionManager.suggestions(for: keys) // Temporarily commented out
             let results: [(String, Int)] = [] // Temporarily empty
-            print("🔍 KeyboardViewModel: Got \(results.count) suggestions: \(results.prefix(3))")
             return results
         }.value
 

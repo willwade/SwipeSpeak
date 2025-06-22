@@ -89,6 +89,7 @@ class MainViewModel: ObservableObject {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] layout in
                 self?.keyboardViewModel.keyboardLayout = layout
+                self?.setupWordPredictionEngine() // Re-setup prediction engine with new layout
             }
             .store(in: &cancellables)
         
@@ -163,8 +164,6 @@ class MainViewModel: ObservableObject {
         guard !viewDidAppear else { return }
         viewDidAppear = true
 
-        print("🔍 MainViewModel: First time viewDidAppear, setting up")
-
         // Update predictions for initial state
         updatePredictions()
     }
@@ -180,87 +179,74 @@ class MainViewModel: ObservableObject {
     // MARK: - Core Business Logic (from MainTVC)
     
     private func setupWordPredictionEngine() {
-        print("🔍 MainViewModel: setupWordPredictionEngine called")
-
-        // TODO: Re-enable full prediction engine setup once concurrency issues are resolved
-        // For now, using simplified prediction logic in updatePredictions()
-
-        print("🔍 MainViewModel: Word prediction engine setup completed")
+        // TODO: Re-enable full prediction engine once PredictionEngine.swift is properly included in Xcode project
+        // For now, using simplified prediction logic with proper key mapping
     }
     
     func updatePredictions() {
-        print("🔍 MainViewModel: updatePredictions called with keys: \(enteredKeys)")
-        
         guard !enteredKeys.isEmpty else {
             // Clear predictions when no keys entered
             predictions = Array(repeating: "", count: 6)
             return
         }
-        
-        // TODO: Re-enable full prediction engine once concurrency issues are resolved
-        // For now, use simplified prediction logic based on entered keys
+
+        // TODO: Re-enable full prediction engine once PredictionEngine.swift is properly included in Xcode project
+        // For now, use simplified prediction logic with proper key mapping
         let newPredictions = getSimplePredictions(for: enteredKeys)
-        
+
         // Ensure we have exactly 6 predictions (pad with empty strings if needed)
         var paddedPredictions = Array(newPredictions.prefix(6))
         while paddedPredictions.count < 6 {
             paddedPredictions.append("")
         }
-        
+
         predictions = paddedPredictions
-        
-        print("🔍 MainViewModel: Updated predictions: \(predictions)")
     }
     
     func updateCurrentWordDisplay() {
-        print("🔍 MainViewModel: updateCurrentWordDisplay called")
-        
         if enteredKeys.isEmpty {
             currentWord = ""
             isWordHighlighted = false
         } else {
-            // Build current word from entered keys
-            let letters = enteredKeys.compactMap { Self.letter(from: $0) }
+            // Build current word from entered keys using keyboard layout
+            let letters = enteredKeys.compactMap { keyIndex in
+                letter(from: keyIndex, layout: keyboardViewModel.keyboardLayout)
+            }
             currentWord = letters.joined()
             isWordHighlighted = !currentWord.isEmpty
         }
-        
-        print("🔍 MainViewModel: Current word updated to: '\(currentWord)'")
     }
     
     @discardableResult
     func addWordToSentence(word: String, announce: Bool) -> Bool {
-        print("🔍 MainViewModel: addWordToSentence called with word: '\(word)', announce: \(announce)")
-        
         guard !word.isEmpty else { return false }
-        
+
         // Add word to sentence
         if currentSentence.isEmpty {
             currentSentence = word
         } else {
             currentSentence += " " + word
         }
-        
+
         // Clear current word and entered keys
         currentWord = ""
         enteredKeys = []
         isWordHighlighted = false
-        
+
         // Update keyboard state
         keyboardViewModel.enteredKeys.removeAll()
-        
+
         // Clear predictions
         predictions = Array(repeating: "", count: 6)
-        
+
         // Add to user's sentence history
         userPreferences.addSentence(currentSentence)
-        
+
         // Announce if requested
         if announce {
             self.announce(word)
         }
-        
-        print("🔍 MainViewModel: Word added. New sentence: '\(currentSentence)'")
+
         return true
     }
     
@@ -331,9 +317,30 @@ class MainViewModel: ObservableObject {
 
     // MARK: - Helper Methods
 
-    private static func letter(from key: Int) -> String? {
-        guard let scalar = UnicodeScalar(key) else { return nil }
-        return String(describing: scalar)
+    /// Get the key letter grouping for a specific keyboard layout
+    private func getKeyLetterGrouping(for layout: KeyboardLayout) -> [String] {
+        switch layout {
+        case .keys4:
+            return Constants.keyLetterGrouping4Keys
+        case .keys6:
+            return Constants.keyLetterGrouping6Keys
+        case .keys8:
+            return Constants.keyLetterGrouping8Keys
+        case .strokes2:
+            return Constants.keyLetterGroupingSteve
+        case .msr:
+            return Constants.keyLetterGroupingMSR
+        }
+    }
+
+    /// Convert a key index to a letter based on the keyboard layout
+    private func letter(from keyIndex: Int, layout: KeyboardLayout) -> String? {
+        let grouping = getKeyLetterGrouping(for: layout)
+
+        // For regular keyboards, return the first letter of the group for display
+        guard keyIndex >= 0 && keyIndex < grouping.count else { return nil }
+        let letterGroup = grouping[keyIndex]
+        return letterGroup.isEmpty ? nil : String(letterGroup.first!)
     }
 
     /// Simplified prediction logic for Phase 3
@@ -344,7 +351,7 @@ class MainViewModel: ObservableObject {
         }
 
         // Convert keys to letters based on current keyboard layout
-        let letters = keys.compactMap { Self.letter(from: $0) }
+        let letters = keys.compactMap { letter(from: $0, layout: keyboardViewModel.keyboardLayout) }
         let currentInput = letters.joined().lowercased()
 
         // Simple prediction based on common English words that start with the input

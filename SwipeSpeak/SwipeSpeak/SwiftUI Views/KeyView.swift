@@ -116,12 +116,10 @@ struct KeyView: View {
     // MARK: - Gesture Handling
     
     private func handleDragChanged(_ value: DragGesture.Value) {
-        print("🔍 KeyView: handleDragChanged called for key \(key.index) - translation: \(value.translation)")
         dragOffset = value.translation
 
         if !isPressed {
             isPressed = true
-            print("🔍 KeyView: Key \(key.index) pressed")
             // Provide haptic feedback on initial press
             hapticManager.keyPress()
         }
@@ -146,12 +144,10 @@ struct KeyView: View {
         
         if dragDistance < minimumSwipeDistance && velocityMagnitude < minimumSwipeVelocity {
             // This was a tap
-            print("🔍 KeyView: Tap detected on key \(key.index)")
             onTap()
         } else {
             // This was a swipe - determine direction and pass velocity
             let detectedDirection = determineSwipeDirection(translation: translation, velocity: velocity)
-            print("🔍 KeyView: Swipe detected on key \(key.index) - direction: \(detectedDirection)")
 
             // Show swipe direction indicator
             swipeDirection = detectedDirection

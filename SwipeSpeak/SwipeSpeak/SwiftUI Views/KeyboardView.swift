@@ -212,7 +212,6 @@ struct KeyboardView: View {
     // MARK: - Private Methods
     
     private func handleKeyTap(_ key: SwiftUIKeyboardKey) {
-        print("🔍 KeyboardView: handleKeyTap called for key \(key.index) with layout \(keyboardConfig.layout)")
         highlightKey(key.index)
 
         if keyboardConfig.layout == .msr {
@@ -237,8 +236,6 @@ struct KeyboardView: View {
     }
     
     private func handleRegularKeyTap(_ key: SwiftUIKeyboardKey) {
-        print("🔍 KeyboardView: handleRegularKeyTap called for key \(key.index)")
-
         // For regular keyboards, switch to individual letters when a key is pressed
         switchToIndividualLetters(for: key.index)
 
@@ -292,7 +289,6 @@ struct KeyboardView: View {
     }
     
     private func handleMSRKeyTap(_ key: SwiftUIKeyboardKey) {
-        print("🔍 KeyboardView: handleMSRKeyTap called for key \(key.index)")
         viewModel.msrKeyEntered(key: key.index, isSwipe: false)
     }
 
@@ -400,8 +396,6 @@ struct KeyboardView: View {
 
     private func updateMSRKeyboard() {
         guard keyboardConfig.layout == .msr else { return }
-
-        print("🔍 KeyboardView: updateMSRKeyboard called - state: \(viewModel.msrKeyboardState)")
 
         // Get the current MSR keys based on the state
         let currentMSRKeys = viewModel.getCurrentMSRKeys()
