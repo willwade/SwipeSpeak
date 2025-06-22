@@ -26,18 +26,18 @@ struct SettingsView: View {
                 cloudSection
                 aboutSection
             }
-            .navigationTitle("Settings")
+            .navigationTitle(LocalizedStrings.Settings.title)
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("Done") {
+                    Button(LocalizedStrings.Button.done) {
                         dismiss()
                     }
                 }
             }
         }
-        .alert("Error", isPresented: .constant(viewModel.errorMessage != nil)) {
-            Button("OK") {
+        .alert(LocalizedStrings.Error.title, isPresented: .constant(viewModel.errorMessage != nil)) {
+            Button(LocalizedStrings.Button.ok) {
                 viewModel.errorMessage = nil
             }
         } message: {
@@ -206,14 +206,14 @@ struct SettingsView: View {
     // MARK: - Cloud Section
     
     private var cloudSection: some View {
-        Section("Cloud Sync") {
-            Toggle("Enable Cloud Sync", isOn: Binding(
+        Section(LocalizedStrings.Settings.Cloud.sync) {
+            Toggle(LocalizedStrings.Settings.Cloud.enable, isOn: Binding(
                 get: { viewModel.isCloudSyncEnabled },
                 set: { _ in viewModel.toggleCloudSync() }
             ))
-            
+
             if viewModel.isCloudSyncEnabled {
-                Text("Your settings and custom words will be synced across devices using iCloud.")
+                Text(LocalizedStrings.Settings.Cloud.description)
                     .font(.caption)
                     .foregroundColor(.secondary)
             }
@@ -223,16 +223,16 @@ struct SettingsView: View {
     // MARK: - About Section
     
     private var aboutSection: some View {
-        Section("About") {
-            NavigationLink("About SwipeSpeak") {
+        Section(LocalizedStrings.Settings.about) {
+            NavigationLink(LocalizedStrings.Settings.aboutSwipeSpeak) {
                 AboutView()
             }
-            
-            NavigationLink("Acknowledgements") {
+
+            NavigationLink(LocalizedStrings.Settings.acknowledgements) {
                 AcknowledgementsView()
             }
-            
-            Button("Reset to Defaults") {
+
+            Button(LocalizedStrings.Settings.resetToDefaults) {
                 viewModel.resetToDefaults()
             }
             .foregroundColor(.red)
@@ -368,7 +368,7 @@ struct AboutView: View {
     var body: some View {
         List {
             Section {
-                Button("Contact Support") {
+                Button(LocalizedStrings.About.contactSupport) {
                     showingContactOptions = true
                 }
                 .foregroundColor(.blue)
@@ -380,23 +380,23 @@ struct AboutView: View {
                         .font(.largeTitle)
                         .fontWeight(.bold)
 
-                    Text("An innovative communication app designed to help users express themselves through intuitive swipe gestures and word prediction.")
+                    Text(LocalizedStrings.About.appDescription)
                         .font(.body)
 
-                    Text("Developed by Team Gleason")
+                    Text(LocalizedStrings.About.developer)
                         .font(.subheadline)
                         .foregroundColor(.secondary)
 
-                    Text("Version \(appVersion) (\(appBuild))")
+                    Text(LocalizedStrings.About.version(appVersion, appBuild))
                         .font(.caption)
                         .foregroundColor(.secondary)
                 }
                 .padding(.vertical, 8)
             }
         }
-        .navigationTitle("About")
+        .navigationTitle(LocalizedStrings.About.title)
         .navigationBarTitleDisplayMode(.inline)
-        .confirmationDialog("Choose an email app:", isPresented: $showingContactOptions) {
+        .confirmationDialog(LocalizedStrings.Settings.chooseEmailApp, isPresented: $showingContactOptions) {
             ContactOptionsView()
         }
     }

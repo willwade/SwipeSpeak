@@ -99,7 +99,7 @@ struct SentenceHistoryView: View {
                         }
                     )
                     .accessibilityElement(children: .combine)
-                    .accessibilityAction(named: "Speak") {
+                    .accessibilityAction(named: LocalizedStrings.Accessibility.speak) {
                         if let sentence = sentenceData[SentenceKeys.sentence] as? String {
                             speakSentence(sentence)
                         }
@@ -190,7 +190,7 @@ private struct SentenceRowView: View {
                     .foregroundColor(.blue)
             }
             .buttonStyle(.plain)
-            .accessibilityLabel("Speak sentence")
+            .accessibilityLabel(LocalizedStrings.Accessibility.speakSentence)
         }
         .contentShape(Rectangle())
         .onTapGesture {

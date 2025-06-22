@@ -41,6 +41,8 @@
 		F3A4B5C6D7E8F9012CDEF123 /* TextDisplayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3456789012CDEF1234567890 /* TextDisplayView.swift */; };
 		F4A5B6C7D8E9F0123DEF1234 /* TextDisplayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4567890123DEF12345678901 /* TextDisplayViewModel.swift */; };
 		F7A8B9CADBE2F3456G234567 /* CloudKitSyncManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 789012345G234567890123456 /* CloudKitSyncManager.swift */; };
+		LOC1234567890ABCDEF12345 /* LocalizedStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = LOC1234567890ABCDEF12346 /* LocalizedStrings.swift */; };
+		STR1234567890ABCDEF12345 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = STR1234567890ABCDEF12346 /* Localizable.xcstrings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -94,6 +96,8 @@
 		DDA361582E08328400E0A9DA /* CommonUIComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonUIComponents.swift; sourceTree = "<group>"; };
 		DDA361592E08328400E0A9DA /* GestureVisualizationOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GestureVisualizationOverlay.swift; sourceTree = "<group>"; };
 		E6C57A2B87714BE3827B3AC4 /* SettingsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
+		LOC1234567890ABCDEF12346 /* LocalizedStrings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalizedStrings.swift; sourceTree = "<group>"; };
+		STR1234567890ABCDEF12346 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -199,6 +203,8 @@
 				B95CB41C1FAFC50E00F705EB /* UserPreferences.swift */,
 				789012345G234567890123456 /* CloudKitSyncManager.swift */,
 				B928F1DF1FB49EEF00302E70 /* SpeechSynthesizer.swift */,
+				LOC1234567890ABCDEF12346 /* LocalizedStrings.swift */,
+				STR1234567890ABCDEF12346 /* Localizable.xcstrings */,
 				B93BCCA11FD7F8E5007BFCC3 /* Resources */,
 			);
 			path = SwipeSpeak;
@@ -281,6 +287,9 @@
 			knownRegions = (
 				en,
 				Base,
+				es,
+				fr,
+				de,
 			);
 			mainGroup = DA57B1ED1F0D9EC100895E18;
 			packageReferences = (
@@ -303,7 +312,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B9FD99F31FADFFEB00E34F9F /* LaunchScreen.storyboard in Resources */,
-
+				STR1234567890ABCDEF12345 /* Localizable.xcstrings in Resources */,
 				B9E23BDB1FEAAFAD00EE3998 /* word_frequency_english_ucrel.csv in Resources */,
 				31656ADF20EEEAD700059AFA /* Assets.xcassets in Resources */,
 
@@ -352,6 +361,7 @@
 				DDA3615B2E08328400E0A9DA /* GestureVisualizationOverlay.swift in Sources */,
 				F4A5B6C7D8E9F0123DEF1234 /* TextDisplayViewModel.swift in Sources */,
 				F7A8B9CADBE2F3456G234567 /* CloudKitSyncManager.swift in Sources */,
+				LOC1234567890ABCDEF12345 /* LocalizedStrings.swift in Sources */,
 				F1A2B3C4D5E6F7890ABCDEF2 /* UserAddedWordsView.swift in Sources */,
 				F1A2B3C4D5E6F7890ABCDEF4 /* SentenceHistoryView.swift in Sources */,
 			);
@@ -518,6 +528,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.teamgleason.swipespeak;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 6.0;
@@ -537,6 +548,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.teamgleason.swipespeak;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				RUN_CLANG_STATIC_ANALYZER = YES;

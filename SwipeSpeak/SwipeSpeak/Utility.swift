@@ -31,10 +31,10 @@ struct Constants {
                                  2: "←",
                                  3: "↓"]
     
-    static let arrows4KeysTextMap = [0: "Up",
-                                     1: "Right",
-                                     2: "Left",
-                                     3: "Down"]
+    static let arrows4KeysTextMap = [0: LocalizedStrings.Direction.up,
+                                     1: LocalizedStrings.Direction.right,
+                                     2: LocalizedStrings.Direction.left,
+                                     3: LocalizedStrings.Direction.down]
     
     static let arrows2StrokesMap = [0: "↗︎",
                                     1: "↑",
@@ -43,12 +43,12 @@ struct Constants {
                                     4: "↓",
                                     5: "↙︎"]
     
-    static let arrows2StrokesTextMap = [0: "Up Right",
-                                        1: "Up",
-                                        2: "Up Left",
-                                        3: "Down Right",
-                                        4: "Down",
-                                        5: "Down left"]
+    static let arrows2StrokesTextMap = [0: LocalizedStrings.Direction.upRight,
+                                        1: LocalizedStrings.Direction.up,
+                                        2: LocalizedStrings.Direction.upLeft,
+                                        3: LocalizedStrings.Direction.downRight,
+                                        4: LocalizedStrings.Direction.down,
+                                        5: LocalizedStrings.Direction.downLeft]
     
     // ✔︎ ✘ ⌫
     static let MSRKeyYes = "👍🏻"

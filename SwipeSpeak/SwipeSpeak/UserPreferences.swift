@@ -24,15 +24,15 @@ enum KeyboardLayout: Int {
     func localizedString() -> String {
         switch self {
         case .keys4:
-            return NSLocalizedString("4 Keys", comment: "")
+            return LocalizedStrings.Keyboard.fourKeys
         case .keys6:
-            return NSLocalizedString("6 Keys", comment: "")
+            return LocalizedStrings.Keyboard.sixKeys
         case .keys8:
-            return NSLocalizedString("8 Keys", comment: "")
+            return LocalizedStrings.Keyboard.eightKeys
         case .strokes2:
-            return NSLocalizedString("2 Strokes", comment: "")
+            return LocalizedStrings.Keyboard.twoStrokes
         case .msr:
-            return NSLocalizedString("Keyboard 37", comment: "")
+            return LocalizedStrings.Keyboard.msr
         }
     }
 

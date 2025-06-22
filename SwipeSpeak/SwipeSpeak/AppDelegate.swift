@@ -64,19 +64,19 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     }
     
     private func showTutorial() {
-        let alertController = UIAlertController(title: NSLocalizedString("SwipeSpeak Tutorial", comment: ""),
-                                                message: NSLocalizedString("Do you want to view a tutorial about how to use the app?\nYou can always view it from the app settings.", comment: ""),
+        let alertController = UIAlertController(title: LocalizedStrings.Tutorial.title,
+                                                message: LocalizedStrings.Tutorial.message,
                                                 preferredStyle: .alert)
-        
-        alertController.addAction(UIAlertAction(title: NSLocalizedString("Show", comment: ""), style: .default, handler: { (_) in
+
+        alertController.addAction(UIAlertAction(title: LocalizedStrings.Tutorial.show, style: .default, handler: { (_) in
             UserDefaults.standard.set(true, forKey: Constants.tutorialShownKey)
             self.presentTutorial()
         }))
 
-        alertController.addAction(UIAlertAction(title: NSLocalizedString("Later", comment: ""), style: .default, handler: { (_) in
+        alertController.addAction(UIAlertAction(title: LocalizedStrings.Tutorial.later, style: .default, handler: { (_) in
         }))
 
-        alertController.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: { (_) in
+        alertController.addAction(UIAlertAction(title: LocalizedStrings.Button.cancel, style: .cancel, handler: { (_) in
             UserDefaults.standard.set(true, forKey: Constants.tutorialShownKey)
             self.presentTutorial()
         }))

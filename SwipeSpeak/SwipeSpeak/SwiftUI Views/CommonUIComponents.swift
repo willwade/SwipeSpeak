@@ -168,11 +168,11 @@ struct SwipeSpeakAccessibility {
     static func keyboardKeyHint(layout: KeyboardLayout) -> String {
         switch layout {
         case .keys4, .keys6, .keys8:
-            return "Tap to select letters, swipe in different directions for more options"
+            return LocalizedStrings.Accessibility.Keyboard.keysHint
         case .strokes2:
-            return "First tap selects direction, second tap selects letter"
+            return LocalizedStrings.Accessibility.Keyboard.strokesHint
         case .msr:
-            return "Tap to switch between master and detail keys"
+            return LocalizedStrings.Accessibility.Keyboard.msrHint
         }
     }
     

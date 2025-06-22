@@ -18,7 +18,7 @@ struct TextDisplayView: View {
             VStack(spacing: 0) {
                 SentenceDisplayView(
                     text: viewModel.sentenceText,
-                    placeholder: "Sentence",
+                    placeholder: LocalizedStrings.Placeholder.sentence,
                     onTap: viewModel.sentenceTapped,
                     onLongPress: viewModel.sentenceLongPressed
                 )
@@ -36,7 +36,7 @@ struct TextDisplayView: View {
             VStack(spacing: 0) {
                 WordDisplayView(
                     text: viewModel.wordText,
-                    placeholder: "Word",
+                    placeholder: LocalizedStrings.Placeholder.word,
                     isHighlighted: viewModel.isWordHighlighted,
                     onTap: viewModel.wordTapped,
                     onLongPress: viewModel.wordLongPressed
@@ -95,9 +95,9 @@ struct SentenceDisplayView: View {
             onLongPress()
         }
         .accessibilityLabel(text.isEmpty ?
-            "Sentence area. Currently empty. Tap letters to spell words" :
-            "Current sentence: \(text)")
-        .accessibilityHint("Double tap to speak sentence, long press to complete and clear")
+            LocalizedStrings.Accessibility.Sentence.empty :
+            LocalizedStrings.Accessibility.Sentence.label(text))
+        .accessibilityHint(LocalizedStrings.Accessibility.Sentence.hint)
         .accessibilityAddTraits(.isButton)
         .accessibilityAction(.default) {
             onTap()
@@ -144,9 +144,9 @@ struct WordDisplayView: View {
             onLongPress()
         }
         .accessibilityLabel(text.isEmpty ?
-            "Word area. Current input is empty" :
-            "Current word being typed: \(text)")
-        .accessibilityHint("Double tap to select word, long press to add to sentence")
+            LocalizedStrings.Accessibility.Word.empty :
+            LocalizedStrings.Accessibility.Word.label(text))
+        .accessibilityHint(LocalizedStrings.Accessibility.Word.hint)
         .accessibilityAddTraits(.isButton)
         .accessibilityAction(.default) {
             onTap()

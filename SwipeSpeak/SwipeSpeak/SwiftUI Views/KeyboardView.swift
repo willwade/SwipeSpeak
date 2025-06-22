@@ -172,7 +172,7 @@ struct KeyboardView: View {
                 }
         )
         .accessibilityElement(children: .contain)
-        .accessibilityLabel("SwipeSpeak keyboard with \(keyboardConfig.keys.count) keys")
+        .accessibilityLabel(LocalizedStrings.Accessibility.Keyboard.label(keyboardConfig.keys.count))
         .accessibilityHint("Swipe or tap keys to enter letters. Current layout: \(keyboardConfig.layout.rawValue)")
         .layoutTransition(isTransitioning: animationManager.isLayoutTransitioning)
         .animation(reduceMotion ? nil : AnimationConfig.layoutTransition, value: viewModel.keyboardLayout)

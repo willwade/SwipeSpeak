@@ -43,21 +43,21 @@ struct UserAddedWordsView: View {
             }
             .environment(\.editMode, isEditing ? .constant(.active) : .constant(.inactive))
         }
-        .alert("Add Word", isPresented: $showingAddWordAlert) {
-            TextField("Enter word", text: $newWord)
+        .alert(LocalizedStrings.Words.addTitle, isPresented: $showingAddWordAlert) {
+            TextField(LocalizedStrings.Words.addPlaceholder, text: $newWord)
                 .textInputAutocapitalization(.never)
                 .autocorrectionDisabled()
-            
-            Button("Add") {
+
+            Button(LocalizedStrings.Button.add) {
                 addWord()
             }
             .disabled(!isWordValid(newWord) || userPreferences.userAddedWords.contains(newWord))
-            
-            Button("Cancel", role: .cancel) {
+
+            Button(LocalizedStrings.Button.cancel, role: .cancel) {
                 newWord = ""
             }
         } message: {
-            Text("Please do not include punctuations or spaces")
+            Text(LocalizedStrings.Words.addMessage)
         }
     }
     
@@ -115,7 +115,7 @@ struct UserAddedWordsView: View {
                             .foregroundColor(.blue)
                     }
                     .buttonStyle(.plain)
-                    .accessibilityLabel("Speak \(word)")
+                    .accessibilityLabel("\(LocalizedStrings.Accessibility.speak) \(word)")
                 }
                 .contentShape(Rectangle())
                 .onTapGesture {
@@ -124,7 +124,7 @@ struct UserAddedWordsView: View {
                 .accessibilityElement(children: .combine)
                 .accessibilityLabel("Word: \(word)")
                 .accessibilityHint("Tap to speak this word")
-                .accessibilityAction(named: "Speak") {
+                .accessibilityAction(named: LocalizedStrings.Accessibility.speak) {
                     speakWord(word)
                 }
             }
