@@ -10,12 +10,12 @@ import Foundation
 import UIKit
 
 /// Native iOS prediction engine using UITextChecker and system APIs
+@MainActor
 class NativePredictionEngine: PredictionEngine {
-    
+
     // MARK: - Properties
-    
+
     private let textChecker = UITextChecker()
-    private let spellChecker = NSSpellChecker.shared
     private var keyLetterGrouping: [Character: Int] = [:]
     private var isTwoStrokes = false
     
@@ -246,14 +246,7 @@ class NativePredictionEngine: PredictionEngine {
             }
         }
         
-        // Use NSSpellChecker for additional suggestions
-        let spellSuggestions = spellChecker.completions(forPartialWordRange: NSRange(location: 0, length: partialWord.count), in: partialWord, language: "en") ?? []
-        
-        for (index, suggestion) in spellSuggestions.enumerated() {
-            // Lower score for spell checker suggestions
-            let score = max(500 - (index * 5), 1)
-            suggestions.append((suggestion, score))
-        }
+        // Note: NSSpellChecker is not available on iOS, only using UITextChecker
         
         return suggestions
     }

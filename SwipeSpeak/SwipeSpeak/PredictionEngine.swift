@@ -88,6 +88,7 @@ struct PredictionEngineMetrics {
 }
 
 /// Manager class for handling multiple prediction engines
+@MainActor
 class PredictionEngineManager {
     static let shared = PredictionEngineManager()
 
@@ -115,7 +116,7 @@ class PredictionEngineManager {
         UserPreferences.shared.predictionEngineType = type.rawValue
         
         // Copy key letter grouping from current engine if needed
-        if let currentEngine = engines[.custom] as? WordPredictionEngine {
+        if engines[.custom] is WordPredictionEngine {
             engine.setKeyLetterGrouping([], twoStrokes: false) // Will be set properly by MainTVC
         }
         
@@ -140,8 +141,8 @@ class PredictionEngineManager {
         currentEngine?.setKeyLetterGrouping(grouping, twoStrokes: twoStrokes)
     }
 
-    func insert(_ word: String, _ frequency: Int) throws {
-        try currentEngine?.insert(word, frequency)
+    func insert(_ word: String, frequency: Int) throws {
+        try currentEngine?.insert(word, frequency: frequency)
     }
 
     func contains(_ word: String) -> Bool {
@@ -204,5 +205,9 @@ extension WordPredictionEngine: PredictionEngine {
         return await Task {
             return suggestions(for: keySequence)
         }.value
+    }
+
+    func insert(_ word: String, frequency: Int) throws {
+        try insert(word, frequency)
     }
 }
