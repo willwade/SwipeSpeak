@@ -207,8 +207,6 @@ struct KeyboardView: View {
         .padding(.horizontal, 8)
         .padding(.vertical, 8)
         .background(Color(.systemBackground))
-        .cornerRadius(12)
-        .shadow(radius: 2)
     }
     
     // MARK: - Private Methods

@@ -13,25 +13,45 @@ struct TextDisplayView: View {
     @ObservedObject var viewModel: TextDisplayViewModel
     
     var body: some View {
-        VStack(spacing: 16) {
-            // Sentence Display
-            SentenceDisplayView(
-                text: viewModel.sentenceText,
-                placeholder: "Sentence",
-                onTap: viewModel.sentenceTapped,
-                onLongPress: viewModel.sentenceLongPressed
-            )
+        VStack(spacing: 0) {
+            // Sentence Display Section
+            VStack(spacing: 0) {
+                SentenceDisplayView(
+                    text: viewModel.sentenceText,
+                    placeholder: "Sentence",
+                    onTap: viewModel.sentenceTapped,
+                    onLongPress: viewModel.sentenceLongPressed
+                )
+                .padding(.horizontal, 20)
+                .padding(.vertical, 11)
+                .background(Color(.systemBackground))
 
-            // Word Display
-            WordDisplayView(
-                text: viewModel.wordText,
-                placeholder: "Word",
-                isHighlighted: viewModel.isWordHighlighted,
-                onTap: viewModel.wordTapped,
-                onLongPress: viewModel.wordLongPressed
-            )
+                // Section separator
+                Rectangle()
+                    .fill(Color(.separator))
+                    .frame(height: 0.5)
+            }
 
-            // Prediction Labels - expand to fill remaining space
+            // Word Display Section
+            VStack(spacing: 0) {
+                WordDisplayView(
+                    text: viewModel.wordText,
+                    placeholder: "Word",
+                    isHighlighted: viewModel.isWordHighlighted,
+                    onTap: viewModel.wordTapped,
+                    onLongPress: viewModel.wordLongPressed
+                )
+                .padding(.horizontal, 20)
+                .padding(.vertical, 11)
+                .background(Color(.systemBackground))
+
+                // Section separator
+                Rectangle()
+                    .fill(Color(.separator))
+                    .frame(height: 0.5)
+            }
+
+            // Prediction Labels Section - expand to fill remaining space
             PredictionLabelsView(
                 predictions: viewModel.predictions,
                 highlightedIndex: viewModel.highlightedPredictionIndex,
@@ -39,10 +59,10 @@ struct TextDisplayView: View {
                 onPredictionLongPress: viewModel.predictionLongPressed
             )
             .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(Color(.systemBackground))
         }
-        .padding()
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(Color(.systemBackground))
+        .background(Color(.systemGroupedBackground))
     }
 }
 
@@ -54,25 +74,17 @@ struct SentenceDisplayView: View {
     let onLongPress: () -> Void
     
     var body: some View {
-        ZStack {
-            RoundedRectangle(cornerRadius: 8)
-                .fill(Color(.secondarySystemBackground))
-                .stroke(Color(.separator), lineWidth: 1)
-            
-            HStack {
-                if text.isEmpty {
-                    Text(placeholder)
-                        .foregroundColor(.secondary)
-                        .font(.body)
-                } else {
-                    Text(text)
-                        .font(.body)
-                        .foregroundColor(.primary)
-                }
-                Spacer()
+        HStack {
+            if text.isEmpty {
+                Text(placeholder)
+                    .foregroundColor(.secondary)
+                    .font(.body)
+            } else {
+                Text(text)
+                    .font(.body)
+                    .foregroundColor(.primary)
             }
-            .padding(.horizontal, 12)
-            .padding(.vertical, 8)
+            Spacer()
         }
         .frame(minHeight: 44)
         .contentShape(Rectangle())
@@ -105,26 +117,23 @@ struct WordDisplayView: View {
     let onLongPress: () -> Void
     
     var body: some View {
-        ZStack {
-            RoundedRectangle(cornerRadius: 8)
-                .fill(Color(.secondarySystemBackground))
-                .stroke(isHighlighted ? Color.blue : Color(.separator), lineWidth: isHighlighted ? 2 : 1)
-            
-            HStack {
-                if text.isEmpty {
-                    Text(placeholder)
-                        .foregroundColor(.secondary)
-                        .font(.body)
-                } else {
-                    Text(text)
-                        .font(isHighlighted ? .headline : .body)
-                        .fontWeight(isHighlighted ? .bold : .regular)
-                        .foregroundColor(.primary)
-                }
-                Spacer()
+        HStack {
+            if text.isEmpty {
+                Text(placeholder)
+                    .foregroundColor(.secondary)
+                    .font(.body)
+            } else {
+                Text(text)
+                    .font(isHighlighted ? .headline : .body)
+                    .fontWeight(isHighlighted ? .bold : .regular)
+                    .foregroundColor(.primary)
             }
-            .padding(.horizontal, 12)
-            .padding(.vertical, 8)
+            Spacer()
+
+            // Backspace button area (placeholder for spacing)
+            Rectangle()
+                .fill(Color.clear)
+                .frame(width: 44, height: 44)
         }
         .frame(minHeight: 44)
         .contentShape(Rectangle())
@@ -149,30 +158,76 @@ struct WordDisplayView: View {
     }
 }
 
-/// Prediction labels grid component
+/// Prediction labels component matching original table view style
 struct PredictionLabelsView: View {
     let predictions: [String]
     let highlightedIndex: Int?
     let onPredictionTap: (Int) -> Void
     let onPredictionLongPress: (Int) -> Void
-    
-    private let columns = [
-        GridItem(.flexible()),
-        GridItem(.flexible()),
-        GridItem(.flexible())
-    ]
-    
+
     var body: some View {
-        LazyVGrid(columns: columns, spacing: 8) {
-            ForEach(0..<6, id: \.self) { index in
-                PredictionLabelView(
-                    text: index < predictions.count ? predictions[index] : "",
-                    isHighlighted: highlightedIndex == index,
-                    onTap: { onPredictionTap(index) },
-                    onLongPress: { onPredictionLongPress(index) }
-                )
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
+        VStack(spacing: 0) {
+            // First row of predictions (0-3)
+            HStack(spacing: 0) {
+                ForEach(0..<4, id: \.self) { index in
+                    if index > 0 {
+                        // Vertical separator
+                        Rectangle()
+                            .fill(Color(.separator))
+                            .frame(width: 0.5)
+                    }
+
+                    PredictionLabelView(
+                        text: index < predictions.count ? predictions[index] : "",
+                        isHighlighted: highlightedIndex == index,
+                        onTap: { onPredictionTap(index) },
+                        onLongPress: { onPredictionLongPress(index) }
+                    )
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                }
             }
+            .frame(height: 44)
+
+            // Horizontal separator
+            Rectangle()
+                .fill(Color(.separator))
+                .frame(height: 0.5)
+
+            // Second row of predictions (4-5) + Build Word button
+            HStack(spacing: 0) {
+                ForEach(4..<6, id: \.self) { index in
+                    if index > 4 {
+                        // Vertical separator
+                        Rectangle()
+                            .fill(Color(.separator))
+                            .frame(width: 0.5)
+                    }
+
+                    PredictionLabelView(
+                        text: index < predictions.count ? predictions[index] : "",
+                        isHighlighted: highlightedIndex == index,
+                        onTap: { onPredictionTap(index) },
+                        onLongPress: { onPredictionLongPress(index) }
+                    )
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                }
+
+                // Vertical separator before Build Word button
+                Rectangle()
+                    .fill(Color(.separator))
+                    .frame(width: 0.5)
+
+                // Build Word button placeholder
+                Rectangle()
+                    .fill(Color(.systemGray5))
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .overlay(
+                        Text("Build Word")
+                            .font(.system(size: 14, weight: .bold))
+                            .foregroundColor(.white)
+                    )
+            }
+            .frame(height: 44)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
@@ -184,22 +239,21 @@ struct PredictionLabelView: View {
     let isHighlighted: Bool
     let onTap: () -> Void
     let onLongPress: () -> Void
-    
+
     var body: some View {
-        ZStack {
-            RoundedRectangle(cornerRadius: 6)
-                .fill(text.isEmpty ? Color.clear : Color(.tertiarySystemBackground))
-                .stroke(isHighlighted ? Color.blue : Color(.separator),
-                       lineWidth: isHighlighted ? 2 : (text.isEmpty ? 0 : 1))
-            
+        HStack {
             Text(text)
-                .font(isHighlighted ? .headline : .subheadline)
+                .font(.body)
                 .fontWeight(isHighlighted ? .bold : .regular)
                 .foregroundColor(text.isEmpty ? .clear : .primary)
                 .lineLimit(1)
                 .minimumScaleFactor(0.8)
+            Spacer()
         }
-        .frame(minHeight: 36, maxHeight: .infinity)
+        .padding(.horizontal, 6)
+        .padding(.vertical, 6)
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(isHighlighted ? Color.blue.opacity(0.1) : Color.clear)
         .contentShape(Rectangle())
         .onTapGesture {
             if !text.isEmpty {

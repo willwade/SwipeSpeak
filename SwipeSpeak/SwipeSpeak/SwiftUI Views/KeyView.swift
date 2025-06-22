@@ -22,12 +22,11 @@ struct KeyView: View {
     
     var body: some View {
         ZStack {
-            // Key Background
-            RoundedRectangle(cornerRadius: 8)
+            // Key Background - flat design matching original
+            Rectangle()
                 .fill(keyBackgroundColor)
                 .stroke(keyBorderColor, lineWidth: keyBorderWidth)
-                .shadow(color: .black.opacity(0.1), radius: 2, x: 0, y: 1)
-            
+
             // Key Text
             Text(key.text)
                 .font(keyFont)
@@ -59,20 +58,20 @@ struct KeyView: View {
     
     private var keyBackgroundColor: Color {
         if isHighlighted {
-            return .blue.opacity(0.3)
+            return Color(red: 0.239, green: 0.675, blue: 0.969).opacity(0.3) // App's tint color
         } else if isPressed {
             return .gray.opacity(0.4)
         } else {
-            // Use a light gray background for better text contrast
-            return Color(.systemGray6)
+            // Use white background to match original table cells
+            return Color(.systemBackground)
         }
     }
-    
+
     private var keyBorderColor: Color {
         if isHighlighted {
-            return .blue
+            return Color(red: 0.239, green: 0.675, blue: 0.969) // App's tint color
         } else {
-            return .green
+            return Color(.separator)
         }
     }
     
