@@ -119,6 +119,7 @@ struct KeyboardView: View {
     @State private var keyboardConfig: KeyboardLayoutConfig
     @State private var highlightedKeyIndex: Int? = nil
     @StateObject private var animationManager = AnimationStateManager()
+    @State private var gesturePath: [CGPoint] = []
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     
     init(viewModel: KeyboardViewModel) {
@@ -127,22 +128,64 @@ struct KeyboardView: View {
     }
     
     var body: some View {
-        keyboardGridView
-            .accessibilityElement(children: .contain)
-            .accessibilityLabel("SwipeSpeak keyboard with \(keyboardConfig.keys.count) keys")
-            .accessibilityHint("Swipe or tap keys to enter letters. Current layout: \(keyboardConfig.layout.rawValue)")
-            .layoutTransition(isTransitioning: animationManager.isLayoutTransitioning)
-            .animation(reduceMotion ? nil : AnimationConfig.layoutTransition, value: viewModel.keyboardLayout)
-            .onChange(of: viewModel.keyboardLayout) { _, newLayout in
-                handleLayoutChange(newLayout)
+        ZStack {
+            keyboardGridView
+
+            // Gesture visualization overlay - red line drawing
+            Canvas { context, size in
+                if !gesturePath.isEmpty {
+                    var path = Path()
+                    for (index, point) in gesturePath.enumerated() {
+                        if index == 0 {
+                            path.move(to: point)
+                        } else {
+                            path.addLine(to: point)
+                        }
+                    }
+                    context.stroke(
+                        path,
+                        with: .color(.red),
+                        style: StrokeStyle(lineWidth: 4.0, lineCap: .round, lineJoin: .round)
+                    )
+                }
             }
-            .onChange(of: viewModel.enteredKeys) { _, _ in
-                updateKeyHighlighting()
-                announceKeyEntry()
-            }
-            .onChange(of: viewModel.msrKeyboardState) { _, _ in
-                updateMSRKeyboard()
-            }
+            .allowsHitTesting(false)
+        }
+        .gesture(
+            DragGesture(minimumDistance: 0)
+                .onChanged { value in
+                    if gesturePath.isEmpty {
+                        gesturePath = [value.startLocation]
+                    }
+                    gesturePath.append(value.location)
+
+                    // Limit path length for performance
+                    if gesturePath.count > 100 {
+                        gesturePath.removeFirst()
+                    }
+                }
+                .onEnded { value in
+                    // Clear the path after a short delay
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                        gesturePath.removeAll()
+                    }
+                }
+        )
+        .accessibilityElement(children: .contain)
+        .accessibilityLabel("SwipeSpeak keyboard with \(keyboardConfig.keys.count) keys")
+        .accessibilityHint("Swipe or tap keys to enter letters. Current layout: \(keyboardConfig.layout.rawValue)")
+        .layoutTransition(isTransitioning: animationManager.isLayoutTransitioning)
+        .animation(reduceMotion ? nil : AnimationConfig.layoutTransition, value: viewModel.keyboardLayout)
+        .onChange(of: viewModel.keyboardLayout) { _, newLayout in
+            handleLayoutChange(newLayout)
+        }
+        .onChange(of: viewModel.enteredKeys) { _, _ in
+            updateKeyHighlighting()
+            announceKeyEntry()
+        }
+        .onChange(of: viewModel.msrKeyboardState) { _, _ in
+            updateMSRKeyboard()
+        }
     }
 
     private var keyboardGridView: some View {
