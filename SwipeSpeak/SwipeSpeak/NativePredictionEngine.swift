@@ -53,6 +53,7 @@ class NativePredictionEngine: PredictionEngine {
     }
     
     func suggestions(for keySequence: [Int]) -> [(String, Int)] {
+        print("🔍 NativePredictionEngine: suggestions called for keySequence: \(keySequence)")
         let startTime = CFAbsoluteTimeGetCurrent()
         defer {
             let endTime = CFAbsoluteTimeGetCurrent()
@@ -60,17 +61,22 @@ class NativePredictionEngine: PredictionEngine {
             queryCount += 1
         }
 
-        guard !keySequence.isEmpty else { return [] }
+        guard !keySequence.isEmpty else {
+            print("🔍 NativePredictionEngine: keySequence is empty, returning []")
+            return []
+        }
 
         let cacheKey = keySequence.map(String.init).joined(separator:",")
 
         // Check cache first
         if let cachedResult = getCachedSuggestions(for: cacheKey) {
             cacheHits += 1
+            print("🔍 NativePredictionEngine: returning cached result: \(cachedResult.prefix(3))")
             return cachedResult
         }
 
         let suggestions = generateSuggestions(for: keySequence)
+        print("🔍 NativePredictionEngine: generated \(suggestions.count) suggestions: \(suggestions.prefix(3))")
 
         // Cache the result
         setCachedSuggestions(suggestions, for: cacheKey)
@@ -133,9 +139,10 @@ class NativePredictionEngine: PredictionEngine {
     }
     
     func setKeyLetterGrouping(_ grouping: [String], twoStrokes: Bool) {
+        print("🔍 NativePredictionEngine: setKeyLetterGrouping called with grouping: \(grouping), twoStrokes: \(twoStrokes)")
         keyLetterGrouping = [:]
         self.isTwoStrokes = twoStrokes
-        
+
         if twoStrokes {
             // For two-stroke keyboards, map each letter to its ASCII value
             for letterValue in UnicodeScalar("a").value...UnicodeScalar("z").value {
@@ -151,7 +158,9 @@ class NativePredictionEngine: PredictionEngine {
                 }
             }
         }
-        
+
+        print("🔍 NativePredictionEngine: keyLetterGrouping set to: \(keyLetterGrouping)")
+
         // Clear cache when grouping changes
         clearCache()
     }
@@ -188,26 +197,32 @@ class NativePredictionEngine: PredictionEngine {
     
     private func generatePossibleWords(from keySequence: [Int]) -> [String] {
         guard !keySequence.isEmpty else { return [] }
-        
+
+        print("🔍 NativePredictionEngine: generatePossibleWords for keySequence: \(keySequence)")
+        print("🔍 NativePredictionEngine: keyLetterGrouping: \(keyLetterGrouping)")
+
         var possibleWords: [String] = [""]
-        
+
         for key in keySequence {
             var newWords: [String] = []
-            
+
             // Find all letters for this key
             let lettersForKey = keyLetterGrouping.compactMap { (letter, keyIndex) -> Character? in
                 return keyIndex == key ? letter : nil
             }
-            
+
+            print("🔍 NativePredictionEngine: key \(key) -> letters: \(lettersForKey)")
+
             for word in possibleWords {
                 for letter in lettersForKey {
                     newWords.append(word + String(letter))
                 }
             }
-            
+
             possibleWords = newWords
         }
-        
+
+        print("🔍 NativePredictionEngine: possibleWords: \(possibleWords.prefix(10))")
         return possibleWords
     }
     

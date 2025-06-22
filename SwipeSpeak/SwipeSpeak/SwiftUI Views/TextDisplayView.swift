@@ -21,7 +21,7 @@ struct TextDisplayView: View {
                 onTap: viewModel.sentenceTapped,
                 onLongPress: viewModel.sentenceLongPressed
             )
-            
+
             // Word Display
             WordDisplayView(
                 text: viewModel.wordText,
@@ -30,16 +30,18 @@ struct TextDisplayView: View {
                 onTap: viewModel.wordTapped,
                 onLongPress: viewModel.wordLongPressed
             )
-            
-            // Prediction Labels
+
+            // Prediction Labels - expand to fill remaining space
             PredictionLabelsView(
                 predictions: viewModel.predictions,
                 highlightedIndex: viewModel.highlightedPredictionIndex,
                 onPredictionTap: viewModel.predictionTapped,
                 onPredictionLongPress: viewModel.predictionLongPressed
             )
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
         .padding()
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color(.systemBackground))
     }
 }
@@ -169,8 +171,10 @@ struct PredictionLabelsView: View {
                     onTap: { onPredictionTap(index) },
                     onLongPress: { onPredictionLongPress(index) }
                 )
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
         }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 }
 
@@ -195,7 +199,7 @@ struct PredictionLabelView: View {
                 .lineLimit(1)
                 .minimumScaleFactor(0.8)
         }
-        .frame(height: 36)
+        .frame(minHeight: 36, maxHeight: .infinity)
         .contentShape(Rectangle())
         .onTapGesture {
             if !text.isEmpty {

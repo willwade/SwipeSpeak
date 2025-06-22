@@ -1,5 +1,5 @@
 {
-  "originHash" : "c64d7036266ca939aed97847d764691b427d673b4abd0996d3b208301a23f460",
+  "originHash" : "41016956d2ea6d522897a96076b191c9f6901b3c07d7a5a850a8cf19a1f6fc79",
   "pins" : [
     {
       "identity" : "dznemptydataset",
@@ -26,15 +26,6 @@
       "state" : {
         "revision" : "a6fcac8485bc8f57b2d2b55bb6d97138e8659e4b",
         "version" : "0.10.2"
-      }
-    },
-    {
-      "identity" : "zephyr",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/ArtSabintsev/Zephyr",
-      "state" : {
-        "revision" : "b0dda179006b354680b1df96e279134a704b0c06",
-        "version" : "3.8.0"
       }
     }
   ],

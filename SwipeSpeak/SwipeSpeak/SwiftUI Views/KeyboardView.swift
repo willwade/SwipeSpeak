@@ -72,7 +72,7 @@ struct KeyboardLayoutConfig {
                 layout: layout,
                 gridColumns: Array(repeating: GridItem(.flexible(), spacing: 8), count: 3),
                 keyLetterGrouping: Constants.keyLetterGroupingMSR,
-                keys: createMSRKeys()
+                keys: createMSRKeys(from: Constants.MSRKeyboardMasterKeys1)
             )
         }
     }
@@ -84,25 +84,31 @@ struct KeyboardLayoutConfig {
                 text: letters.uppercased(),
                 letters: letters,
                 isSpecial: false,
-                textColor: .white,
+                textColor: .primary, // Use primary color for better contrast
                 backgroundColor: .clear
             )
         }
     }
     
-    private static func createMSRKeys() -> [SwiftUIKeyboardKey] {
-        return Constants.MSRKeyboardMasterKeys1.enumerated().map { index, text in
-            let isSpecial = text.contains(Constants.MSRKeyYes) || text.contains(Constants.MSRKeyNo)
+    static func createMSRKeys(from keyTexts: [String]) -> [SwiftUIKeyboardKey] {
+        return keyTexts.enumerated().map { index, text in
+            let isSpecial = text.contains(Constants.MSRKeyYes) ||
+                           text.contains(Constants.MSRKeyNo) ||
+                           text.contains(Constants.MSRKeySpeak) ||
+                           text.contains(Constants.MSRKeyDelete) ||
+                           text.contains(Constants.MSRKeyCancel)
             return SwiftUIKeyboardKey(
                 index: index,
                 text: text,
                 letters: "",
                 isSpecial: isSpecial,
-                textColor: isSpecial ? .red : .white,
+                textColor: isSpecial ? .red : .primary, // Use primary color for better contrast
                 backgroundColor: .clear
             )
         }
     }
+
+
 }
 
 // MARK: - Main Keyboard View
@@ -121,47 +127,47 @@ struct KeyboardView: View {
     }
     
     var body: some View {
+        keyboardGridView
+            .accessibilityElement(children: .contain)
+            .accessibilityLabel("SwipeSpeak keyboard with \(keyboardConfig.keys.count) keys")
+            .accessibilityHint("Swipe or tap keys to enter letters. Current layout: \(keyboardConfig.layout.rawValue)")
+            .layoutTransition(isTransitioning: animationManager.isLayoutTransitioning)
+            .animation(reduceMotion ? nil : AnimationConfig.layoutTransition, value: viewModel.keyboardLayout)
+            .onChange(of: viewModel.keyboardLayout) { _, newLayout in
+                handleLayoutChange(newLayout)
+            }
+            .onChange(of: viewModel.enteredKeys) { _, _ in
+                updateKeyHighlighting()
+                announceKeyEntry()
+            }
+            .onChange(of: viewModel.msrKeyboardState) { _, _ in
+                updateMSRKeyboard()
+            }
+    }
+
+    private var keyboardGridView: some View {
         VStack(spacing: 16) {
-            // Keyboard Grid
+            // Keyboard Grid - expand to fill available space
             LazyVGrid(columns: keyboardConfig.gridColumns, spacing: 8) {
                 ForEach(keyboardConfig.keys) { key in
                     KeyView(
                         key: key,
                         isHighlighted: highlightedKeyIndex == key.index,
                         onTap: { handleKeyTap(key) },
-                        onSwipe: { direction, velocity in handleKeySwipe(key, direction: direction, velocity: velocity) }
+                        onSwipe: { direction, velocity in
+                            handleKeySwipe(key, direction: direction, velocity: velocity)
+                        }
                     )
-
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
                 }
             }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
             .padding()
             .background(Color.white)
             .cornerRadius(12)
             .shadow(radius: 2)
         }
-        .accessibilityElement(children: .contain)
-        .accessibilityLabel("SwipeSpeak keyboard with \(keyboardConfig.keys.count) keys")
-        .accessibilityHint("Swipe or tap keys to enter letters. Current layout: \(keyboardConfig.layout.rawValue)")
-        .layoutTransition(isTransitioning: animationManager.isLayoutTransitioning)
-        .animation(reduceMotion ? nil : AnimationConfig.layoutTransition, value: viewModel.keyboardLayout)
-        .onChange(of: viewModel.keyboardLayout) { _, newLayout in
-            animationManager.startLayoutTransition()
-
-            // Announce layout change to VoiceOver users
-            UIAccessibility.post(notification: .announcement, argument: "Keyboard layout changed to \(newLayout.rawValue)")
-
-            if reduceMotion {
-                keyboardConfig = KeyboardLayoutConfig.config(for: newLayout)
-            } else {
-                withAnimation(AnimationConfig.layoutTransition) {
-                    keyboardConfig = KeyboardLayoutConfig.config(for: newLayout)
-                }
-            }
-        }
-        .onChange(of: viewModel.enteredKeys) { _, _ in
-            updateKeyHighlighting()
-            announceKeyEntry()
-        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
     
     // MARK: - Private Methods
@@ -243,7 +249,7 @@ struct KeyboardView: View {
     }
     
     private func handleMSRKeyTap(_ key: SwiftUIKeyboardKey) {
-        // MSR keyboard logic will be implemented based on current key state
+        print("🔍 KeyboardView: handleMSRKeyTap called for key \(key.index)")
         viewModel.msrKeyEntered(key: key.index, isSwipe: false)
     }
 
@@ -262,6 +268,21 @@ struct KeyboardView: View {
         }
     }
     
+    private func handleLayoutChange(_ newLayout: KeyboardLayout) {
+        animationManager.startLayoutTransition()
+
+        // Announce layout change to VoiceOver users
+        UIAccessibility.post(notification: .announcement, argument: "Keyboard layout changed to \(newLayout.rawValue)")
+
+        if reduceMotion {
+            keyboardConfig = KeyboardLayoutConfig.config(for: newLayout)
+        } else {
+            withAnimation(AnimationConfig.layoutTransition) {
+                keyboardConfig = KeyboardLayoutConfig.config(for: newLayout)
+            }
+        }
+    }
+
     private func updateKeyHighlighting() {
         // Update key highlighting based on current state
         // This will be enhanced with more sophisticated highlighting logic
@@ -274,6 +295,47 @@ struct KeyboardView: View {
             let keyText = keyboardConfig.keys.first { $0.index == lastKey }?.letters ?? "key \(lastKey)"
             UIAccessibility.post(notification: .announcement, argument: "Entered \(keyText)")
         }
+    }
+
+    private func updateMSRKeyboard() {
+        guard keyboardConfig.layout == .msr else { return }
+
+        print("🔍 KeyboardView: updateMSRKeyboard called - state: \(viewModel.msrKeyboardState)")
+
+        // Get the current MSR keys based on the state
+        let currentMSRKeys = viewModel.getCurrentMSRKeys()
+
+        // Create new SwiftUI keyboard keys
+        let newKeys = KeyboardLayoutConfig.createMSRKeys(from: currentMSRKeys)
+
+        // Update the keyboard configuration with animation
+        if reduceMotion {
+            keyboardConfig = KeyboardLayoutConfig(
+                layout: .msr,
+                gridColumns: keyboardConfig.gridColumns,
+                keyLetterGrouping: keyboardConfig.keyLetterGrouping,
+                keys: newKeys
+            )
+        } else {
+            withAnimation(AnimationConfig.layoutTransition) {
+                keyboardConfig = KeyboardLayoutConfig(
+                    layout: .msr,
+                    gridColumns: keyboardConfig.gridColumns,
+                    keyLetterGrouping: keyboardConfig.keyLetterGrouping,
+                    keys: newKeys
+                )
+            }
+        }
+
+        // Announce the change to VoiceOver users
+        let stateDescription: String
+        switch viewModel.msrKeyboardState {
+        case .master:
+            stateDescription = "master view"
+        case .detail(let keyIndex):
+            stateDescription = "detail view for key \(keyIndex)"
+        }
+        UIAccessibility.post(notification: .announcement, argument: "MSR keyboard switched to \(stateDescription)")
     }
 }
 

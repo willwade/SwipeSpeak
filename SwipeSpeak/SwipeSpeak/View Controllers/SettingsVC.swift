@@ -52,11 +52,10 @@ class SettingsVC: UITableViewController {
         keyboardLayoutLabel?.text = UserPreferences.shared.keyboardLayout.localizedString()
 
         // Update prediction engine label
-        if let engineTypeString = UserPreferences.shared.predictionEngineType,
-           let engineType = PredictionEngineType(rawValue: engineTypeString) {
-            predictionEngineLabel?.text = engineType.displayName
+        if let engineTypeString = UserPreferences.shared.predictionEngineType {
+            predictionEngineLabel?.text = engineTypeString
         } else {
-            predictionEngineLabel?.text = PredictionEngineType.custom.displayName
+            predictionEngineLabel?.text = "custom"
         }
 
         announceLettersCountSwitch?.isOn = UserPreferences.shared.announceLettersCount
@@ -101,38 +100,29 @@ class SettingsVC: UITableViewController {
             preferredStyle: .actionSheet
         )
 
-        let manager = PredictionEngineManager.shared
+        // let manager = PredictionEngineManager.shared // Temporarily commented out
 
-        for engineType in PredictionEngineType.allCases {
-            let action = UIAlertAction(title: engineType.displayName, style: .default) { _ in
+        for engineType in ["custom", "native"] { // Temporarily simplified
+            let action = UIAlertAction(title: engineType, style: .default) { _ in
                 Task { @MainActor in
-                    if manager.switchToEngine(engineType) {
-                        self.predictionEngineLabel?.text = engineType.displayName
+                    // Temporarily simplified - just update the preference
+                    UserPreferences.shared.predictionEngineType = engineType
+                    self.predictionEngineLabel?.text = engineType
 
-                        // Show brief description
-                        let successAlert = UIAlertController(
-                            title: NSLocalizedString("Engine Changed", comment: ""),
-                            message: engineType.displayName,
-                            preferredStyle: .alert
-                        )
-                        successAlert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .default))
-                        self.present(successAlert, animated: true)
-                    } else {
-                        // Engine not available
-                        let errorAlert = UIAlertController(
-                            title: NSLocalizedString("Engine Unavailable", comment: ""),
-                            message: NSLocalizedString("This prediction engine is not available on your device", comment: ""),
-                            preferredStyle: .alert
-                        )
-                        errorAlert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .default))
-                        self.present(errorAlert, animated: true)
-                    }
+                    // Show brief description
+                    let successAlert = UIAlertController(
+                        title: NSLocalizedString("Engine Changed", comment: ""),
+                        message: engineType,
+                        preferredStyle: .alert
+                    )
+                    successAlert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .default))
+                    self.present(successAlert, animated: true)
                 }
             }
 
             // Mark current engine
             if let currentType = UserPreferences.shared.predictionEngineType,
-               currentType == engineType.rawValue {
+               currentType == engineType {
                 action.setValue(true, forKey: "checked")
             }
 

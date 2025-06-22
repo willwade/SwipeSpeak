@@ -14,26 +14,8 @@ enum WordPredictionError: Error {
     case unsupportedWord(invalidChar: Character)
 }
 
-enum PredictionEngineType: String, CaseIterable {
-    case custom = "custom"
-    case native = "native"
-
-    var displayName: String {
-        switch self {
-        case .custom:
-            return "Custom"
-        case .native:
-            return "Native"
-        }
-    }
-}
-
-protocol PredictionEngineProtocol {
-    func setKeyLetterGrouping(_ grouping: [String], twoStrokes: Bool)
-    func insert(_ word: String, _ frequency: Int) throws
-    func contains(_ word: String) -> Bool
-    func suggestions(for keyString: [Int]) -> [(String, Int)]
-}
+// Note: PredictionEngineType and PredictionEngine protocol are now defined in PredictionEngine.swift
+// This file now only contains the legacy implementations
 
 
 
@@ -41,82 +23,9 @@ protocol PredictionEngineProtocol {
 
 
 
-// Native prediction engine using iOS built-in text checking
-class NativePredictionEngine: PredictionEngineProtocol {
+// Legacy NativePredictionEngine removed - use NativePredictionEngine from NativePredictionEngine.swift
 
-    func setKeyLetterGrouping(_ grouping: [String], twoStrokes: Bool) {
-        // Native engine doesn't need key letter grouping
-    }
-
-    func insert(_ word: String, _ frequency: Int) throws {
-        // Native engine doesn't support custom word insertion
-    }
-
-    func contains(_ word: String) -> Bool {
-        // For native engine, assume all words are available
-        return true
-    }
-
-    func suggestions(for keyString: [Int]) -> [(String, Int)] {
-        // Convert key sequence to partial word
-        let partialWord = convertKeySequenceToPartialWord(keyString)
-
-        // For now, provide some basic completions based on common patterns
-        // In a real implementation, this would use iOS text prediction APIs
-        let basicCompletions = generateBasicCompletions(for: partialWord)
-
-        // Return with default frequency
-        return basicCompletions.enumerated().map { (index, word) in
-            (word, 100 - index) // Higher frequency for earlier suggestions
-        }
-    }
-
-    private func generateBasicCompletions(for partialWord: String) -> [String] {
-        // Simple completion logic for testing
-        let commonWords = [
-            "hello", "help", "here", "have", "how", "home", "happy", "hand",
-            "the", "that", "this", "they", "there", "then", "thank", "think",
-            "and", "are", "all", "any", "also", "about", "after", "again",
-            "you", "your", "yes", "year", "yet", "young", "yesterday",
-            "can", "could", "come", "call", "car", "cat", "computer", "cool",
-            "will", "with", "what", "when", "where", "why", "who", "work",
-            "good", "great", "get", "go", "give", "game", "group", "girl"
-        ]
-
-        if partialWord.isEmpty {
-            return Array(commonWords.prefix(5))
-        }
-
-        // Filter words that start with the partial word
-        let matches = commonWords.filter { $0.lowercased().hasPrefix(partialWord.lowercased()) }
-        return Array(matches.prefix(5))
-    }
-
-    private func convertKeySequenceToPartialWord(_ keyString: [Int]) -> String {
-        // This is a simplified conversion - in a real implementation,
-        // you would map key sequences to letters based on the keyboard layout
-        // For now, return a simple string for testing
-        if keyString.isEmpty {
-            return ""
-        }
-
-        // Simple mapping for testing - this should be replaced with actual keyboard mapping
-        let keyToLetter: [Int: String] = [
-            2: "abc", 3: "def", 4: "ghi", 5: "jkl", 6: "mno", 7: "pqrs", 8: "tuv", 9: "wxyz"
-        ]
-
-        var result = ""
-        for key in keyString {
-            if let letters = keyToLetter[key] {
-                result += String(letters.first ?? "a") // Take first letter for simplicity
-            }
-        }
-
-        return result
-    }
-}
-
-class WordPredictionEngine: PredictionEngineProtocol {
+class WordPredictionEngine {
     
     // MARK: Classes
     
@@ -250,56 +159,4 @@ class WordPredictionEngine: PredictionEngineProtocol {
 
 }
 
-class PredictionEngineManager {
-    @MainActor static let shared = PredictionEngineManager()
-
-    var engines: [PredictionEngineType: PredictionEngineProtocol] = [:]
-    var currentEngineType: PredictionEngineType = .custom
-
-    var currentEngine: PredictionEngineProtocol? {
-        return engines[currentEngineType]
-    }
-
-    var availableEngines: [PredictionEngineType] {
-        return Array(engines.keys)
-    }
-
-    private init() {
-        // Register default custom engine
-        let customEngine = WordPredictionEngine()
-        registerEngine(customEngine, for: .custom)
-
-        // Register native engine
-        let nativeEngine = NativePredictionEngine()
-        registerEngine(nativeEngine, for: .native)
-    }
-
-    func registerEngine(_ engine: PredictionEngineProtocol, for type: PredictionEngineType) {
-        engines[type] = engine
-    }
-
-    @MainActor func switchToEngine(_ type: PredictionEngineType) -> Bool {
-        guard engines[type] != nil else {
-            return false
-        }
-        currentEngineType = type
-        UserPreferences.shared.predictionEngineType = type.rawValue
-        return true
-    }
-
-    func setKeyLetterGrouping(_ grouping: [String], twoStrokes: Bool) {
-        currentEngine?.setKeyLetterGrouping(grouping, twoStrokes: twoStrokes)
-    }
-
-    func insert(_ word: String, _ frequency: Int) throws {
-        try currentEngine?.insert(word, frequency)
-    }
-
-    func contains(_ word: String) -> Bool {
-        return currentEngine?.contains(word) ?? false
-    }
-
-    func suggestions(for keyString: [Int]) -> [(String, Int)] {
-        return currentEngine?.suggestions(for: keyString) ?? []
-    }
-}
+// LegacyPredictionEngineManager removed - use PredictionEngineManager from PredictionEngine.swift

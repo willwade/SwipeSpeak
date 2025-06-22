@@ -35,11 +35,12 @@
 		DD2C9D732E07C19C0006658A /* VisualFeedbackSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2C9D6F2E07C19C0006658A /* VisualFeedbackSystem.swift */; };
 		DDC6F1622E058E7F00EFC306 /* MarkdownView in Frameworks */ = {isa = PBXBuildFile; productRef = DDC6F1612E058E7F00EFC306 /* MarkdownView */; };
 		DDC6F1652E058EEA00EFC306 /* DZNEmptyDataSet in Frameworks */ = {isa = PBXBuildFile; productRef = DDC6F1642E058EEA00EFC306 /* DZNEmptyDataSet */; };
-		DDC6F1682E058F6500EFC306 /* Zephyr in Frameworks */ = {isa = PBXBuildFile; productRef = DDC6F1672E058F6500EFC306 /* Zephyr */; };
+
 		F1A2B3C4D5E6F7890ABCDEF1 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1234567890ABCDEF12345678 /* SettingsView.swift */; };
 		F2A3B4C5D6E7F8901BCDEF12 /* SwiftUIBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2345678901BCDEF123456789 /* SwiftUIBridge.swift */; };
 		F3A4B5C6D7E8F9012CDEF123 /* TextDisplayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3456789012CDEF1234567890 /* TextDisplayView.swift */; };
 		F4A5B6C7D8E9F0123DEF1234 /* TextDisplayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4567890123DEF12345678901 /* TextDisplayViewModel.swift */; };
+		F7A8B9CADBE2F3456G234567 /* CloudKitSyncManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 789012345G234567890123456 /* CloudKitSyncManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +59,7 @@
 		31656ADE20EEEAD700059AFA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3456789012CDEF1234567890 /* TextDisplayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextDisplayView.swift; sourceTree = "<group>"; };
 		4567890123DEF12345678901 /* TextDisplayViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextDisplayViewModel.swift; sourceTree = "<group>"; };
+		789012345G234567890123456 /* CloudKitSyncManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudKitSyncManager.swift; sourceTree = "<group>"; };
 		A094360083F94AFE8FAEE668 /* KeyboardViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardViewModel.swift; sourceTree = "<group>"; };
 		B928F1DF1FB49EEF00302E70 /* SpeechSynthesizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechSynthesizer.swift; sourceTree = "<group>"; };
 		B93BCC9F1FD7F8DC007BFCC3 /* AcknowledgementsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcknowledgementsVC.swift; sourceTree = "<group>"; };
@@ -103,7 +105,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				DDC6F1652E058EEA00EFC306 /* DZNEmptyDataSet in Frameworks */,
-				DDC6F1682E058F6500EFC306 /* Zephyr in Frameworks */,
 				DDC6F1622E058E7F00EFC306 /* MarkdownView in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -205,6 +206,7 @@
 				DA0700181F0DA06B003BEE3D /* SwipeView.swift */,
 				DA07001A1F0DA0C2003BEE3D /* Utility.swift */,
 				B95CB41C1FAFC50E00F705EB /* UserPreferences.swift */,
+				789012345G234567890123456 /* CloudKitSyncManager.swift */,
 				B928F1DF1FB49EEF00302E70 /* SpeechSynthesizer.swift */,
 				B93BCCA11FD7F8E5007BFCC3 /* Resources */,
 			);
@@ -293,7 +295,6 @@
 			packageReferences = (
 				DDC6F1602E058E7F00EFC306 /* XCRemoteSwiftPackageReference "MarkdownView" */,
 				DDC6F1632E058EEA00EFC306 /* XCRemoteSwiftPackageReference "DZNEmptyDataSet" */,
-				DDC6F1662E058F6500EFC306 /* XCRemoteSwiftPackageReference "Zephyr" */,
 				DDC6F1692E058F9900EFC306 /* XCRemoteSwiftPackageReference "ViewInspector" */,
 			);
 			productRefGroup = DA57B1F71F0D9EC100895E18 /* Products */;
@@ -358,6 +359,7 @@
 				F2A3B4C5D6E7F8901BCDEF12 /* SwiftUIBridge.swift in Sources */,
 				F3A4B5C6D7E8F9012CDEF123 /* TextDisplayView.swift in Sources */,
 				F4A5B6C7D8E9F0123DEF1234 /* TextDisplayViewModel.swift in Sources */,
+				F7A8B9CADBE2F3456G234567 /* CloudKitSyncManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -671,14 +673,7 @@
 				kind = branch;
 			};
 		};
-		DDC6F1662E058F6500EFC306 /* XCRemoteSwiftPackageReference "Zephyr" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/ArtSabintsev/Zephyr";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 3.8.0;
-			};
-		};
+
 		DDC6F1692E058F9900EFC306 /* XCRemoteSwiftPackageReference "ViewInspector" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/nalexn/ViewInspector";
@@ -700,11 +695,7 @@
 			package = DDC6F1632E058EEA00EFC306 /* XCRemoteSwiftPackageReference "DZNEmptyDataSet" */;
 			productName = DZNEmptyDataSet;
 		};
-		DDC6F1672E058F6500EFC306 /* Zephyr */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = DDC6F1662E058F6500EFC306 /* XCRemoteSwiftPackageReference "Zephyr" */;
-			productName = Zephyr;
-		};
+
 /* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = DA57B1EE1F0D9EC100895E18 /* Project object */;

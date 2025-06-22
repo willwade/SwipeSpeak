@@ -171,7 +171,7 @@ struct SettingsView: View {
                 set: { viewModel.updatePredictionEngine($0) }
             )) {
                 ForEach(viewModel.availableEngines, id: \.self) { engine in
-                    Text(engine.displayName)
+                    Text(engine)
                         .tag(engine)
                 }
             }
@@ -274,7 +274,7 @@ struct KeyboardSettingsView: View {
                     set: { viewModel.updatePredictionEngine($0) }
                 )) {
                     ForEach(viewModel.availableEngines, id: \.self) { engine in
-                        Text(engine.displayName)
+                        Text(engine)
                             .tag(engine)
                     }
                 }

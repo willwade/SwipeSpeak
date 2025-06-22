@@ -37,7 +37,7 @@ struct KeyView: View {
                 .minimumScaleFactor(0.5)
                 .padding(8)
         }
-        .frame(minHeight: keyHeight)
+        .frame(minWidth: 0, maxWidth: .infinity, minHeight: keyHeight, maxHeight: .infinity)
         .keyPress(isPressed: isPressed)
         .keyHighlight(isHighlighted: isHighlighted, type: .border)
         .swipeIndicator(direction: swipeDirection, isActive: swipeDirection != nil)
@@ -63,7 +63,8 @@ struct KeyView: View {
         } else if isPressed {
             return .gray.opacity(0.2)
         } else {
-            return key.backgroundColor.opacity(0.1)
+            // Use a more visible background for better contrast
+            return Color(.secondarySystemBackground)
         }
     }
     

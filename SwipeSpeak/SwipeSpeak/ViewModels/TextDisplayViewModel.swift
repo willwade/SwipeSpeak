@@ -23,9 +23,8 @@ class TextDisplayViewModel: ObservableObject {
     @Published var highlightedPredictionIndex: Int? = nil
     
     // MARK: - Private Properties
-    
+
     private var cancellables = Set<AnyCancellable>()
-    private let predictionEngineManager = PredictionEngineManager.shared
     
     // Callbacks to MainTVC for actions that require UIKit integration
     var onSentenceTapped: (() -> Void)?

@@ -65,7 +65,7 @@ class KeyboardViewModel: ObservableObject {
 
     // MARK: - Dependencies
     
-    private let predictionManager: PredictionEngineManager
+    // private let predictionManager: PredictionEngineManager // Temporarily commented out
     private let userPreferences: UserPreferences
     private let speechSynthesizer: SpeechSynthesizer
     
@@ -76,11 +76,11 @@ class KeyboardViewModel: ObservableObject {
     // MARK: - Initialization
     
     init(
-        predictionManager: PredictionEngineManager = PredictionEngineManager.shared,
+        // predictionManager: PredictionEngineManager = PredictionEngineManager.shared, // Temporarily commented out
         userPreferences: UserPreferences = UserPreferences.shared,
         speechSynthesizer: SpeechSynthesizer = SpeechSynthesizer.shared
     ) {
-        self.predictionManager = predictionManager
+        // self.predictionManager = predictionManager // Temporarily commented out
         self.userPreferences = userPreferences
         self.speechSynthesizer = speechSynthesizer
         
@@ -166,9 +166,42 @@ class KeyboardViewModel: ObservableObject {
 
     /// Handle MSR keyboard key entry
     func msrKeyEntered(key: Int, isSwipe: Bool) {
-        // MSR keyboard logic - will be implemented based on current state
-        // For now, delegate to regular key entry
-        keyEntered(key, isSwipe: isSwipe)
+        print("🔍 KeyboardViewModel: msrKeyEntered called - key: \(key), state: \(msrKeyboardState)")
+
+        switch msrKeyboardState {
+        case .master:
+            // First stroke - switch to detail view for this key
+            firstStrokeEntered(key: key, isSwipe: isSwipe)
+            msrKeyboardState = .detail(keyIndex: key)
+
+        case .detail(_):
+            // Second stroke - process the letter and return to master
+            secondStrokeEntered(key: key, isSwipe: isSwipe)
+            msrKeyboardState = .master
+        }
+    }
+
+    /// Get current MSR keys based on state
+    func getCurrentMSRKeys() -> [String] {
+        switch msrKeyboardState {
+        case .master:
+            // Check if word or sentence has text to determine which master keys to use
+            let hasText = !currentWord.isEmpty || !currentSentence.isEmpty
+            return hasText ? Constants.MSRKeyboardMasterKeys2 : Constants.MSRKeyboardMasterKeys1
+
+        case .detail(let keyIndex):
+            // Check if word or sentence has text to determine which detail keys to use
+            let hasText = !currentWord.isEmpty || !currentSentence.isEmpty
+            let detailKeys = hasText ? Constants.MSRKeyboardDetailKeys2 : Constants.MSRKeyboardDetailKeys1
+
+            // Return the detail keys for the specific key index
+            if keyIndex < detailKeys.count {
+                return detailKeys[keyIndex]
+            } else {
+                // Fallback to master keys if index is out of bounds
+                return hasText ? Constants.MSRKeyboardMasterKeys2 : Constants.MSRKeyboardMasterKeys1
+            }
+        }
     }
     
     /// Select a prediction
@@ -286,7 +319,8 @@ class KeyboardViewModel: ObservableObject {
         // Use the synchronous method for now, wrapped in Task for async context
         let suggestions = await Task {
             print("🔍 KeyboardViewModel: Calling predictionManager.suggestions for keys: \(keys)")
-            let results = predictionManager.suggestions(for: keys)
+            // let results = predictionManager.suggestions(for: keys) // Temporarily commented out
+            let results: [(String, Int)] = [] // Temporarily empty
             print("🔍 KeyboardViewModel: Got \(results.count) suggestions: \(results.prefix(3))")
             return results
         }.value

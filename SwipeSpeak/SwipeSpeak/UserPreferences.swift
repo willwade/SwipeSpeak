@@ -10,7 +10,7 @@
 import Foundation
 import AVFoundation
 import Combine
-import Zephyr
+import CloudKit
 
 enum KeyboardLayout: Int {
     case keys4 = 4
@@ -19,7 +19,7 @@ enum KeyboardLayout: Int {
     case strokes2 = -1
     case msr = 37
 
-    static let `default` = KeyboardLayout.msr
+    static let `default` = KeyboardLayout.keys6
     
     func localizedString() -> String {
         switch self {
@@ -42,7 +42,7 @@ enum KeyboardLayout: Int {
 }
 
 /// MSR Keyboard State
-enum MSRKeyboardState {
+enum MSRKeyboardState: Equatable {
     case master
     case detail(keyIndex: Int)
 }
@@ -63,7 +63,7 @@ extension NSNotification.Name {
     static let UserAddedWordsUpdated = NSNotification.Name(rawValue: "UserAddedWordsUpdated")
 }
 
-private struct Keys {
+struct Keys {
     
     static let keyboardLayout = "keyboardLayout"
 
@@ -115,13 +115,13 @@ class UserPreferences: ObservableObject {
     // MARK: Shared Instance
 
     static let shared = UserPreferences()
-    
+
     // MARK: User Defaults
-    
+
     private var userDefaults: UserDefaults {
         return UserDefaults.standard
     }
-    
+
     // MARK: Initialization
 
     private init() {
@@ -136,8 +136,8 @@ class UserPreferences: ObservableObject {
             Keys.speechRate: AVSpeechUtteranceDefaultSpeechRate,
             Keys.speechVolume: 1.0,
 
-            Keys.enableCloudSync: true,
-            Keys.predictionEngineType: "custom",
+            Keys.enableCloudSync: false, // Temporarily disabled to fix concurrency crash
+            Keys.predictionEngineType: "native",
             ])
 
         // Initialize @Published properties from UserDefaults after defaults are registered
@@ -145,24 +145,25 @@ class UserPreferences: ObservableObject {
         self.keyboardLayout = KeyboardLayout(rawValue: savedLayout) ?? KeyboardLayout.default
         self.enableCloudSync = userDefaults.bool(forKey: Keys.enableCloudSync)
 
+        // Enable CloudKit sync if enabled
         if self.enableCloudSync {
-            enableZephyr()
+            enableCloudKitSync()
         }
     }
-    
-    // MARK: Zephyr
 
-    private func enableZephyr() {
-        #if DEBUG
-            // Zephyr.debugEnabled = true // Disabled for Swift 6 concurrency
-        #endif
-        
-        Zephyr.sync(keys: Keys.iCloudSyncKeys())
-        Zephyr.addKeysToBeMonitored(keys: Keys.iCloudSyncKeys())
+    // MARK: CloudKit Sync
+
+    private func enableCloudKitSync() {
+        CloudKitSyncManager.shared.startMonitoring(keys: Keys.iCloudSyncKeys())
+
+        // Fetch existing preferences from CloudKit
+        Task {
+            await CloudKitSyncManager.shared.fetchUserPreferences()
+        }
     }
-    
-    private func disableZephyr() {
-        Zephyr.removeKeysFromBeingMonitored(keys: Keys.iCloudSyncKeys())
+
+    private func disableCloudKitSync() {
+        CloudKitSyncManager.shared.stopMonitoring()
     }
     
     // MARK: Properties
@@ -238,14 +239,14 @@ class UserPreferences: ObservableObject {
         }
     }
     
-    @Published var enableCloudSync: Bool = true {
+    @Published var enableCloudSync: Bool = false {
         didSet {
             userDefaults.set(enableCloudSync, forKey: Keys.enableCloudSync)
 
             if enableCloudSync {
-                enableZephyr()
+                enableCloudKitSync()
             } else {
-                disableZephyr()
+                disableCloudKitSync()
             }
         }
     }

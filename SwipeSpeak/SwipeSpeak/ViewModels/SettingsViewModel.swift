@@ -24,7 +24,7 @@ class SettingsViewModel: ObservableObject {
     @Published var availableVoices: [AVSpeechSynthesisVoice] = []
     
     /// Available prediction engines
-    @Published var availableEngines: [PredictionEngineType] = PredictionEngineType.allCases
+    @Published var availableEngines: [String] = ["custom", "native"] // Temporarily simplified
     
     /// Current prediction engine performance metrics
     @Published var engineMetrics: String = "Metrics not available"
@@ -38,7 +38,7 @@ class SettingsViewModel: ObservableObject {
     // MARK: - Dependencies
     
     private let userPreferences: UserPreferences
-    private let predictionManager: PredictionEngineManager
+    // private let predictionManager: PredictionEngineManager // Temporarily commented out
     
     // MARK: - Private Properties
     
@@ -47,11 +47,11 @@ class SettingsViewModel: ObservableObject {
     // MARK: - Initialization
     
     init(
-        userPreferences: UserPreferences = UserPreferences.shared,
-        predictionManager: PredictionEngineManager = PredictionEngineManager.shared
+        userPreferences: UserPreferences = UserPreferences.shared
+        // predictionManager: PredictionEngineManager = PredictionEngineManager.shared // Temporarily commented out
     ) {
         self.userPreferences = userPreferences
-        self.predictionManager = predictionManager
+        // self.predictionManager = predictionManager // Temporarily commented out
         
         setupBindings()
         loadAvailableVoices()
@@ -89,8 +89,8 @@ class SettingsViewModel: ObservableObject {
     }
     
     /// Update prediction engine
-    func updatePredictionEngine(_ engineType: PredictionEngineType) {
-        userPreferences.predictionEngineType = engineType.rawValue
+    func updatePredictionEngine(_ engineType: String) {
+        userPreferences.predictionEngineType = engineType
         // Note: switchEngine method will be added to PredictionEngineManager later
         // predictionManager.switchEngine(to: engineType)
         loadEngineMetrics()
@@ -169,7 +169,7 @@ class SettingsViewModel: ObservableObject {
     private func loadEngineMetrics() {
         // Note: performanceMetrics will be available when we implement the full protocol
         // For now, create a placeholder
-        engineMetrics = "Engine: \(currentPredictionEngine.displayName) - Ready"
+        engineMetrics = "Engine: \(currentPredictionEngine) - Ready"
     }
 }
 
@@ -199,8 +199,8 @@ extension SettingsViewModel {
     }
     
     /// Current prediction engine type
-    var currentPredictionEngine: PredictionEngineType {
-        PredictionEngineType(rawValue: userPreferences.predictionEngineType ?? "custom") ?? .custom
+    var currentPredictionEngine: String {
+        userPreferences.predictionEngineType ?? "custom"
     }
     
     /// Audio feedback enabled state
