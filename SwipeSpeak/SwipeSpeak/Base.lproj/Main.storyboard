@@ -477,7 +477,7 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="ic_settings" id="GKk-sp-s3S">
                             <connections>
-                                <segue destination="6tf-5h-2xL" kind="presentation" identifier="toSettingsVC" modalPresentationStyle="formSheet" id="Mbn-50-vIx"/>
+                                <action selector="presentSettings" destination="9Am-1Y-Xgg" id="SwiftUI-Settings-Action"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

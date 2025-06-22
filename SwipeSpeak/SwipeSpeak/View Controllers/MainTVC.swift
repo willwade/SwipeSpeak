@@ -390,13 +390,13 @@ class MainTVC: UITableViewController {
         view.addSubview(hostingController.view)
         hostingController.didMove(toParent: self)
 
-        // Position the SwiftUI view to fill the space between table view top and keyboard container
+        // Position the SwiftUI view to fill the space between safe area top and keyboard container
         // This ensures it expands to use all available space above the keyboard
         NSLayoutConstraint.activate([
-            hostingController.view.topAnchor.constraint(equalTo: tableView.topAnchor),
+            hostingController.view.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             hostingController.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             hostingController.view.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            hostingController.view.bottomAnchor.constraint(equalTo: keyboardContainerView.topAnchor, constant: -8)
+            hostingController.view.bottomAnchor.constraint(equalTo: keyboardContainerView.topAnchor, constant: -4)
         ])
 
         // Ensure the SwiftUI view is interactive
@@ -404,6 +404,10 @@ class MainTVC: UITableViewController {
 
         // Set background to clear to avoid visual conflicts
         hostingController.view.backgroundColor = .clear
+
+        // Hide the table view to prevent UIKit elements from showing through
+        tableView.isHidden = true
+        tableView.backgroundColor = .clear
 
         // Initialize with current text values
         textDisplayViewModel.setSentenceText(sentenceLabel.text ?? "")

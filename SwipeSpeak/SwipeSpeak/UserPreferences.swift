@@ -145,9 +145,15 @@ class UserPreferences: ObservableObject {
         self.keyboardLayout = KeyboardLayout(rawValue: savedLayout) ?? KeyboardLayout.default
         self.enableCloudSync = userDefaults.bool(forKey: Keys.enableCloudSync)
 
-        // Enable CloudKit sync if enabled
+        // Enable CloudKit sync if enabled (but only if CloudKit is available)
         if self.enableCloudSync {
+            #if targetEnvironment(simulator)
+            // Disable CloudKit sync in simulator to prevent crashes
+            print("CloudKit sync disabled in simulator")
+            self.enableCloudSync = false
+            #else
             enableCloudKitSync()
+            #endif
         }
     }
 
@@ -251,6 +257,15 @@ class UserPreferences: ObservableObject {
     @Published var enableCloudSync: Bool = false {
         didSet {
             userDefaults.set(enableCloudSync, forKey: Keys.enableCloudSync)
+
+            #if targetEnvironment(simulator)
+            // Prevent CloudKit sync in simulator
+            if enableCloudSync {
+                print("CloudKit sync not supported in simulator")
+                enableCloudSync = false
+                return
+            }
+            #endif
 
             if enableCloudSync {
                 enableCloudKitSync()

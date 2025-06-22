@@ -84,7 +84,7 @@ struct KeyboardLayoutConfig {
                 text: letters.uppercased(),
                 letters: letters,
                 isSpecial: false,
-                textColor: .primary, // Use primary color for better contrast
+                textColor: .black, // Use black for maximum contrast against light backgrounds
                 backgroundColor: .clear
             )
         }
@@ -102,7 +102,7 @@ struct KeyboardLayoutConfig {
                 text: text,
                 letters: "",
                 isSpecial: isSpecial,
-                textColor: isSpecial ? .red : .primary, // Use primary color for better contrast
+                textColor: isSpecial ? .red : .black, // Use black for better contrast against light backgrounds
                 backgroundColor: .clear
             )
         }
@@ -146,28 +146,26 @@ struct KeyboardView: View {
     }
 
     private var keyboardGridView: some View {
-        VStack(spacing: 16) {
-            // Keyboard Grid - expand to fill available space
-            LazyVGrid(columns: keyboardConfig.gridColumns, spacing: 8) {
-                ForEach(keyboardConfig.keys) { key in
-                    KeyView(
-                        key: key,
-                        isHighlighted: highlightedKeyIndex == key.index,
-                        onTap: { handleKeyTap(key) },
-                        onSwipe: { direction, velocity in
-                            handleKeySwipe(key, direction: direction, velocity: velocity)
-                        }
-                    )
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-                }
+        // Keyboard Grid - expand to fill available space
+        LazyVGrid(columns: keyboardConfig.gridColumns, spacing: 8) {
+            ForEach(keyboardConfig.keys) { key in
+                KeyView(
+                    key: key,
+                    isHighlighted: highlightedKeyIndex == key.index,
+                    onTap: { handleKeyTap(key) },
+                    onSwipe: { direction, velocity in
+                        handleKeySwipe(key, direction: direction, velocity: velocity)
+                    }
+                )
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .padding()
-            .background(Color.white)
-            .cornerRadius(12)
-            .shadow(radius: 2)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .padding(.horizontal, 8)
+        .padding(.vertical, 8)
+        .background(Color(.systemBackground))
+        .cornerRadius(12)
+        .shadow(radius: 2)
     }
     
     // MARK: - Private Methods

@@ -61,10 +61,10 @@ struct KeyView: View {
         if isHighlighted {
             return .blue.opacity(0.3)
         } else if isPressed {
-            return .gray.opacity(0.2)
+            return .gray.opacity(0.4)
         } else {
-            // Use a more visible background for better contrast
-            return Color(.secondarySystemBackground)
+            // Use a light gray background for better text contrast
+            return Color(.systemGray6)
         }
     }
     

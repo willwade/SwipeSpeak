@@ -41,17 +41,33 @@ class CloudKitSyncManager: ObservableObject {
     // MARK: - Initialization
 
     private init() {
-        // Safely initialize CloudKit container
-        self.container = CKContainer.default()
-        self.database = container?.privateCloudDatabase
+        // Check if CloudKit is available at all before trying to initialize
+        #if targetEnvironment(simulator)
+        // CloudKit often doesn't work properly in simulator
+        print("Running in simulator - CloudKit disabled")
+        self.container = nil
+        self.database = nil
+        self.isCloudAvailable = false
+        #else
+        // Try to initialize CloudKit on device
+        do {
+            self.container = CKContainer.default()
+            self.database = container?.privateCloudDatabase
 
-        if container != nil {
-            print("CloudKit container initialized successfully")
-            checkCloudKitAvailability()
-        } else {
-            print("Failed to initialize CloudKit container")
-            isCloudAvailable = false
+            if container != nil {
+                print("CloudKit container initialized successfully")
+                checkCloudKitAvailability()
+            } else {
+                print("Failed to initialize CloudKit container")
+                self.isCloudAvailable = false
+            }
+        } catch {
+            print("CloudKit initialization failed: \(error)")
+            self.container = nil
+            self.database = nil
+            self.isCloudAvailable = false
         }
+        #endif
     }
     
     // MARK: - Public Methods
