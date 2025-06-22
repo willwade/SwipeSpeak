@@ -85,31 +85,29 @@ class NativePredictionEngine: PredictionEngine {
     }
 
     func suggestionsAsync(for keySequence: [Int]) async -> [(String, Int)] {
-        return await Task {
-            let startTime = CFAbsoluteTimeGetCurrent()
-            defer {
-                let endTime = CFAbsoluteTimeGetCurrent()
-                totalResponseTime += (endTime - startTime)
-                queryCount += 1
-            }
+        let startTime = CFAbsoluteTimeGetCurrent()
+        defer {
+            let endTime = CFAbsoluteTimeGetCurrent()
+            totalResponseTime += (endTime - startTime)
+            queryCount += 1
+        }
 
-            guard !keySequence.isEmpty else { return [] }
+        guard !keySequence.isEmpty else { return [] }
 
-            let cacheKey = keySequence.map(String.init).joined(separator:",")
+        let cacheKey = keySequence.map(String.init).joined(separator:",")
 
-            // Check cache first
-            if let cachedResult = getCachedSuggestions(for: cacheKey) {
-                cacheHits += 1
-                return cachedResult
-            }
+        // Check cache first
+        if let cachedResult = getCachedSuggestions(for: cacheKey) {
+            cacheHits += 1
+            return cachedResult
+        }
 
-            let suggestions = generateSuggestions(for: keySequence)
+        let suggestions = generateSuggestions(for: keySequence)
 
-            // Cache the result
-            setCachedSuggestions(suggestions, for: cacheKey)
+        // Cache the result
+        setCachedSuggestions(suggestions, for: cacheKey)
 
-            return suggestions
-        }.value
+        return suggestions
     }
     
     func insert(_ word: String, frequency: Int) throws {
@@ -264,22 +262,28 @@ class NativePredictionEngine: PredictionEngine {
     }
     
     private func setCachedSuggestions(_ suggestions: [(String, Int)], for key: String) {
-        cacheQueue.async(flags: .barrier) {
-            self.suggestionCache[key] = suggestions
-            
-            // Limit cache size
-            if self.suggestionCache.count > 1000 {
-                let keysToRemove = Array(self.suggestionCache.keys.prefix(100))
-                for keyToRemove in keysToRemove {
-                    self.suggestionCache.removeValue(forKey: keyToRemove)
+        cacheQueue.async(flags: .barrier) { [weak self] in
+            guard let self = self else { return }
+            Task { @MainActor in
+                self.suggestionCache[key] = suggestions
+
+                // Limit cache size
+                if self.suggestionCache.count > 1000 {
+                    let keysToRemove = Array(self.suggestionCache.keys.prefix(100))
+                    for keyToRemove in keysToRemove {
+                        self.suggestionCache.removeValue(forKey: keyToRemove)
+                    }
                 }
             }
         }
     }
     
     private func clearCache() {
-        cacheQueue.async(flags: .barrier) {
-            self.suggestionCache.removeAll()
+        cacheQueue.async(flags: .barrier) { [weak self] in
+            guard let self = self else { return }
+            Task { @MainActor in
+                self.suggestionCache.removeAll()
+            }
         }
     }
     

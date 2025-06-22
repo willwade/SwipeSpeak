@@ -8,9 +8,10 @@
 
 import XCTest
 import SwiftUI
-// import ViewInspector // Commented out until ViewInspector is properly configured
+import ViewInspector
 @testable import SwipeSpeak
 
+@MainActor
 final class TextDisplayViewTests: XCTestCase {
     
     var viewModel: TextDisplayViewModel!
@@ -32,7 +33,7 @@ final class TextDisplayViewTests: XCTestCase {
         let inspection = try view.inspect()
         
         // Verify the view contains a VStack
-        XCTAssertNoThrow(try inspection.find(ViewType.VStack.self))
+        XCTAssertNoThrow(try inspection.find(ViewInspector.ViewType.VStack.self))
     }
     
     func testTextDisplayViewStructure() throws {
@@ -40,7 +41,7 @@ final class TextDisplayViewTests: XCTestCase {
         let inspection = try view.inspect()
         
         // Should contain sentence display, word display, and predictions
-        let vstack = try inspection.find(ViewType.VStack.self)
+        let vstack = try inspection.find(ViewInspector.ViewType.VStack.self)
         XCTAssertNotNil(vstack)
         
         // Should have multiple child views
@@ -55,7 +56,7 @@ final class TextDisplayViewTests: XCTestCase {
         let inspection = try view.inspect()
         
         // Look for sentence text display
-        let texts = try inspection.findAll(ViewType.Text.self)
+        let texts = try inspection.findAll(ViewInspector.ViewType.Text.self)
         XCTAssertGreaterThan(texts.count, 0)
         
         // Should display the sentence text
@@ -78,8 +79,8 @@ final class TextDisplayViewTests: XCTestCase {
         viewModel.setSentenceText(newSentence)
         
         let inspection = try view.inspect()
-        let texts = try inspection.findAll(ViewType.Text.self)
-        
+        let texts = try inspection.findAll(ViewInspector.ViewType.Text.self)
+
         // Should display updated text
         var foundUpdatedText = false
         for text in texts {
@@ -91,13 +92,13 @@ final class TextDisplayViewTests: XCTestCase {
         }
         XCTAssertTrue(foundUpdatedText, "Should display updated sentence text")
     }
-    
+
     func testSentenceDisplayTapGesture() throws {
         let view = TextDisplayView(viewModel: viewModel)
         let inspection = try view.inspect()
-        
+
         // Find sentence display area
-        let texts = try inspection.findAll(ViewType.Text.self)
+        let texts = try inspection.findAll(ViewInspector.ViewType.Text.self)
         XCTAssertGreaterThan(texts.count, 0)
         
         // Should have tap gesture capability
@@ -112,8 +113,8 @@ final class TextDisplayViewTests: XCTestCase {
         let inspection = try view.inspect()
         
         // Look for word text display
-        let texts = try inspection.findAll(ViewType.Text.self)
-        
+        let texts = try inspection.findAll(ViewInspector.ViewType.Text.self)
+
         // Should display the current word
         var foundWordText = false
         for text in texts {
@@ -125,16 +126,16 @@ final class TextDisplayViewTests: XCTestCase {
         }
         XCTAssertTrue(foundWordText, "Should display current word")
     }
-    
+
     func testWordTextUpdate() throws {
         let view = TextDisplayView(viewModel: viewModel)
-        
+
         // Update word text
         let newWord = "updated"
         viewModel.setWordText(newWord)
-        
+
         let inspection = try view.inspect()
-        let texts = try inspection.findAll(ViewType.Text.self)
+        let texts = try inspection.findAll(ViewInspector.ViewType.Text.self)
         
         // Should display updated word
         var foundUpdatedWord = false
@@ -150,11 +151,11 @@ final class TextDisplayViewTests: XCTestCase {
     
     func testWordHighlighting() throws {
         let view = TextDisplayView(viewModel: viewModel)
-        
+
         // Test word highlighting state
-        viewModel.setWordHighlighted(true)
+        viewModel.highlightWord(true)
         let inspection = try view.inspect()
-        
+
         // Should have visual indication of highlighting
         // This would typically be tested through background color or border changes
         XCTAssertNotNil(inspection)
@@ -167,16 +168,16 @@ final class TextDisplayViewTests: XCTestCase {
         let inspection = try view.inspect()
         
         // Should have prediction buttons/labels
-        let buttons = try inspection.findAll(ViewType.Button.self)
+        let buttons = try inspection.findAll(ViewInspector.ViewType.Button.self)
         XCTAssertGreaterThanOrEqual(buttons.count, 6, "Should have 6 prediction buttons")
     }
-    
+
     func testPredictionLabelsContent() throws {
         let view = TextDisplayView(viewModel: viewModel)
         let inspection = try view.inspect()
-        
+
         // Check that predictions are displayed
-        let buttons = try inspection.findAll(ViewType.Button.self)
+        let buttons = try inspection.findAll(ViewInspector.ViewType.Button.self)
         
         let expectedPredictions = ["testing", "test", "tests", "tested", "tester"]
         var foundPredictions = 0
@@ -197,24 +198,24 @@ final class TextDisplayViewTests: XCTestCase {
         let inspection = try view.inspect()
         
         // Find first prediction button
-        let buttons = try inspection.findAll(ViewType.Button.self)
+        let buttons = try inspection.findAll(ViewInspector.ViewType.Button.self)
         XCTAssertGreaterThan(buttons.count, 0)
-        
+
         let firstButton = buttons[0]
-        
+
         // Should be able to tap prediction buttons
         XCTAssertNoThrow(try firstButton.tap())
     }
-    
+
     func testPredictionUpdate() throws {
         let view = TextDisplayView(viewModel: viewModel)
-        
+
         // Update predictions
         let newPredictions = ["hello", "help", "here", "heart", "heavy", ""]
         viewModel.updatePredictions(newPredictions)
-        
+
         let inspection = try view.inspect()
-        let buttons = try inspection.findAll(ViewType.Button.self)
+        let buttons = try inspection.findAll(ViewInspector.ViewType.Button.self)
         
         // Should display updated predictions
         var foundNewPredictions = 0
@@ -236,19 +237,19 @@ final class TextDisplayViewTests: XCTestCase {
         let inspection = try view.inspect()
         
         // Should use LazyVGrid for predictions
-        XCTAssertNoThrow(try inspection.find(ViewType.LazyVGrid.self))
+        XCTAssertNoThrow(try inspection.find(ViewInspector.ViewType.LazyVGrid.self))
     }
-    
+
     func testGridColumns() throws {
         let view = TextDisplayView(viewModel: viewModel)
         let inspection = try view.inspect()
-        
+
         // Grid should have proper column configuration
-        let grid = try inspection.find(ViewType.LazyVGrid.self)
+        let grid = try inspection.find(ViewInspector.ViewType.LazyVGrid.self)
         XCTAssertNotNil(grid)
-        
+
         // Should have 6 prediction items (including empty one)
-        let buttons = try inspection.findAll(ViewType.Button.self)
+        let buttons = try inspection.findAll(ViewInspector.ViewType.Button.self)
         XCTAssertGreaterThanOrEqual(buttons.count, 6)
     }
     
@@ -259,30 +260,30 @@ final class TextDisplayViewTests: XCTestCase {
         let inspection = try view.inspect()
         
         // Sentence display should have accessibility support
-        let texts = try inspection.findAll(ViewType.Text.self)
+        let texts = try inspection.findAll(ViewInspector.ViewType.Text.self)
         XCTAssertGreaterThan(texts.count, 0)
-        
+
         // Should have proper accessibility labels
         for text in texts {
             XCTAssertNotNil(text)
         }
     }
-    
+
     func testWordAccessibility() throws {
         let view = TextDisplayView(viewModel: viewModel)
         let inspection = try view.inspect()
-        
+
         // Word display should have accessibility support
-        let texts = try inspection.findAll(ViewType.Text.self)
+        let texts = try inspection.findAll(ViewInspector.ViewType.Text.self)
         XCTAssertGreaterThan(texts.count, 0)
     }
-    
+
     func testPredictionAccessibility() throws {
         let view = TextDisplayView(viewModel: viewModel)
         let inspection = try view.inspect()
-        
+
         // Prediction buttons should have accessibility support
-        let buttons = try inspection.findAll(ViewType.Button.self)
+        let buttons = try inspection.findAll(ViewInspector.ViewType.Button.self)
         
         for button in buttons {
             // Each button should have accessibility label
@@ -294,29 +295,29 @@ final class TextDisplayViewTests: XCTestCase {
     
     func testWordHighlightAnimation() throws {
         let view = TextDisplayView(viewModel: viewModel)
-        
+
         // Test highlighting animation
-        viewModel.setWordHighlighted(true)
-        
+        viewModel.highlightWord(true)
+
         // Animation should be smooth
         let inspection = try view.inspect()
         XCTAssertNotNil(inspection)
-        
+
         // Reset highlighting
-        viewModel.setWordHighlighted(false)
+        viewModel.highlightWord(false)
     }
-    
+
     func testPredictionSelectionAnimation() throws {
         let view = TextDisplayView(viewModel: viewModel)
-        
+
         // Test prediction selection animation
-        viewModel.setPredictionHighlighted(0, highlighted: true)
-        
+        viewModel.highlightPrediction(at: 0)
+
         let inspection = try view.inspect()
         XCTAssertNotNil(inspection)
-        
+
         // Reset highlighting
-        viewModel.setPredictionHighlighted(0, highlighted: false)
+        viewModel.highlightPrediction(at: nil)
     }
     
     // MARK: - Integration Tests
@@ -340,30 +341,33 @@ final class TextDisplayViewTests: XCTestCase {
         
         // Test callback functionality
         var callbackTriggered = false
-        
-        viewModel.onSentenceTap = {
+
+        viewModel.onSentenceTapped = {
             callbackTriggered = true
         }
-        
+
         // Simulate sentence tap
-        viewModel.onSentenceTap?()
+        viewModel.onSentenceTapped?()
         XCTAssertTrue(callbackTriggered, "Sentence tap callback should be triggered")
     }
-    
+
     func testPredictionCallback() throws {
         let view = TextDisplayView(viewModel: viewModel)
-        
+
         // Test prediction selection callback
         var selectedPrediction: String?
-        
-        viewModel.onPredictionTap = { prediction in
+        var selectedIndex: Int?
+
+        viewModel.onPredictionSelected = { prediction, index in
             selectedPrediction = prediction
+            selectedIndex = index
         }
-        
+
         // Simulate prediction tap
         let testPrediction = "testing"
-        viewModel.onPredictionTap?(testPrediction)
+        viewModel.onPredictionSelected?(testPrediction, 0)
         XCTAssertEqual(selectedPrediction, testPrediction, "Prediction callback should pass correct value")
+        XCTAssertEqual(selectedIndex, 0, "Prediction callback should pass correct index")
     }
     
     // MARK: - Performance Tests

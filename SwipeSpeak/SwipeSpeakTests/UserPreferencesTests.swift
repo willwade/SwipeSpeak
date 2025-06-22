@@ -9,6 +9,7 @@
 import XCTest
 @testable import SwipeSpeak
 
+@MainActor
 final class UserPreferencesTests: XCTestCase {
     
     var userPreferences: UserPreferences!
@@ -20,9 +21,8 @@ final class UserPreferencesTests: XCTestCase {
         UserDefaults.standard.removeObject(forKey: "predictionEngineType")
         UserDefaults.standard.removeObject(forKey: "keyboardLayout")
         UserDefaults.standard.removeObject(forKey: "speechRate")
-        UserDefaults.standard.removeObject(forKey: "speechPitch")
         UserDefaults.standard.removeObject(forKey: "speechVolume")
-        UserDefaults.standard.removeObject(forKey: "selectedVoiceIdentifier")
+        UserDefaults.standard.removeObject(forKey: "voiceIdentifier")
     }
     
     override func tearDownWithError() throws {
@@ -30,9 +30,8 @@ final class UserPreferencesTests: XCTestCase {
         UserDefaults.standard.removeObject(forKey: "predictionEngineType")
         UserDefaults.standard.removeObject(forKey: "keyboardLayout")
         UserDefaults.standard.removeObject(forKey: "speechRate")
-        UserDefaults.standard.removeObject(forKey: "speechPitch")
         UserDefaults.standard.removeObject(forKey: "speechVolume")
-        UserDefaults.standard.removeObject(forKey: "selectedVoiceIdentifier")
+        UserDefaults.standard.removeObject(forKey: "voiceIdentifier")
     }
     
     // MARK: - Singleton Tests
@@ -53,10 +52,9 @@ final class UserPreferencesTests: XCTestCase {
     func testPredictionEngineTypePersistence() throws {
         userPreferences.predictionEngineType = "native"
         XCTAssertEqual(userPreferences.predictionEngineType, "native")
-        
-        // Create new instance to test persistence
-        let newPrefs = UserPreferences()
-        XCTAssertEqual(newPrefs.predictionEngineType, "native")
+
+        // Test persistence by checking UserDefaults directly since constructor is private
+        XCTAssertEqual(UserDefaults.standard.string(forKey: "predictionEngineType"), "native")
     }
     
     func testPredictionEngineTypeValidValues() throws {
@@ -77,16 +75,15 @@ final class UserPreferencesTests: XCTestCase {
     
     func testKeyboardLayoutPersistence() throws {
         let originalLayout = userPreferences.keyboardLayout
-        
+
         // Change to a different layout
         let newLayout: KeyboardLayout = (originalLayout == .keys4) ? .keys6 : .keys4
         userPreferences.keyboardLayout = newLayout
-        
+
         XCTAssertEqual(userPreferences.keyboardLayout, newLayout)
-        
-        // Create new instance to test persistence
-        let newPrefs = UserPreferences()
-        XCTAssertEqual(newPrefs.keyboardLayout, newLayout)
+
+        // Test persistence by checking UserDefaults directly since constructor is private
+        XCTAssertEqual(UserDefaults.standard.integer(forKey: "keyboardLayout"), newLayout.rawValue)
     }
     
     // MARK: - Speech Settings Tests
@@ -102,28 +99,12 @@ final class UserPreferencesTests: XCTestCase {
         let testRate: Float = 0.75
         userPreferences.speechRate = testRate
         XCTAssertEqual(userPreferences.speechRate, testRate, accuracy: 0.01)
-        
-        // Create new instance to test persistence
-        let newPrefs = UserPreferences()
-        XCTAssertEqual(newPrefs.speechRate, testRate, accuracy: 0.01)
+
+        // Test persistence by checking UserDefaults directly since constructor is private
+        XCTAssertEqual(UserDefaults.standard.float(forKey: "speechRate"), testRate, accuracy: 0.01)
     }
     
-    func testSpeechPitchDefault() throws {
-        // Should have a reasonable default speech pitch
-        let pitch = userPreferences.speechPitch
-        XCTAssertGreaterThan(pitch, 0.0)
-        XCTAssertLessThanOrEqual(pitch, 2.0)
-    }
-    
-    func testSpeechPitchPersistence() throws {
-        let testPitch: Float = 1.25
-        userPreferences.speechPitch = testPitch
-        XCTAssertEqual(userPreferences.speechPitch, testPitch, accuracy: 0.01)
-        
-        // Create new instance to test persistence
-        let newPrefs = UserPreferences()
-        XCTAssertEqual(newPrefs.speechPitch, testPitch, accuracy: 0.01)
-    }
+    // Note: speechPitch property doesn't exist in current implementation
     
     func testSpeechVolumeDefault() throws {
         // Should have a reasonable default speech volume
@@ -136,27 +117,25 @@ final class UserPreferencesTests: XCTestCase {
         let testVolume: Float = 0.8
         userPreferences.speechVolume = testVolume
         XCTAssertEqual(userPreferences.speechVolume, testVolume, accuracy: 0.01)
-        
-        // Create new instance to test persistence
-        let newPrefs = UserPreferences()
-        XCTAssertEqual(newPrefs.speechVolume, testVolume, accuracy: 0.01)
+
+        // Test persistence by checking UserDefaults directly since constructor is private
+        XCTAssertEqual(UserDefaults.standard.float(forKey: "speechVolume"), testVolume, accuracy: 0.01)
     }
     
     // MARK: - Voice Selection Tests
     
-    func testSelectedVoiceIdentifierDefault() throws {
+    func testVoiceIdentifierDefault() throws {
         // Should be nil initially (will use system default)
-        XCTAssertNil(userPreferences.selectedVoiceIdentifier)
+        XCTAssertNil(userPreferences.voiceIdentifier)
     }
-    
-    func testSelectedVoiceIdentifierPersistence() throws {
+
+    func testVoiceIdentifierPersistence() throws {
         let testIdentifier = "com.apple.ttsbundle.Samantha-compact"
-        userPreferences.selectedVoiceIdentifier = testIdentifier
-        XCTAssertEqual(userPreferences.selectedVoiceIdentifier, testIdentifier)
-        
-        // Create new instance to test persistence
-        let newPrefs = UserPreferences()
-        XCTAssertEqual(newPrefs.selectedVoiceIdentifier, testIdentifier)
+        userPreferences.voiceIdentifier = testIdentifier
+        XCTAssertEqual(userPreferences.voiceIdentifier, testIdentifier)
+
+        // Test persistence by checking UserDefaults directly since constructor is private
+        XCTAssertEqual(UserDefaults.standard.string(forKey: "voiceIdentifier"), testIdentifier)
     }
     
     // MARK: - Edge Cases Tests
@@ -171,15 +150,7 @@ final class UserPreferencesTests: XCTestCase {
         XCTAssertLessThanOrEqual(userPreferences.speechRate, 1.0)
     }
     
-    func testInvalidSpeechPitchValues() throws {
-        // Test negative value
-        userPreferences.speechPitch = -1.0
-        XCTAssertGreaterThanOrEqual(userPreferences.speechPitch, 0.5)
-        
-        // Test extremely high value
-        userPreferences.speechPitch = 10.0
-        XCTAssertLessThanOrEqual(userPreferences.speechPitch, 2.0)
-    }
+    // Note: speechPitch property doesn't exist in current implementation
     
     func testInvalidSpeechVolumeValues() throws {
         // Test negative value
@@ -196,15 +167,13 @@ final class UserPreferencesTests: XCTestCase {
     func testMultiplePropertiesSimultaneously() throws {
         userPreferences.predictionEngineType = "native"
         userPreferences.speechRate = 0.6
-        userPreferences.speechPitch = 1.3
         userPreferences.speechVolume = 0.9
-        userPreferences.selectedVoiceIdentifier = "test.voice.identifier"
-        
+        userPreferences.voiceIdentifier = "test.voice.identifier"
+
         XCTAssertEqual(userPreferences.predictionEngineType, "native")
         XCTAssertEqual(userPreferences.speechRate, 0.6, accuracy: 0.01)
-        XCTAssertEqual(userPreferences.speechPitch, 1.3, accuracy: 0.01)
         XCTAssertEqual(userPreferences.speechVolume, 0.9, accuracy: 0.01)
-        XCTAssertEqual(userPreferences.selectedVoiceIdentifier, "test.voice.identifier")
+        XCTAssertEqual(userPreferences.voiceIdentifier, "test.voice.identifier")
     }
     
     // MARK: - Performance Tests
@@ -213,9 +182,9 @@ final class UserPreferencesTests: XCTestCase {
         measure {
             for _ in 0..<100 {
                 _ = userPreferences.speechRate
-                _ = userPreferences.speechPitch
                 _ = userPreferences.speechVolume
                 _ = userPreferences.predictionEngineType
+                _ = userPreferences.voiceIdentifier
             }
         }
     }

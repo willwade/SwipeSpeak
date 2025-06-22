@@ -25,7 +25,7 @@ enum WordPredictionError: Error {
 
 // Legacy NativePredictionEngine removed - use NativePredictionEngine from NativePredictionEngine.swift
 
-class WordPredictionEngine {
+class WordPredictionEngine: @unchecked Sendable {
     
     // MARK: Classes
     

@@ -415,7 +415,7 @@ final class AccessibilityTests: XCTestCase {
         XCTAssertNotNil(accessibilityHint)
     }
 
-    func testTextDisplayAccessibilityActions() throws {
+    func testTextDisplayAccessibilityActionsAdvanced() throws {
         let view = TextDisplayView(viewModel: textDisplayViewModel)
         let inspection = try view.inspect()
 

@@ -12,7 +12,7 @@ import UIKit
 
 typealias SwipeViewKeyNum = Int
 
-protocol SwipeViewDelegate {
+protocol SwipeViewDelegate: AnyObject {
     func keyEntered(key: SwipeViewKeyNum, isSwipe: Bool)
     func firstStrokeEntered(key: SwipeViewKeyNum, isSwipe: Bool)
     func secondStrokeEntered(key: SwipeViewKeyNum, isSwipe: Bool)

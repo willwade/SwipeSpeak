@@ -8,7 +8,7 @@
 
 import XCTest
 import SwiftUI
-// import ViewInspector // Commented out until ViewInspector is properly configured
+import ViewInspector
 @testable import SwipeSpeak
 
 /// Utilities for testing SwiftUI components in SwipeSpeak
@@ -47,8 +47,8 @@ class SwiftUITestUtilities {
     /// Assert that a view contains specific text
     static func assertContainsText<V: View>(_ view: V, text: String, file: StaticString = #file, line: UInt = #line) throws {
         let inspection = try view.inspect()
-        XCTAssertTrue(try inspection.findAll(ViewType.Text.self).contains { text in
-            try text.string().contains(text)
+        XCTAssertTrue(try inspection.findAll(ViewInspector.ViewType.Text.self).contains { textView in
+            try textView.string().contains(text)
         }, "View should contain text: \(text)", file: file, line: line)
     }
     
@@ -69,16 +69,16 @@ class SwiftUITestUtilities {
     /// Assert that a toggle exists with specific state
     static func assertToggleState<V: View>(_ view: V, withLabel label: String, isOn: Bool, file: StaticString = #file, line: UInt = #line) throws {
         let inspection = try view.inspect()
-        let toggle = try inspection.find(ViewType.Toggle.self) { toggle in
+        let toggle = try inspection.find(ViewInspector.ViewType.Toggle.self) { toggle in
             try toggle.labelView().text().string() == label
         }
         XCTAssertEqual(try toggle.isOn(), isOn, "Toggle '\(label)' should be \(isOn ? "on" : "off")", file: file, line: line)
     }
-    
+
     /// Simulate toggle tap
     static func tapToggle<V: View>(_ view: V, withLabel label: String) throws {
         let inspection = try view.inspect()
-        let toggle = try inspection.find(ViewType.Toggle.self) { toggle in
+        let toggle = try inspection.find(ViewInspector.ViewType.Toggle.self) { toggle in
             try toggle.labelView().text().string() == label
         }
         try toggle.tap()
@@ -105,16 +105,16 @@ class SwiftUITestUtilities {
     /// Assert that a NavigationLink exists
     static func assertNavigationLinkExists<V: View>(_ view: V, withText text: String, file: StaticString = #file, line: UInt = #line) throws {
         let inspection = try view.inspect()
-        let navigationLink = try inspection.find(ViewType.NavigationLink.self) { link in
+        let navigationLink = try inspection.find(ViewInspector.ViewType.NavigationLink.self) { link in
             try link.labelView().text().string() == text
         }
         XCTAssertNotNil(navigationLink, "NavigationLink with text '\(text)' should exist", file: file, line: line)
     }
-    
+
     /// Simulate NavigationLink tap
     static func tapNavigationLink<V: View>(_ view: V, withText text: String) throws {
         let inspection = try view.inspect()
-        let navigationLink = try inspection.find(ViewType.NavigationLink.self) { link in
+        let navigationLink = try inspection.find(ViewInspector.ViewType.NavigationLink.self) { link in
             try link.labelView().text().string() == text
         }
         try navigationLink.activate()
@@ -125,17 +125,17 @@ class SwiftUITestUtilities {
     /// Assert that a Picker exists with specific selection
     static func assertPickerSelection<V: View, T: Equatable>(_ view: V, withLabel label: String, expectedSelection: T, file: StaticString = #file, line: UInt = #line) throws {
         let inspection = try view.inspect()
-        let picker = try inspection.find(ViewType.Picker.self) { picker in
+        let picker = try inspection.find(ViewInspector.ViewType.Picker.self) { picker in
             try picker.labelView().text().string() == label
         }
         // Note: ViewInspector picker selection testing may need custom implementation
         XCTAssertNotNil(picker, "Picker with label '\(label)' should exist", file: file, line: line)
     }
-    
+
     /// Assert that a Slider exists with specific value
     static func assertSliderValue<V: View>(_ view: V, expectedValue: Double, tolerance: Double = 0.01, file: StaticString = #file, line: UInt = #line) throws {
         let inspection = try view.inspect()
-        let slider = try inspection.find(ViewType.Slider.self)
+        let slider = try inspection.find(ViewInspector.ViewType.Slider.self)
         let actualValue = try slider.value()
         XCTAssertEqual(actualValue, expectedValue, accuracy: tolerance, "Slider value should match expected value", file: file, line: line)
     }
@@ -145,30 +145,22 @@ class SwiftUITestUtilities {
     /// Assert that a List contains specific number of rows
     static func assertListRowCount<V: View>(_ view: V, expectedCount: Int, file: StaticString = #file, line: UInt = #line) throws {
         let inspection = try view.inspect()
-        let list = try inspection.find(ViewType.List.self)
+        let list = try inspection.find(ViewInspector.ViewType.List.self)
         let rowCount = try list.forEach().count
         XCTAssertEqual(rowCount, expectedCount, "List should contain \(expectedCount) rows", file: file, line: line)
     }
-    
+
     /// Assert that a specific row exists in a List
     static func assertListRowExists<V: View>(_ view: V, atIndex index: Int, file: StaticString = #file, line: UInt = #line) throws {
         let inspection = try view.inspect()
-        let list = try inspection.find(ViewType.List.self)
+        let list = try inspection.find(ViewInspector.ViewType.List.self)
         let row = try list.forEach()[index]
         XCTAssertNotNil(row, "List row at index \(index) should exist", file: file, line: line)
     }
 }
 
 // MARK: - ViewInspector Extensions
-
-extension Inspection {
-    /// Find a button by its text content
-    func find(button text: String) throws -> InspectableView<ViewType.Button> {
-        return try find(ViewType.Button.self) { button in
-            try button.labelView().text().string() == text
-        }
-    }
-}
+// Note: ViewInspector extensions would go here when needed
 
 // MARK: - Test Data Providers
 

@@ -19,8 +19,8 @@
 		DA0700191F0DA06B003BEE3D /* SwipeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0700181F0DA06B003BEE3D /* SwipeView.swift */; };
 		DA07001B1F0DA0C2003BEE3D /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA07001A1F0DA0C2003BEE3D /* Utility.swift */; };
 		DA07001D1F0DA15A003BEE3D /* WordPredictionEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA07001C1F0DA15A003BEE3D /* WordPredictionEngine.swift */; };
-		// DA0700411F0DA72B003BEE3D /* PredictionEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0700401F0DA72B003BEE3D /* PredictionEngine.swift */; };
-		// DA0700511F0DA72C003BEE3D /* NativePredictionEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0700501F0DA72C003BEE3D /* NativePredictionEngine.swift */; };
+		DA0700411F0DA72B003BEE3D /* PredictionEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0700401F0DA72B003BEE3D /* PredictionEngine.swift */; };
+		DA0700511F0DA72C003BEE3D /* NativePredictionEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0700501F0DA72C003BEE3D /* NativePredictionEngine.swift */; };
 
 		DA57B1FA1F0D9EC100895E18 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA57B1F91F0D9EC100895E18 /* AppDelegate.swift */; };
 		ABCD1234567890ABCDEF1234 /* SwipeSpeakApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABCD1234567890ABCDEF1235 /* SwipeSpeakApp.swift */; };
@@ -248,6 +248,7 @@
 			);
 			name = SwipeSpeakTests;
 			packageProductDependencies = (
+				DDC6F16A2E058F9900EFC306 /* ViewInspector */,
 			);
 			productName = SwipeSpeakTests;
 			productReference = DD2C9D482E07ADD80006658A /* SwipeSpeakTests.xctest */;
@@ -345,8 +346,8 @@
 				DA07001B1F0DA0C2003BEE3D /* Utility.swift in Sources */,
 				DA0700191F0DA06B003BEE3D /* SwipeView.swift in Sources */,
 				DA07001D1F0DA15A003BEE3D /* WordPredictionEngine.swift in Sources */,
-				// DA0700411F0DA72B003BEE3D /* PredictionEngine.swift in Sources */,
-				// DA0700511F0DA72C003BEE3D /* NativePredictionEngine.swift in Sources */,
+				DA0700411F0DA72B003BEE3D /* PredictionEngine.swift in Sources */,
+				DA0700511F0DA72C003BEE3D /* NativePredictionEngine.swift in Sources */,
 
 				DA57B1FA1F0D9EC100895E18 /* AppDelegate.swift in Sources */,
 				ABCD1234567890ABCDEF1234 /* SwipeSpeakApp.swift in Sources */,
@@ -673,6 +674,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = DDC6F1602E058E7F00EFC306 /* XCRemoteSwiftPackageReference "MarkdownView" */;
 			productName = MarkdownView;
+		};
+		DDC6F16A2E058F9900EFC306 /* ViewInspector */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DDC6F1692E058F9900EFC306 /* XCRemoteSwiftPackageReference "ViewInspector" */;
+			productName = ViewInspector;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

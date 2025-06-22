@@ -39,7 +39,8 @@ enum PredictionEngineType: String, CaseIterable {
 }
 
 /// Protocol defining the interface for word prediction engines
-protocol PredictionEngine {
+@MainActor
+protocol PredictionEngine: Sendable {
     /// The type of this prediction engine
     var engineType: PredictionEngineType { get }
 
@@ -157,7 +158,8 @@ class PredictionEngineManager {
     /// - Parameter keySequence: Array of integers representing key presses
     /// - Returns: Array of tuples containing (word, frequency/score)
     func suggestionsAsync(for keySequence: [Int]) async -> [(String, Int)] {
-        return await currentEngine?.suggestionsAsync(for: keySequence) ?? []
+        guard let engine = currentEngine else { return [] }
+        return await engine.suggestionsAsync(for: keySequence)
     }
     
     private func setupEngines() {
@@ -202,8 +204,8 @@ extension WordPredictionEngine: PredictionEngine {
     func suggestionsAsync(for keySequence: [Int]) async -> [(String, Int)] {
         // For the custom engine, delegate to the synchronous method
         // In a real implementation, this could perform actual async work
-        return await Task {
-            return suggestions(for: keySequence)
+        return await Task.detached { [self] in
+            return self.suggestions(for: keySequence)
         }.value
     }
 

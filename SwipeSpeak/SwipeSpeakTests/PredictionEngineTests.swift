@@ -9,6 +9,7 @@
 import XCTest
 @testable import SwipeSpeak
 
+@MainActor
 final class PredictionEngineTests: XCTestCase {
     
     var customEngine: WordPredictionEngine!
@@ -18,18 +19,18 @@ final class PredictionEngineTests: XCTestCase {
         customEngine = WordPredictionEngine()
         nativeEngine = NativePredictionEngine()
         
-        // Setup basic key letter grouping for testing
+        // Setup basic key letter grouping for testing - fix the type
         let keyLetterGrouping = [
-            ["a", "b", "c"],
-            ["d", "e", "f"],
-            ["g", "h", "i"],
-            ["j", "k", "l"],
-            ["m", "n", "o"],
-            ["p", "q", "r", "s"],
-            ["t", "u", "v"],
-            ["w", "x", "y", "z"]
+            "abc",
+            "def",
+            "ghi",
+            "jkl",
+            "mno",
+            "pqrs",
+            "tuv",
+            "wxyz"
         ]
-        
+
         customEngine.setKeyLetterGrouping(keyLetterGrouping, twoStrokes: false)
         nativeEngine.setKeyLetterGrouping(keyLetterGrouping, twoStrokes: false)
     }

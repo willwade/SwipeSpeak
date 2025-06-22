@@ -58,21 +58,21 @@ final class KeyboardViewTests: XCTestCase {
     }
     
     func testKeyboardKeyCreation() throws {
-        let key = KeyboardKey(
+        let key = SwiftUIKeyboardKey(
             index: 0,
             text: "ABCDEF",
             letters: "abcdef",
             isSpecial: false,
-            textColor: .white,
-            backgroundColor: .clear
+            textColor: Color.white,
+            backgroundColor: Color.clear
         )
-        
+
         XCTAssertEqual(key.index, 0)
         XCTAssertEqual(key.text, "ABCDEF")
         XCTAssertEqual(key.letters, "abcdef")
         XCTAssertFalse(key.isSpecial)
-        XCTAssertEqual(key.textColor, .white)
-        XCTAssertEqual(key.backgroundColor, .clear)
+        XCTAssertEqual(key.textColor, Color.white)
+        XCTAssertEqual(key.backgroundColor, Color.clear)
     }
     
     func testMSRKeyCreation() throws {

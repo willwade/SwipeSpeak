@@ -15,7 +15,7 @@ class MockSwipeViewDelegate: SwipeViewDelegate {
     var keyEnteredCalls: [(key: SwipeViewKeyNum, isSwipe: Bool)] = []
     var firstStrokeEnteredCalls: [(key: SwipeViewKeyNum, isSwipe: Bool)] = []
     var secondStrokeEnteredCalls: [(key: SwipeViewKeyNum, isSwipe: Bool)] = []
-    var longPressBegan = false
+    var longPressBeganCalled = false
     
     func keyEntered(key: SwipeViewKeyNum, isSwipe: Bool) {
         keyEnteredCalls.append((key: key, isSwipe: isSwipe))
@@ -30,14 +30,14 @@ class MockSwipeViewDelegate: SwipeViewDelegate {
     }
     
     func longPressBegan() {
-        longPressBegan = true
+        longPressBeganCalled = true
     }
     
     func reset() {
         keyEnteredCalls.removeAll()
         firstStrokeEnteredCalls.removeAll()
         secondStrokeEnteredCalls.removeAll()
-        longPressBegan = false
+        longPressBeganCalled = false
     }
 }
 
