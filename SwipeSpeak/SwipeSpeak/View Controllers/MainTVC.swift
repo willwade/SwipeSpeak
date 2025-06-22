@@ -325,6 +325,9 @@ class MainTVC: UITableViewController {
         // Ensure the SwiftUI keyboard is interactive
         hostingController.view.isUserInteractionEnabled = true
 
+        // Bring the SwiftUI keyboard to front
+        keyboardContainerView.bringSubviewToFront(hostingController.view)
+
         // Update the keyboard layout to match user preferences
         keyboardViewModel.keyboardLayout = UserPreferences.shared.keyboardLayout
 
@@ -402,12 +405,15 @@ class MainTVC: UITableViewController {
         // Ensure the SwiftUI view is interactive
         hostingController.view.isUserInteractionEnabled = true
 
-        // Set background to clear to avoid visual conflicts
-        hostingController.view.backgroundColor = .clear
+        // Set background to visible color for debugging
+        hostingController.view.backgroundColor = .systemBackground
 
-        // Hide the table view to prevent UIKit elements from showing through
-        tableView.isHidden = true
+        // Keep the table view visible but clear its background
         tableView.backgroundColor = .clear
+        tableView.separatorStyle = .none
+
+        // Ensure SwiftUI views are on top
+        view.bringSubviewToFront(hostingController.view)
 
         // Initialize with current text values
         textDisplayViewModel.setSentenceText(sentenceLabel.text ?? "")
