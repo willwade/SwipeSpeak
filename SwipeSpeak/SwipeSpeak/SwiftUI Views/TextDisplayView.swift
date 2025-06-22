@@ -80,11 +80,17 @@ struct SentenceDisplayView: View {
         .onLongPressGesture {
             onLongPress()
         }
-        .accessibilityLabel(text.isEmpty ? 
-            "Sentence area. Tap letters to spell words" : 
+        .accessibilityLabel(text.isEmpty ?
+            "Sentence area. Currently empty. Tap letters to spell words" :
             "Current sentence: \(text)")
-        .accessibilityHint("Tap to speak, long press to complete sentence")
+        .accessibilityHint("Double tap to speak sentence, long press to complete and clear")
         .accessibilityAddTraits(.isButton)
+        .accessibilityAction(.default) {
+            onTap()
+        }
+        .accessibilityAction(named: "Complete sentence") {
+            onLongPress()
+        }
     }
 }
 
@@ -126,11 +132,17 @@ struct WordDisplayView: View {
         .onLongPressGesture {
             onLongPress()
         }
-        .accessibilityLabel(text.isEmpty ? 
-            "Word area. Current input is empty" : 
-            "Current word input: \(text)")
-        .accessibilityHint("Tap to select word, long press to add to sentence")
+        .accessibilityLabel(text.isEmpty ?
+            "Word area. Current input is empty" :
+            "Current word being typed: \(text)")
+        .accessibilityHint("Double tap to select word, long press to add to sentence")
         .accessibilityAddTraits(.isButton)
+        .accessibilityAction(.default) {
+            onTap()
+        }
+        .accessibilityAction(named: "Add to sentence") {
+            onLongPress()
+        }
         .animation(.easeInOut(duration: 0.2), value: isHighlighted)
     }
 }
@@ -195,9 +207,19 @@ struct PredictionLabelView: View {
                 onLongPress()
             }
         }
-        .accessibilityLabel(text.isEmpty ? "" : "Prediction: \(text)")
-        .accessibilityHint(text.isEmpty ? "" : "Tap to select, long press to add to sentence")
+        .accessibilityLabel(text.isEmpty ? "" : "Word prediction: \(text)")
+        .accessibilityHint(text.isEmpty ? "" : "Double tap to select prediction, long press to add directly to sentence")
         .accessibilityAddTraits(text.isEmpty ? [] : .isButton)
+        .accessibilityAction(.default) {
+            if !text.isEmpty {
+                onTap()
+            }
+        }
+        .accessibilityAction(named: "Add to sentence") {
+            if !text.isEmpty {
+                onLongPress()
+            }
+        }
         .animation(.easeInOut(duration: 0.2), value: isHighlighted)
     }
 }

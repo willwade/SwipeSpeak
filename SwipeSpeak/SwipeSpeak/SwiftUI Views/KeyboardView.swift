@@ -113,6 +113,7 @@ struct KeyboardView: View {
     @State private var keyboardConfig: KeyboardLayoutConfig
     @State private var highlightedKeyIndex: Int? = nil
     @StateObject private var animationManager = AnimationStateManager()
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
     
     init(viewModel: KeyboardViewModel) {
         self._viewModel = StateObject(wrappedValue: viewModel)
@@ -130,6 +131,7 @@ struct KeyboardView: View {
                         onTap: { handleKeyTap(key) },
                         onSwipe: { direction, velocity in handleKeySwipe(key, direction: direction, velocity: velocity) }
                     )
+
                 }
             }
             .padding()
@@ -137,15 +139,28 @@ struct KeyboardView: View {
             .cornerRadius(12)
             .shadow(radius: 2)
         }
+        .accessibilityElement(children: .contain)
+        .accessibilityLabel("SwipeSpeak keyboard with \(keyboardConfig.keys.count) keys")
+        .accessibilityHint("Swipe or tap keys to enter letters. Current layout: \(keyboardConfig.layout.rawValue)")
         .layoutTransition(isTransitioning: animationManager.isLayoutTransitioning)
+        .animation(reduceMotion ? nil : AnimationConfig.layoutTransition, value: viewModel.keyboardLayout)
         .onChange(of: viewModel.keyboardLayout) { _, newLayout in
             animationManager.startLayoutTransition()
-            withAnimation(AnimationConfig.layoutTransition) {
+
+            // Announce layout change to VoiceOver users
+            UIAccessibility.post(notification: .announcement, argument: "Keyboard layout changed to \(newLayout.rawValue)")
+
+            if reduceMotion {
                 keyboardConfig = KeyboardLayoutConfig.config(for: newLayout)
+            } else {
+                withAnimation(AnimationConfig.layoutTransition) {
+                    keyboardConfig = KeyboardLayoutConfig.config(for: newLayout)
+                }
             }
         }
         .onChange(of: viewModel.enteredKeys) { _, _ in
             updateKeyHighlighting()
+            announceKeyEntry()
         }
     }
     
@@ -248,6 +263,15 @@ struct KeyboardView: View {
     private func updateKeyHighlighting() {
         // Update key highlighting based on current state
         // This will be enhanced with more sophisticated highlighting logic
+    }
+
+    private func announceKeyEntry() {
+        guard UIAccessibility.isVoiceOverRunning else { return }
+
+        if let lastKey = viewModel.enteredKeys.last {
+            let keyText = keyboardConfig.keys.first { $0.index == lastKey }?.letters ?? "key \(lastKey)"
+            UIAccessibility.post(notification: .announcement, argument: "Entered \(keyText)")
+        }
     }
 }
 

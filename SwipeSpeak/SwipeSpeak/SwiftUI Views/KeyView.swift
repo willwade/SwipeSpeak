@@ -99,14 +99,18 @@ struct KeyView: View {
     
     private var accessibilityLabel: String {
         if key.isSpecial {
-            return key.text
+            return "\(key.text) key"
         } else {
-            return "Key with letters: \(key.letters)"
+            return "Key with letters: \(key.letters.uppercased())"
         }
     }
-    
+
     private var accessibilityHint: String {
-        "Tap to select this key, or swipe in any direction for different keys"
+        if key.isSpecial {
+            return "Double tap to activate \(key.text)"
+        } else {
+            return "Double tap to select, or swipe in any direction for different letters"
+        }
     }
     
     // MARK: - Gesture Handling
