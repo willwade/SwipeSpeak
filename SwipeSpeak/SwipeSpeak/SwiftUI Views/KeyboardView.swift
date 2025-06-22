@@ -127,7 +127,7 @@ struct KeyboardView: View {
                         key: key,
                         isHighlighted: highlightedKeyIndex == key.index,
                         onTap: { handleKeyTap(key) },
-                        onSwipe: { direction in handleKeySwipe(key, direction: direction) }
+                        onSwipe: { direction, velocity in handleKeySwipe(key, direction: direction, velocity: velocity) }
                     )
                 }
             }
@@ -160,15 +160,15 @@ struct KeyboardView: View {
         }
     }
     
-    private func handleKeySwipe(_ key: KeyboardKey, direction: SwipeDirection) {
+    private func handleKeySwipe(_ key: KeyboardKey, direction: SwipeDirection, velocity: CGSize) {
         highlightKey(key.index)
-        
+
         if keyboardConfig.layout == .msr {
-            handleMSRKeySwipe(key, direction: direction)
+            handleMSRKeySwipe(key, direction: direction, velocity: velocity)
         } else if keyboardConfig.layout == .strokes2 {
-            handleTwoStrokeKeySwipe(key, direction: direction)
+            handleTwoStrokeKeySwipe(key, direction: direction, velocity: velocity)
         } else {
-            handleRegularKeySwipe(key, direction: direction)
+            handleRegularKeySwipe(key, direction: direction, velocity: velocity)
         }
     }
     
@@ -176,8 +176,8 @@ struct KeyboardView: View {
         viewModel.keyEntered(key: key.index, isSwipe: false)
     }
     
-    private func handleRegularKeySwipe(_ key: KeyboardKey, direction: SwipeDirection) {
-        let swipeKeyIndex = SwipeDirection.keyIndex(for: direction, numberOfKeys: keyboardConfig.keys.count)
+    private func handleRegularKeySwipe(_ key: KeyboardKey, direction: SwipeDirection, velocity: CGSize) {
+        let swipeKeyIndex = SwipeDirection.keyIndex(for: velocity, numberOfKeys: keyboardConfig.keys.count)
         viewModel.keyEntered(key: swipeKeyIndex, isSwipe: true)
     }
     
@@ -193,9 +193,24 @@ struct KeyboardView: View {
         }
     }
     
-    private func handleTwoStrokeKeySwipe(_ key: KeyboardKey, direction: SwipeDirection) {
-        let swipeKeyIndex = SwipeDirection.keyIndex(for: direction, numberOfKeys: keyboardConfig.keys.count)
-        
+    private func handleTwoStrokeKeySwipe(_ key: KeyboardKey, direction: SwipeDirection, velocity: CGSize) {
+        let numberOfKeys: Int
+        if viewModel.isTwoStrokesMode {
+            if viewModel.firstStroke == nil {
+                numberOfKeys = -1
+            } else {
+                if viewModel.firstStroke == 5 {
+                    numberOfKeys = -3
+                } else {
+                    numberOfKeys = -2
+                }
+            }
+        } else {
+            numberOfKeys = keyboardConfig.keys.count
+        }
+
+        let swipeKeyIndex = SwipeDirection.keyIndex(for: velocity, numberOfKeys: numberOfKeys)
+
         if viewModel.isTwoStrokesMode {
             if viewModel.firstStroke == nil {
                 viewModel.firstStrokeEntered(key: swipeKeyIndex, isSwipe: true)
@@ -212,8 +227,8 @@ struct KeyboardView: View {
         viewModel.msrKeyEntered(key: key.index, isSwipe: false)
     }
     
-    private func handleMSRKeySwipe(_ key: KeyboardKey, direction: SwipeDirection) {
-        let swipeKeyIndex = SwipeDirection.keyIndex(for: direction, numberOfKeys: keyboardConfig.keys.count)
+    private func handleMSRKeySwipe(_ key: KeyboardKey, direction: SwipeDirection, velocity: CGSize) {
+        let swipeKeyIndex = SwipeDirection.keyIndex(for: velocity, numberOfKeys: keyboardConfig.keys.count)
         viewModel.msrKeyEntered(key: swipeKeyIndex, isSwipe: true)
     }
     
@@ -236,15 +251,105 @@ struct KeyboardView: View {
 
 enum SwipeDirection: CaseIterable {
     case up, down, left, right
-    
-    static func keyIndex(for direction: SwipeDirection, numberOfKeys: Int) -> Int {
-        // This implements the same logic as SwipeView.keyIndexForSwipe
-        // For now, return a simple mapping - will be enhanced with proper angle calculation
-        switch direction {
-        case .up: return 0
-        case .right: return 1
-        case .left: return 2
-        case .down: return 3
+
+    /// Calculate key index based on velocity and number of keys, matching UIKit SwipeView logic
+    static func keyIndex(for velocity: CGSize, numberOfKeys: Int) -> Int {
+        var degree = Double(atan2(velocity.y, velocity.x)) * 180 / Double.pi
+        if degree < 0 {
+            degree += 360
+        }
+
+        if numberOfKeys == 4 {
+            if (315 <= degree && degree <= 360) || (0 <= degree && degree < 45) {
+                return 1
+            } else if (45 <= degree && degree < 135) {
+                return 3
+            } else if (135 <= degree && degree < 225) {
+                return 2
+            } else if (225 <= degree && degree < 315) {
+                return 0
+            }
+        } else if numberOfKeys == 6 {
+            if (0 <= degree && degree < 60) {
+                return 3
+            } else if (60 <= degree && degree < 120) {
+                return 4
+            } else if (120 <= degree && degree < 180) {
+                return 5
+            } else if (180 <= degree && degree < 240) {
+                return 2
+            } else if (240 <= degree && degree < 300) {
+                return 1
+            } else if (300 <= degree && degree <= 360) {
+                return 0
+            }
+        } else if numberOfKeys == 8 {
+            if (337.5 <= degree && degree <= 360) || (0 <= degree && degree < 22.5) {
+                return 3
+            } else if (22.5 <= degree && degree < 67.5) {
+                return 4
+            } else if (67.5 <= degree && degree < 112.5) {
+                return 5
+            } else if (112.5 <= degree && degree < 157.5) {
+                return 6
+            } else if (157.5 <= degree && degree < 202.5) {
+                return 7
+            } else if (202.5 <= degree && degree < 247.5) {
+                return 0
+            } else if (247.5 <= degree && degree < 292.5) {
+                return 1
+            } else if (292.5 <= degree && degree < 337.5) {
+                return 2
+            }
+        } else if numberOfKeys == -1 { // 6 directions for Steve keyboard layout, stroke 1
+            if (0 <= degree && degree < 60) {
+                return 3
+            } else if (60 <= degree && degree < 120) {
+                return 4
+            } else if (120 <= degree && degree < 180) {
+                return 5
+            } else if (180 <= degree && degree < 240) {
+                return 2
+            } else if (240 <= degree && degree < 300) {
+                return 1
+            } else if (300 <= degree && degree <= 360) {
+                return 0
+            }
+        } else if numberOfKeys == -2 { // 4 directions for Steve keyboard layout, stroke 2
+            if (315 <= degree && degree <= 360) || (0 <= degree && degree < 45) {
+                return 0
+            } else if (45 <= degree && degree < 135) {
+                return 3
+            } else if (135 <= degree && degree < 225) {
+                return 2
+            } else if (225 <= degree && degree < 315) {
+                return 1
+            }
+        } else if numberOfKeys == -3 { // 6 directions(include Y,Z) for Steve keyboard layout, stroke 2
+            let unit = 22.5
+            if (unit*14 <= degree && degree <= 360) || (0 <= degree && degree < unit) {
+                return 0
+            } else if (unit <= degree && degree < unit*3) {
+                return 4
+            } else if (unit*3 <= degree && degree < unit*5) {
+                return 3
+            } else if (unit*5 <= degree && degree < unit*7) {
+                return 5
+            } else if (unit*7 <= degree && degree < unit*10) {
+                return 2
+            } else if (unit*10 <= degree && degree < unit*14) {
+                return 1
+            }
+        }
+        return 0
+    }
+
+    /// Simple direction detection for basic swipe recognition
+    static func direction(for velocity: CGSize) -> SwipeDirection {
+        if abs(velocity.x) > abs(velocity.y) {
+            return velocity.x > 0 ? .right : .left
+        } else {
+            return velocity.y > 0 ? .down : .up
         }
     }
 }

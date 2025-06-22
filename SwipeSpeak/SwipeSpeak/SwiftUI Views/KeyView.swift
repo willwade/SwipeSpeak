@@ -13,7 +13,7 @@ struct KeyView: View {
     let key: KeyboardKey
     let isHighlighted: Bool
     let onTap: () -> Void
-    let onSwipe: (SwipeDirection) -> Void
+    let onSwipe: (SwipeDirection, CGSize) -> Void
     
     @State private var dragOffset: CGSize = .zero
     @State private var isPressed: Bool = false
@@ -141,9 +141,9 @@ struct KeyView: View {
             // This was a tap
             onTap()
         } else {
-            // This was a swipe - determine direction
+            // This was a swipe - determine direction and pass velocity
             let swipeDirection = determineSwipeDirection(translation: translation, velocity: velocity)
-            onSwipe(swipeDirection)
+            onSwipe(swipeDirection, velocity)
         }
     }
     
@@ -198,17 +198,17 @@ struct PulseAnimationModifier: ViewModifier {
             key: KeyboardKey(index: 0, text: "ABCDEF", letters: "abcdef"),
             isHighlighted: false,
             onTap: { print("Tapped") },
-            onSwipe: { direction in print("Swiped \(direction)") }
+            onSwipe: { direction, velocity in print("Swiped \(direction) with velocity \(velocity)") }
         )
-        
+
         // Highlighted key
         KeyView(
             key: KeyboardKey(index: 1, text: "GHIJKL", letters: "ghijkl"),
             isHighlighted: true,
             onTap: { print("Tapped") },
-            onSwipe: { direction in print("Swiped \(direction)") }
+            onSwipe: { direction, velocity in print("Swiped \(direction) with velocity \(velocity)") }
         )
-        
+
         // Special MSR key
         KeyView(
             key: KeyboardKey(
@@ -220,7 +220,7 @@ struct PulseAnimationModifier: ViewModifier {
             ),
             isHighlighted: false,
             onTap: { print("Tapped") },
-            onSwipe: { direction in print("Swiped \(direction)") }
+            onSwipe: { direction, velocity in print("Swiped \(direction) with velocity \(velocity)") }
         )
     }
     .padding()
