@@ -112,6 +112,7 @@ struct KeyboardView: View {
     @StateObject private var viewModel: KeyboardViewModel
     @State private var keyboardConfig: KeyboardLayoutConfig
     @State private var highlightedKeyIndex: Int? = nil
+    @StateObject private var animationManager = AnimationStateManager()
     
     init(viewModel: KeyboardViewModel) {
         self._viewModel = StateObject(wrappedValue: viewModel)
@@ -136,8 +137,10 @@ struct KeyboardView: View {
             .cornerRadius(12)
             .shadow(radius: 2)
         }
+        .layoutTransition(isTransitioning: animationManager.isLayoutTransitioning)
         .onChange(of: viewModel.keyboardLayout) { _, newLayout in
-            withAnimation(.easeInOut(duration: 0.3)) {
+            animationManager.startLayoutTransition()
+            withAnimation(AnimationConfig.layoutTransition) {
                 keyboardConfig = KeyboardLayoutConfig.config(for: newLayout)
             }
         }
@@ -234,7 +237,8 @@ struct KeyboardView: View {
     
     private func highlightKey(_ index: Int) {
         highlightedKeyIndex = index
-        
+        animationManager.highlightKey(index)
+
         // Remove highlight after animation
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
             highlightedKeyIndex = nil

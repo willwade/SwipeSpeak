@@ -17,6 +17,8 @@ struct KeyView: View {
     
     @State private var dragOffset: CGSize = .zero
     @State private var isPressed: Bool = false
+    @State private var swipeDirection: SwipeDirection? = nil
+    @StateObject private var hapticManager = HapticFeedbackManager.shared
     
     var body: some View {
         ZStack {
@@ -36,9 +38,9 @@ struct KeyView: View {
                 .padding(8)
         }
         .frame(minHeight: keyHeight)
-        .scaleEffect(isPressed ? 0.95 : 1.0)
-        .animation(.easeInOut(duration: 0.1), value: isPressed)
-        .animation(.easeInOut(duration: 0.2), value: isHighlighted)
+        .keyPress(isPressed: isPressed)
+        .keyHighlight(isHighlighted: isHighlighted, type: .border)
+        .swipeIndicator(direction: swipeDirection, isActive: swipeDirection != nil)
         .gesture(
             DragGesture(minimumDistance: 0)
                 .onChanged { value in
@@ -115,8 +117,7 @@ struct KeyView: View {
         if !isPressed {
             isPressed = true
             // Provide haptic feedback on initial press
-            let impactFeedback = UIImpactFeedbackGenerator(style: .light)
-            impactFeedback.impactOccurred()
+            hapticManager.keyPress()
         }
     }
     
@@ -142,8 +143,20 @@ struct KeyView: View {
             onTap()
         } else {
             // This was a swipe - determine direction and pass velocity
-            let swipeDirection = determineSwipeDirection(translation: translation, velocity: velocity)
-            onSwipe(swipeDirection, velocity)
+            let detectedDirection = determineSwipeDirection(translation: translation, velocity: velocity)
+
+            // Show swipe direction indicator
+            swipeDirection = detectedDirection
+
+            // Provide haptic feedback for swipe
+            hapticManager.keySwipe()
+
+            // Clear swipe indicator after delay
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                swipeDirection = nil
+            }
+
+            onSwipe(detectedDirection, velocity)
         }
     }
     
