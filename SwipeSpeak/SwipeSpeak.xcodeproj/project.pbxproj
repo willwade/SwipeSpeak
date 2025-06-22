@@ -3,11 +3,13 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 54;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		31656ADF20EEEAD700059AFA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 31656ADE20EEEAD700059AFA /* Assets.xcassets */; };
+		65BAB22629F944CE94D082B7 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6C57A2B87714BE3827B3AC4 /* SettingsViewModel.swift */; };
+		7009779B245E4A87AD4C9ABA /* KeyboardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A094360083F94AFE8FAEE668 /* KeyboardViewModel.swift */; };
 		B928F1E01FB49EEF00302E70 /* SpeechSynthesizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B928F1DF1FB49EEF00302E70 /* SpeechSynthesizer.swift */; };
 		B93BCCA01FD7F8DC007BFCC3 /* AcknowledgementsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B93BCC9F1FD7F8DC007BFCC3 /* AcknowledgementsVC.swift */; };
 		B95CB4191FAFBCAA00F705EB /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B95CB4171FAFBCAA00F705EB /* Settings.storyboard */; };
@@ -26,20 +28,33 @@
 		DA0700251F0DA98F003BEE3D /* UserAddedWordListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0700241F0DA98F003BEE3D /* UserAddedWordListVC.swift */; };
 		DA0700271F0DB116003BEE3D /* SentenceHistoryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0700261F0DB116003BEE3D /* SentenceHistoryVC.swift */; };
 		DA57B1FA1F0D9EC100895E18 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA57B1F91F0D9EC100895E18 /* AppDelegate.swift */; };
-		7009779B245E4A87AD4C9ABA /* KeyboardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A094360083F94AFE8FAEE668 /* KeyboardViewModel.swift */; };
-		65BAB22629F944CE94D082B7 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6C57A2B87714BE3827B3AC4 /* SettingsViewModel.swift */; };
-		F1A2B3C4D5E6F7890ABCDEF1 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1234567890ABCDEF12345678 /* SettingsView.swift */; };
-		F2A3B4C5D6E7F8901BCDEF12 /* SwiftUIBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2345678901BCDEF123456789 /* SwiftUIBridge.swift */; };
-		F3A4B5C6D7E8F9012CDEF123 /* TextDisplayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3456789012CDEF1234567890 /* TextDisplayView.swift */; };
-		F4A5B6C7D8E9F0123DEF1234 /* TextDisplayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4567890123DEF12345678901 /* TextDisplayViewModel.swift */; };
 		DA57B1FF1F0D9EC100895E18 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA57B1FD1F0D9EC100895E18 /* Main.storyboard */; };
 		DDC6F1622E058E7F00EFC306 /* MarkdownView in Frameworks */ = {isa = PBXBuildFile; productRef = DDC6F1612E058E7F00EFC306 /* MarkdownView */; };
 		DDC6F1652E058EEA00EFC306 /* DZNEmptyDataSet in Frameworks */ = {isa = PBXBuildFile; productRef = DDC6F1642E058EEA00EFC306 /* DZNEmptyDataSet */; };
 		DDC6F1682E058F6500EFC306 /* Zephyr in Frameworks */ = {isa = PBXBuildFile; productRef = DDC6F1672E058F6500EFC306 /* Zephyr */; };
+		F1A2B3C4D5E6F7890ABCDEF1 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1234567890ABCDEF12345678 /* SettingsView.swift */; };
+		F2A3B4C5D6E7F8901BCDEF12 /* SwiftUIBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2345678901BCDEF123456789 /* SwiftUIBridge.swift */; };
+		F3A4B5C6D7E8F9012CDEF123 /* TextDisplayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3456789012CDEF1234567890 /* TextDisplayView.swift */; };
+		F4A5B6C7D8E9F0123DEF1234 /* TextDisplayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4567890123DEF12345678901 /* TextDisplayViewModel.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		DD2C9D4C2E07ADD80006658A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DA57B1EE1F0D9EC100895E18 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DA57B1F51F0D9EC100895E18;
+			remoteInfo = SwipeSpeak;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		1234567890ABCDEF12345678 /* SettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		2345678901BCDEF123456789 /* SwiftUIBridge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftUIBridge.swift; sourceTree = "<group>"; };
 		31656ADE20EEEAD700059AFA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		3456789012CDEF1234567890 /* TextDisplayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextDisplayView.swift; sourceTree = "<group>"; };
+		4567890123DEF12345678901 /* TextDisplayViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextDisplayViewModel.swift; sourceTree = "<group>"; };
+		A094360083F94AFE8FAEE668 /* KeyboardViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardViewModel.swift; sourceTree = "<group>"; };
 		B928F1DF1FB49EEF00302E70 /* SpeechSynthesizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechSynthesizer.swift; sourceTree = "<group>"; };
 		B93BCC9F1FD7F8DC007BFCC3 /* AcknowledgementsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcknowledgementsVC.swift; sourceTree = "<group>"; };
 		B952C900200FB0370020161E /* word_frequency_german.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = word_frequency_german.csv; sourceTree = "<group>"; };
@@ -66,13 +81,13 @@
 		DA57B1F91F0D9EC100895E18 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DA57B1FE1F0D9EC100895E18 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		DA57B2051F0D9EC100895E18 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A094360083F94AFE8FAEE668 /* KeyboardViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardViewModel.swift; sourceTree = "<group>"; };
+		DD2C9D482E07ADD80006658A /* SwipeSpeakTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwipeSpeakTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6C57A2B87714BE3827B3AC4 /* SettingsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
-		1234567890ABCDEF12345678 /* SettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
-		2345678901BCDEF123456789 /* SwiftUIBridge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftUIBridge.swift; sourceTree = "<group>"; };
-		3456789012CDEF1234567890 /* TextDisplayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextDisplayView.swift; sourceTree = "<group>"; };
-		4567890123DEF12345678901 /* TextDisplayViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextDisplayViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		DD2C9D492E07ADD80006658A /* SwipeSpeakTests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = SwipeSpeakTests; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		DA57B1F31F0D9EC100895E18 /* Frameworks */ = {
@@ -85,9 +100,36 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		DD2C9D452E07ADD80006658A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4EC6D480B15646ECAD092CBA /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				A094360083F94AFE8FAEE668 /* KeyboardViewModel.swift */,
+				E6C57A2B87714BE3827B3AC4 /* SettingsViewModel.swift */,
+				4567890123DEF12345678901 /* TextDisplayViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		9876543210FEDCBA98765432 /* SwiftUI Views */ = {
+			isa = PBXGroup;
+			children = (
+				1234567890ABCDEF12345678 /* SettingsView.swift */,
+				2345678901BCDEF123456789 /* SwiftUIBridge.swift */,
+				3456789012CDEF1234567890 /* TextDisplayView.swift */,
+			);
+			path = "SwiftUI Views";
+			sourceTree = "<group>";
+		};
 		B93BCCA11FD7F8E5007BFCC3 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -116,30 +158,11 @@
 			path = "View Controllers";
 			sourceTree = "<group>";
 		};
-		4EC6D480B15646ECAD092CBA /* ViewModels */ = {
-			isa = PBXGroup;
-			children = (
-				A094360083F94AFE8FAEE668 /* KeyboardViewModel.swift */,
-				E6C57A2B87714BE3827B3AC4 /* SettingsViewModel.swift */,
-				4567890123DEF12345678901 /* TextDisplayViewModel.swift */,
-			);
-			path = ViewModels;
-			sourceTree = "<group>";
-		};
-		9876543210FEDCBA98765432 /* SwiftUI Views */ = {
-			isa = PBXGroup;
-			children = (
-				1234567890ABCDEF12345678 /* SettingsView.swift */,
-				2345678901BCDEF123456789 /* SwiftUIBridge.swift */,
-				3456789012CDEF1234567890 /* TextDisplayView.swift */,
-			);
-			path = "SwiftUI Views";
-			sourceTree = "<group>";
-		};
 		DA57B1ED1F0D9EC100895E18 = {
 			isa = PBXGroup;
 			children = (
 				DA57B1F81F0D9EC100895E18 /* SwipeSpeak */,
+				DD2C9D492E07ADD80006658A /* SwipeSpeakTests */,
 				DA57B1F71F0D9EC100895E18 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -148,6 +171,7 @@
 			isa = PBXGroup;
 			children = (
 				DA57B1F61F0D9EC100895E18 /* SwipeSpeak.app */,
+				DD2C9D482E07ADD80006658A /* SwipeSpeakTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -195,13 +219,36 @@
 			productReference = DA57B1F61F0D9EC100895E18 /* SwipeSpeak.app */;
 			productType = "com.apple.product-type.application";
 		};
+		DD2C9D472E07ADD80006658A /* SwipeSpeakTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DD2C9D502E07ADD80006658A /* Build configuration list for PBXNativeTarget "SwipeSpeakTests" */;
+			buildPhases = (
+				DD2C9D442E07ADD80006658A /* Sources */,
+				DD2C9D452E07ADD80006658A /* Frameworks */,
+				DD2C9D462E07ADD80006658A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				DD2C9D4D2E07ADD80006658A /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				DD2C9D492E07ADD80006658A /* SwipeSpeakTests */,
+			);
+			name = SwipeSpeakTests;
+			packageProductDependencies = (
+			);
+			productName = SwipeSpeakTests;
+			productReference = DD2C9D482E07ADD80006658A /* SwipeSpeakTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		DA57B1EE1F0D9EC100895E18 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0830;
+				LastSwiftUpdateCheck = 1640;
 				LastUpgradeCheck = 0940;
 				ORGANIZATIONNAME = TeamGleason;
 				TargetAttributes = {
@@ -214,6 +261,10 @@
 								enabled = 1;
 							};
 						};
+					};
+					DD2C9D472E07ADD80006658A = {
+						CreatedOnToolsVersion = 16.4;
+						TestTargetID = DA57B1F51F0D9EC100895E18;
 					};
 				};
 			};
@@ -231,12 +282,14 @@
 				DDC6F1602E058E7F00EFC306 /* XCRemoteSwiftPackageReference "MarkdownView" */,
 				DDC6F1632E058EEA00EFC306 /* XCRemoteSwiftPackageReference "DZNEmptyDataSet" */,
 				DDC6F1662E058F6500EFC306 /* XCRemoteSwiftPackageReference "Zephyr" */,
+				DDC6F1692E058F9900EFC306 /* XCRemoteSwiftPackageReference "ViewInspector" */,
 			);
 			productRefGroup = DA57B1F71F0D9EC100895E18 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
 				DA57B1F51F0D9EC100895E18 /* SwipeSpeak */,
+				DD2C9D472E07ADD80006658A /* SwipeSpeakTests */,
 			);
 		};
 /* End PBXProject section */
@@ -251,6 +304,13 @@
 				B9E23BDB1FEAAFAD00EE3998 /* word_frequency_english_ucrel.csv in Resources */,
 				31656ADF20EEEAD700059AFA /* Assets.xcassets in Resources */,
 				B95CB4191FAFBCAA00F705EB /* Settings.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DD2C9D462E07ADD80006658A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -285,7 +345,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		DD2C9D442E07ADD80006658A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		DD2C9D4D2E07ADD80006658A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DA57B1F51F0D9EC100895E18 /* SwipeSpeak */;
+			targetProxy = DD2C9D4C2E07ADD80006658A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		B95CB4171FAFBCAA00F705EB /* Settings.storyboard */ = {
@@ -466,6 +541,65 @@
 			};
 			name = Release;
 		};
+		DD2C9D4E2E07ADD80006658A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = TRKU383G7Z;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = willwade.SwipeSpeakTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SwipeSpeak.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/SwipeSpeak";
+			};
+			name = Debug;
+		};
+		DD2C9D4F2E07ADD80006658A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = TRKU383G7Z;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = willwade.SwipeSpeakTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SwipeSpeak.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/SwipeSpeak";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -483,6 +617,15 @@
 			buildConfigurations = (
 				DA57B2091F0D9EC100895E18 /* Debug */,
 				DA57B20A1F0D9EC100895E18 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DD2C9D502E07ADD80006658A /* Build configuration list for PBXNativeTarget "SwipeSpeakTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DD2C9D4E2E07ADD80006658A /* Debug */,
+				DD2C9D4F2E07ADD80006658A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -512,6 +655,14 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 3.8.0;
+			};
+		};
+		DDC6F1692E058F9900EFC306 /* XCRemoteSwiftPackageReference "ViewInspector" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/nalexn/ViewInspector";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.9.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */

@@ -228,10 +228,50 @@ struct SettingsView: View {
 // MARK: - Supporting Views
 
 struct KeyboardSettingsView: View {
+    @StateObject private var viewModel = SettingsViewModel()
+
     var body: some View {
-        Text("Keyboard Settings")
-            .navigationTitle("Keyboard")
-            .navigationBarTitleDisplayMode(.inline)
+        Form {
+            Section {
+                Picker("Layout", selection: $viewModel.selectedKeyboardLayout) {
+                    ForEach(KeyboardLayout.allCases, id: \.self) { layout in
+                        Text(layout.localizedString())
+                            .tag(layout)
+                    }
+                }
+                .pickerStyle(.navigationLink)
+            } header: {
+                Text("Keyboard Layout")
+            } footer: {
+                Text("Select between 4 keys, 6 keys, 8 keys, 2 strokes, or MSR keyboards.")
+            }
+
+            Section {
+                Toggle("Audio Feedback", isOn: $viewModel.audioFeedbackEnabled)
+                Toggle("Vibration Feedback", isOn: $viewModel.vibrationFeedbackEnabled)
+                Toggle("Pause on Prediction", isOn: $viewModel.pauseOnPredictionEnabled)
+            } header: {
+                Text("Feedback")
+            } footer: {
+                Text("Configure how the keyboard provides feedback during typing.")
+            }
+
+            Section {
+                Picker("Prediction Engine", selection: $viewModel.selectedPredictionEngine) {
+                    ForEach(PredictionEngineType.allCases, id: \.self) { engine in
+                        Text(engine.displayName)
+                            .tag(engine)
+                    }
+                }
+                .pickerStyle(.navigationLink)
+            } header: {
+                Text("Word Prediction")
+            } footer: {
+                Text("Choose the word prediction engine to use.")
+            }
+        }
+        .navigationTitle("Keyboard")
+        .navigationBarTitleDisplayMode(.inline)
     }
 }
 

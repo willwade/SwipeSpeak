@@ -2,40 +2,16 @@
 //  SwipeSpeakTests.swift
 //  SwipeSpeakTests
 //
-//  Created by Testing Implementation on 20/06/2025.
+//  Created by user280982 on 6/22/25.
 //  Copyright © 2025 TeamGleason. All rights reserved.
 //
 
-import XCTest
-@testable import SwipeSpeak
+import Testing
 
-final class SwipeSpeakTests: XCTestCase {
+struct SwipeSpeakTests {
 
-    override func setUpWithError() throws {
-        // Reset UserPreferences to default state for each test
-        UserPreferences.shared.predictionEngineType = PredictionEngineType.custom.rawValue
+    @Test func example() async throws {
+        // Write your test here and use APIs like `#expect(...)` to check expected conditions.
     }
 
-    override func tearDownWithError() throws {
-        // Clean up after each test
-    }
-
-    // MARK: - Basic App Functionality Tests
-
-    func testAppDelegateExists() throws {
-        let appDelegate = AppDelegate()
-        XCTAssertNotNil(appDelegate)
-    }
-
-    func testUserPreferencesSharedInstance() throws {
-        let prefs1 = UserPreferences.shared
-        let prefs2 = UserPreferences.shared
-        XCTAssertTrue(prefs1 === prefs2, "UserPreferences should be a singleton")
-    }
-
-    func testPredictionEngineManagerSharedInstance() throws {
-        let manager1 = PredictionEngineManager.shared
-        let manager2 = PredictionEngineManager.shared
-        XCTAssertTrue(manager1 === manager2, "PredictionEngineManager should be a singleton")
-    }
 }

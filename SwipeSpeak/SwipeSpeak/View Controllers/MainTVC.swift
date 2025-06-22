@@ -58,7 +58,6 @@ class MainTVC: UITableViewController {
 
     // SwiftUI Text Display Integration
     private var textDisplayViewModel: TextDisplayViewModel!
-    private var textDisplayBridge: TextDisplayBridge!
     private var textDisplayHostingController: UIHostingController<TextDisplayView>!
     
     private var keyLetterGrouping = [String]()
@@ -174,7 +173,9 @@ class MainTVC: UITableViewController {
     private func setupSwiftUITextDisplay() {
         // Create the SwiftUI text display components
         textDisplayViewModel = TextDisplayViewModel()
-        textDisplayBridge = TextDisplayBridge(viewModel: textDisplayViewModel, mainTVC: self)
+
+        // Setup callbacks for SwiftUI interactions
+        setupSwiftUICallbacks()
 
         let textDisplayView = TextDisplayView(viewModel: textDisplayViewModel)
         textDisplayHostingController = UIHostingController(rootView: textDisplayView)
@@ -187,6 +188,28 @@ class MainTVC: UITableViewController {
         textDisplayHostingController.view.backgroundColor = .clear
 
         // We'll add it to the table view in setupUI after the outlets are connected
+    }
+
+    private func setupSwiftUICallbacks() {
+        textDisplayViewModel.onSentenceTapped = { [weak self] in
+            self?.sentenceLabelTouched()
+        }
+
+        textDisplayViewModel.onSentenceLongPressed = { [weak self] in
+            self?.sentenceLabelLongPressed()
+        }
+
+        textDisplayViewModel.onPredictionSelected = { [weak self] prediction, index in
+            _ = self?.addWordToSentence(word: prediction, announce: true)
+        }
+
+        textDisplayViewModel.onPredictionLongPressed = { [weak self] prediction, index in
+            _ = self?.addWordToSentence(word: prediction, announce: false)
+        }
+
+        textDisplayViewModel.onAnnounce = { [weak self] text in
+            self?.announce(text)
+        }
     }
 
     private func setupSwiftUITextDisplayOverlay() {
@@ -215,12 +238,12 @@ class MainTVC: UITableViewController {
         hostingController.view.isUserInteractionEnabled = true
 
         // Initialize with current text values
-        textDisplayBridge.updateSentenceText(sentenceLabel.text ?? "")
-        textDisplayBridge.updateWordText(wordLabel.text ?? "")
+        textDisplayViewModel.setSentenceText(sentenceLabel.text ?? "")
+        textDisplayViewModel.setWordText(wordLabel.text ?? "")
 
         // Update predictions if they exist
         let currentPredictions = predictionLabels.map { $0.text ?? "" }
-        textDisplayBridge.updatePredictions(currentPredictions)
+        textDisplayViewModel.updatePredictions(currentPredictions)
     }
 
     private func setupWordPredictionEngine() {
@@ -466,6 +489,11 @@ class MainTVC: UITableViewController {
     }
     
     // MARK: User UI Interaction
+
+    @IBAction func presentSettings() {
+        let settingsViewController = SwiftUIBridge.createSettingsViewController()
+        present(settingsViewController, animated: true)
+    }
 
     @IBAction func backspace() {
         backspace(noSound: false)
@@ -786,7 +814,7 @@ class MainTVC: UITableViewController {
 
         // Update SwiftUI component
         let currentPredictions = predictionLabels.map { $0.text ?? "" }
-        textDisplayBridge?.updatePredictions(currentPredictions)
+        textDisplayViewModel?.updatePredictions(currentPredictions)
     }
     
     private func highlight(label: UILabel) {
@@ -812,7 +840,7 @@ class MainTVC: UITableViewController {
             NSLocalizedString("Current sentence: \(text)", comment: "")
 
         // Update SwiftUI component
-        textDisplayBridge?.updateSentenceText(text)
+        textDisplayViewModel?.setSentenceText(text)
     }
     
     private func setWordText(_ text: String) {
@@ -825,7 +853,7 @@ class MainTVC: UITableViewController {
             NSLocalizedString("Current word input: \(text)", comment: "")
 
         // Update SwiftUI component
-        textDisplayBridge?.updateWordText(text)
+        textDisplayViewModel?.setWordText(text)
     }
     
     private func resetKeysBoarder() {

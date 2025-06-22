@@ -25,6 +25,46 @@ class SwiftUIBridge {
         return hostingController
     }
 
+    /// Create a UIViewController hosting the SwiftUI VoiceSelectionView
+    static func createVoiceSelectionViewController() -> UIViewController {
+        let voiceView = VoiceSelectionView()
+        let hostingController = UIHostingController(rootView: voiceView)
+
+        hostingController.title = "Voice Selection"
+
+        return hostingController
+    }
+
+    /// Create a UIViewController hosting the SwiftUI AboutView
+    static func createAboutViewController() -> UIViewController {
+        let aboutView = AboutView()
+        let hostingController = UIHostingController(rootView: aboutView)
+
+        hostingController.title = "About"
+
+        return hostingController
+    }
+
+    /// Create a UIViewController hosting the SwiftUI AcknowledgementsView
+    static func createAcknowledgementsViewController() -> UIViewController {
+        let acknowledgementsView = AcknowledgementsView()
+        let hostingController = UIHostingController(rootView: acknowledgementsView)
+
+        hostingController.title = "Acknowledgements"
+
+        return hostingController
+    }
+
+    /// Create a UIViewController hosting the SwiftUI KeyboardSettingsView
+    static func createKeyboardSettingsViewController() -> UIViewController {
+        let keyboardView = KeyboardSettingsView()
+        let hostingController = UIHostingController(rootView: keyboardView)
+
+        hostingController.title = "Keyboard Settings"
+
+        return hostingController
+    }
+
     /// Create a UIViewController hosting any SwiftUI view
     static func createHostingController<Content: View>(
         for view: Content,

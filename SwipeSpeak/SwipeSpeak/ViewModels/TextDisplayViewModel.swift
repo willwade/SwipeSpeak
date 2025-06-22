@@ -153,79 +153,7 @@ class TextDisplayViewModel: ObservableObject {
     }
 }
 
-// MARK: - Integration Helper
 
-/// Helper class to bridge between UIKit MainTVC and SwiftUI TextDisplayView
-@MainActor
-class TextDisplayBridge {
-
-    private let viewModel: TextDisplayViewModel
-    private weak var mainTVC: MainTVC?
-
-    init(viewModel: TextDisplayViewModel, mainTVC: MainTVC) {
-        self.viewModel = viewModel
-        self.mainTVC = mainTVC
-        setupCallbacks()
-    }
-
-    private func setupCallbacks() {
-        viewModel.onSentenceTapped = { [weak self] in
-            self?.mainTVC?.sentenceLabelTouched()
-        }
-
-        viewModel.onSentenceLongPressed = { [weak self] in
-            self?.mainTVC?.sentenceLabelLongPressed()
-        }
-
-        viewModel.onWordTapped = { [weak self] in
-            // Handle word tap - this would need to be implemented in MainTVC
-            // For now, we'll use the existing label tap logic
-        }
-
-        viewModel.onWordLongPressed = { [weak self] in
-            // Handle word long press
-        }
-
-        viewModel.onPredictionSelected = { [weak self] prediction, index in
-            // Handle prediction selection - add to sentence
-            _ = self?.mainTVC?.addWordToSentence(word: prediction, announce: true)
-        }
-
-        viewModel.onPredictionLongPressed = { [weak self] prediction, index in
-            // Handle prediction long press - add to sentence without announcement
-            _ = self?.mainTVC?.addWordToSentence(word: prediction, announce: false)
-        }
-
-        viewModel.onAnnounce = { [weak self] text in
-            self?.mainTVC?.announce(text)
-        }
-    }
-
-    // Methods to update the view model from MainTVC
-    func updateSentenceText(_ text: String) {
-        viewModel.setSentenceText(text)
-    }
-
-    func updateWordText(_ text: String) {
-        viewModel.setWordText(text)
-    }
-
-    func updatePredictions(_ predictions: [String]) {
-        viewModel.updatePredictions(predictions)
-    }
-
-    func highlightWord(_ highlight: Bool = true) {
-        viewModel.highlightWord(highlight)
-    }
-
-    func highlightPrediction(at index: Int?) {
-        viewModel.highlightPrediction(at: index)
-    }
-
-    func removeAllHighlights() {
-        viewModel.removeAllHighlights()
-    }
-}
 
 
 
