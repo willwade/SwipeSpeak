@@ -84,7 +84,7 @@ struct KeyboardLayoutConfig {
                 text: letters.uppercased(),
                 letters: letters,
                 isSpecial: false,
-                textColor: .black, // Use black for maximum contrast against light backgrounds
+                textColor: .white, // Use white text to match original dark keys
                 backgroundColor: .clear
             )
         }
@@ -102,7 +102,7 @@ struct KeyboardLayoutConfig {
                 text: text,
                 letters: "",
                 isSpecial: isSpecial,
-                textColor: isSpecial ? .red : .black, // Use black for better contrast against light backgrounds
+                textColor: isSpecial ? .red : .white, // Use white text to match original dark keys
                 backgroundColor: .clear
             )
         }
@@ -324,7 +324,7 @@ struct KeyboardView: View {
                     text: letter.uppercased(),
                     letters: letter,
                     isSpecial: false,
-                    textColor: .black,
+                    textColor: .white,
                     backgroundColor: .clear
                 )
             } else {
@@ -334,7 +334,7 @@ struct KeyboardView: View {
                     text: "",
                     letters: "",
                     isSpecial: false,
-                    textColor: .black,
+                    textColor: .white,
                     backgroundColor: .clear
                 )
             }

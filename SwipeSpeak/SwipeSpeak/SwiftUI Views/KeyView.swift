@@ -58,12 +58,12 @@ struct KeyView: View {
     
     private var keyBackgroundColor: Color {
         if isHighlighted {
-            return Color(red: 0.239, green: 0.675, blue: 0.969).opacity(0.3) // App's tint color
+            return Color(red: 0.239, green: 0.675, blue: 0.969) // App's tint color
         } else if isPressed {
-            return .gray.opacity(0.4)
+            return Color(.systemGray3)
         } else {
-            // Use white background to match original table cells
-            return Color(.systemBackground)
+            // Dark background to match original keys
+            return Color(.systemGray2)
         }
     }
 
@@ -71,7 +71,7 @@ struct KeyView: View {
         if isHighlighted {
             return Color(red: 0.239, green: 0.675, blue: 0.969) // App's tint color
         } else {
-            return Color(.separator)
+            return Color(.systemGray4)
         }
     }
     
@@ -80,20 +80,20 @@ struct KeyView: View {
     }
     
     private var keyFont: Font {
-        // Adjust font size based on device and content
+        // Adjust font size based on device and content - larger to match original
         if UIDevice.current.userInterfaceIdiom == .pad {
-            return .system(size: 24, weight: .medium)
+            return .system(size: 32, weight: .medium)
         } else {
-            return .system(size: 18, weight: .medium)
+            return .system(size: 24, weight: .medium)
         }
     }
     
     private var keyHeight: CGFloat {
-        // Adjust height based on device
+        // Adjust height based on device - make keys larger to match original
         if UIDevice.current.userInterfaceIdiom == .pad {
-            return 80
+            return 120
         } else {
-            return 60
+            return 90
         }
     }
     
