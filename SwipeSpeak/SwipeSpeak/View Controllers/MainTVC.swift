@@ -685,6 +685,11 @@ class MainTVC: UITableViewController {
         present(settingsViewController, animated: true)
     }
 
+    @IBAction func presentSentenceHistory() {
+        let sentenceHistoryViewController = SwiftUIBridge.createSentenceHistoryViewController()
+        present(sentenceHistoryViewController, animated: true)
+    }
+
     @IBAction func backspace() {
         backspace(noSound: false)
     }
@@ -806,8 +811,10 @@ class MainTVC: UITableViewController {
         guard !result.isEmpty else {
             return ""
         }
-        
-        let toIndex = result.index(result.startIndex, offsetBy: enteredKeyList.count)
+
+        // Ensure we don't try to access beyond the string's length
+        let maxOffset = min(enteredKeyList.count, result.count)
+        let toIndex = result.index(result.startIndex, offsetBy: maxOffset)
         return String(result[..<toIndex])
     }
     

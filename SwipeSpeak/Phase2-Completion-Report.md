@@ -137,8 +137,8 @@ Phase 2 of the SwiftUI migration has been **successfully completed** with all ob
 ### Dependencies Updated
 - **ViewInspector**: 0.10.2 for SwiftUI testing
 - **MarkdownView**: 1.9.1 (existing)
-- **Zephyr**: 3.8.0 (existing)
 - **DZNEmptyDataSet**: master (existing)
+- **CloudKit**: Native iOS framework (replaced Zephyr)
 
 ---
 

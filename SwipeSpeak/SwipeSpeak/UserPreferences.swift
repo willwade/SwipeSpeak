@@ -323,6 +323,18 @@ class UserPreferences: ObservableObject {
     func clearWords() {
         userAddedWords = []
     }
+
+    /// Validates if a word is valid for adding to the user dictionary
+    /// - Parameter word: The word to validate
+    /// - Returns: True if the word is valid (no spaces, punctuation, and not empty)
+    func isWordValid(_ word: String) -> Bool {
+        let trimmed = word.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !trimmed.isEmpty else { return false }
+
+        // Check for spaces or punctuation
+        let allowedCharacters = CharacterSet.letters
+        return trimmed.rangeOfCharacter(from: allowedCharacters.inverted) == nil
+    }
     
     // MARK: Word Frequencies
 

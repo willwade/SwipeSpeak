@@ -65,6 +65,36 @@ class SwiftUIBridge {
         return hostingController
     }
 
+    /// Create a UIViewController hosting the SwiftUI UserAddedWordsView
+    static func createUserAddedWordsViewController() -> UIViewController {
+        let userAddedWordsView = UserAddedWordsView()
+            .withUIKitDismiss {
+                // Dismiss action will be handled by the presenting view controller
+            }
+
+        let hostingController = UIHostingController(rootView: userAddedWordsView)
+        hostingController.title = "Added Words"
+
+        return hostingController
+    }
+
+    /// Create a UIViewController hosting the SwiftUI SentenceHistoryView
+    static func createSentenceHistoryViewController() -> UIViewController {
+        let sentenceHistoryView = SentenceHistoryView()
+            .withUIKitDismiss {
+                // Dismiss action will be handled by the presenting view controller
+            }
+
+        let hostingController = UIHostingController(rootView: sentenceHistoryView)
+        hostingController.title = "Sentence History"
+
+        // Wrap in navigation controller for modal presentation
+        let navigationController = UINavigationController(rootViewController: hostingController)
+        navigationController.modalPresentationStyle = .formSheet
+
+        return navigationController
+    }
+
     /// Create a UIViewController hosting any SwiftUI view
     static func createHostingController<Content: View>(
         for view: Content,

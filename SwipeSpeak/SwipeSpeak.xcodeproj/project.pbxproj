@@ -25,8 +25,6 @@
 		DA07001D1F0DA15A003BEE3D /* WordPredictionEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA07001C1F0DA15A003BEE3D /* WordPredictionEngine.swift */; };
 		DA0700211F0DA84A003BEE3D /* SettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0700201F0DA84A003BEE3D /* SettingsVC.swift */; };
 		DA0700231F0DA889003BEE3D /* KeyboardSettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0700221F0DA889003BEE3D /* KeyboardSettingsVC.swift */; };
-		DA0700251F0DA98F003BEE3D /* UserAddedWordListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0700241F0DA98F003BEE3D /* UserAddedWordListVC.swift */; };
-		DA0700271F0DB116003BEE3D /* SentenceHistoryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0700261F0DB116003BEE3D /* SentenceHistoryVC.swift */; };
 		DA57B1FA1F0D9EC100895E18 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA57B1F91F0D9EC100895E18 /* AppDelegate.swift */; };
 		DA57B1FF1F0D9EC100895E18 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA57B1FD1F0D9EC100895E18 /* Main.storyboard */; };
 		DD2C9D702E07C19C0006658A /* KeyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2C9D6D2E07C19C0006658A /* KeyView.swift */; };
@@ -37,8 +35,9 @@
 		DDA3615A2E08328400E0A9DA /* CommonUIComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA361582E08328400E0A9DA /* CommonUIComponents.swift */; };
 		DDA3615B2E08328400E0A9DA /* GestureVisualizationOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA361592E08328400E0A9DA /* GestureVisualizationOverlay.swift */; };
 		DDC6F1622E058E7F00EFC306 /* MarkdownView in Frameworks */ = {isa = PBXBuildFile; productRef = DDC6F1612E058E7F00EFC306 /* MarkdownView */; };
-		DDC6F1652E058EEA00EFC306 /* DZNEmptyDataSet in Frameworks */ = {isa = PBXBuildFile; productRef = DDC6F1642E058EEA00EFC306 /* DZNEmptyDataSet */; };
 		F1A2B3C4D5E6F7890ABCDEF1 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1234567890ABCDEF12345678 /* SettingsView.swift */; };
+		F1A2B3C4D5E6F7890ABCDEF2 /* UserAddedWordsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1A2B3C4D5E6F7890ABCDEF3 /* UserAddedWordsView.swift */; };
+		F1A2B3C4D5E6F7890ABCDEF4 /* SentenceHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1A2B3C4D5E6F7890ABCDEF5 /* SentenceHistoryView.swift */; };
 		F2A3B4C5D6E7F8901BCDEF12 /* SwiftUIBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2345678901BCDEF123456789 /* SwiftUIBridge.swift */; };
 		F3A4B5C6D7E8F9012CDEF123 /* TextDisplayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3456789012CDEF1234567890 /* TextDisplayView.swift */; };
 		F4A5B6C7D8E9F0123DEF1234 /* TextDisplayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4567890123DEF12345678901 /* TextDisplayViewModel.swift */; };
@@ -81,8 +80,6 @@
 		DA07001E1F0DA72A003BEE3D /* word_frequency_english_kilgarriff.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = word_frequency_english_kilgarriff.csv; sourceTree = "<group>"; };
 		DA0700201F0DA84A003BEE3D /* SettingsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsVC.swift; sourceTree = "<group>"; };
 		DA0700221F0DA889003BEE3D /* KeyboardSettingsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardSettingsVC.swift; sourceTree = "<group>"; };
-		DA0700241F0DA98F003BEE3D /* UserAddedWordListVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserAddedWordListVC.swift; sourceTree = "<group>"; };
-		DA0700261F0DB116003BEE3D /* SentenceHistoryVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SentenceHistoryVC.swift; sourceTree = "<group>"; };
 		DA0700401F0DA72B003BEE3D /* PredictionEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PredictionEngine.swift; sourceTree = "<group>"; };
 		DA0700501F0DA72C003BEE3D /* NativePredictionEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NativePredictionEngine.swift; sourceTree = "<group>"; };
 		DA57B1F61F0D9EC100895E18 /* SwipeSpeak.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwipeSpeak.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -94,6 +91,8 @@
 		DD2C9D6D2E07C19C0006658A /* KeyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyView.swift; sourceTree = "<group>"; };
 		DD2C9D6E2E07C19C0006658A /* SwipeGestureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeGestureView.swift; sourceTree = "<group>"; };
 		DD2C9D6F2E07C19C0006658A /* VisualFeedbackSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisualFeedbackSystem.swift; sourceTree = "<group>"; };
+		F1A2B3C4D5E6F7890ABCDEF3 /* UserAddedWordsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAddedWordsView.swift; sourceTree = "<group>"; };
+		F1A2B3C4D5E6F7890ABCDEF5 /* SentenceHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SentenceHistoryView.swift; sourceTree = "<group>"; };
 		DDA361562E08327400E0A9DA /* BaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
 		DDA361582E08328400E0A9DA /* CommonUIComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonUIComponents.swift; sourceTree = "<group>"; };
 		DDA361592E08328400E0A9DA /* GestureVisualizationOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GestureVisualizationOverlay.swift; sourceTree = "<group>"; };
@@ -109,7 +108,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DDC6F1652E058EEA00EFC306 /* DZNEmptyDataSet in Frameworks */,
 				DDC6F1622E058E7F00EFC306 /* MarkdownView in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -147,6 +145,8 @@
 				1234567890ABCDEF12345678 /* SettingsView.swift */,
 				2345678901BCDEF123456789 /* SwiftUIBridge.swift */,
 				3456789012CDEF1234567890 /* TextDisplayView.swift */,
+				F1A2B3C4D5E6F7890ABCDEF3 /* UserAddedWordsView.swift */,
+				F1A2B3C4D5E6F7890ABCDEF5 /* SentenceHistoryView.swift */,
 			);
 			path = "SwiftUI Views";
 			sourceTree = "<group>";
@@ -169,8 +169,6 @@
 				B991E2271FAEE26F0038074E /* MainTVC.swift */,
 				DA0700201F0DA84A003BEE3D /* SettingsVC.swift */,
 				DA0700221F0DA889003BEE3D /* KeyboardSettingsVC.swift */,
-				DA0700241F0DA98F003BEE3D /* UserAddedWordListVC.swift */,
-				DA0700261F0DB116003BEE3D /* SentenceHistoryVC.swift */,
 				B95CB41E1FAFCB1F00F705EB /* SpeechVC.swift */,
 				B95CB41A1FAFBE2500F705EB /* VoicesVC.swift */,
 				B98A9A011FB96FC5002D2FD9 /* AboutVC.swift */,
@@ -302,7 +300,6 @@
 			mainGroup = DA57B1ED1F0D9EC100895E18;
 			packageReferences = (
 				DDC6F1602E058E7F00EFC306 /* XCRemoteSwiftPackageReference "MarkdownView" */,
-				DDC6F1632E058EEA00EFC306 /* XCRemoteSwiftPackageReference "DZNEmptyDataSet" */,
 				DDC6F1692E058F9900EFC306 /* XCRemoteSwiftPackageReference "ViewInspector" */,
 			);
 			productRefGroup = DA57B1F71F0D9EC100895E18 /* Products */;
@@ -356,10 +353,8 @@
 				DA07001D1F0DA15A003BEE3D /* WordPredictionEngine.swift in Sources */,
 				DA0700231F0DA889003BEE3D /* KeyboardSettingsVC.swift in Sources */,
 				B95CB41B1FAFBE2500F705EB /* VoicesVC.swift in Sources */,
-				DA0700271F0DB116003BEE3D /* SentenceHistoryVC.swift in Sources */,
 				DA57B1FA1F0D9EC100895E18 /* AppDelegate.swift in Sources */,
 				B93BCCA01FD7F8DC007BFCC3 /* AcknowledgementsVC.swift in Sources */,
-				DA0700251F0DA98F003BEE3D /* UserAddedWordListVC.swift in Sources */,
 				DA0700211F0DA84A003BEE3D /* SettingsVC.swift in Sources */,
 				B95CB41F1FAFCB1F00F705EB /* SpeechVC.swift in Sources */,
 				7009779B245E4A87AD4C9ABA /* KeyboardViewModel.swift in Sources */,
@@ -371,6 +366,8 @@
 				DDA3615B2E08328400E0A9DA /* GestureVisualizationOverlay.swift in Sources */,
 				F4A5B6C7D8E9F0123DEF1234 /* TextDisplayViewModel.swift in Sources */,
 				F7A8B9CADBE2F3456G234567 /* CloudKitSyncManager.swift in Sources */,
+				F1A2B3C4D5E6F7890ABCDEF2 /* UserAddedWordsView.swift in Sources */,
+				F1A2B3C4D5E6F7890ABCDEF4 /* SentenceHistoryView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -676,14 +673,7 @@
 				minimumVersion = 1.9.1;
 			};
 		};
-		DDC6F1632E058EEA00EFC306 /* XCRemoteSwiftPackageReference "DZNEmptyDataSet" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/dzenbot/DZNEmptyDataSet";
-			requirement = {
-				branch = master;
-				kind = branch;
-			};
-		};
+
 		DDC6F1692E058F9900EFC306 /* XCRemoteSwiftPackageReference "ViewInspector" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/nalexn/ViewInspector";
@@ -699,11 +689,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = DDC6F1602E058E7F00EFC306 /* XCRemoteSwiftPackageReference "MarkdownView" */;
 			productName = MarkdownView;
-		};
-		DDC6F1642E058EEA00EFC306 /* DZNEmptyDataSet */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = DDC6F1632E058EEA00EFC306 /* XCRemoteSwiftPackageReference "DZNEmptyDataSet" */;
-			productName = DZNEmptyDataSet;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

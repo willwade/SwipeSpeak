@@ -1,15 +1,6 @@
 {
-  "originHash" : "41016956d2ea6d522897a96076b191c9f6901b3c07d7a5a850a8cf19a1f6fc79",
+  "originHash" : "4bc5fadb4b86bea18ac10f1e4dfadd919d09806f1d58f0e8bcee96d888083ec8",
   "pins" : [
-    {
-      "identity" : "dznemptydataset",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/dzenbot/DZNEmptyDataSet",
-      "state" : {
-        "branch" : "master",
-        "revision" : "9bffa69a83a9fa58a14b3cf43cb6dd8a63774179"
-      }
-    },
     {
       "identity" : "markdownview",
       "kind" : "remoteSourceControl",

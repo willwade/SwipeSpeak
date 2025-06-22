@@ -472,7 +472,7 @@
                     <navigationItem key="navigationItem" title="SwipeSpeak" id="hL1-iS-GF0">
                         <barButtonItem key="leftBarButtonItem" image="ic_history" id="dE8-cF-6OY">
                             <connections>
-                                <segue destination="Ph3-Mg-vio" kind="presentation" identifier="toSentenceHistoryVC" modalPresentationStyle="formSheet" id="bLR-bq-Sgc"/>
+                                <action selector="presentSentenceHistory" destination="9Am-1Y-Xgg" id="SwiftUI-SentenceHistory-Action"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="ic_settings" id="GKk-sp-s3S">
@@ -943,14 +943,7 @@ Q   R</string>
             </objects>
             <point key="canvasLocation" x="558" y="334"/>
         </scene>
-        <!--historyNav-->
-        <scene sceneID="LOO-Ou-FUi">
-            <objects>
-                <viewControllerPlaceholder storyboardName="Settings" referencedIdentifier="historyNav" id="Ph3-Mg-vio" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="QTw-NH-fdg" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="619" y="449"/>
-        </scene>
+
         <!--Navigation Controller-->
         <scene sceneID="fQ9-u3-RaG">
             <objects>

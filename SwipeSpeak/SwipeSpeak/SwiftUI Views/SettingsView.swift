@@ -22,6 +22,7 @@ struct SettingsView: View {
                 speechSection
                 feedbackSection
                 predictionSection
+                userDataSection
                 cloudSection
                 aboutSection
             }
@@ -187,7 +188,21 @@ struct SettingsView: View {
             }
         }
     }
-    
+
+    // MARK: - User Data Section
+
+    private var userDataSection: some View {
+        Section("User Data") {
+            NavigationLink("Added Words") {
+                UserAddedWordsView()
+            }
+
+            NavigationLink("Sentence History") {
+                SentenceHistoryView()
+            }
+        }
+    }
+
     // MARK: - Cloud Section
     
     private var cloudSection: some View {
@@ -430,14 +445,6 @@ struct AcknowledgementsView: View {
                     Text("CloudKit")
                         .fontWeight(.semibold)
                     Text("Native iCloud synchronization")
-                        .font(.caption)
-                        .foregroundColor(.secondary)
-                }
-                
-                VStack(alignment: .leading, spacing: 8) {
-                    Text("DZNEmptyDataSet")
-                        .fontWeight(.semibold)
-                    Text("Used for empty state management")
                         .font(.caption)
                         .foregroundColor(.secondary)
                 }
